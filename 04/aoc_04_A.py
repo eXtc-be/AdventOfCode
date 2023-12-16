@@ -40,7 +40,7 @@ def find_winning_numbers(numbers):
 def calc_card_scores(winning_numbers):
     card_scores = []
     for card, numbers in winning_numbers:
-        card_scores.append([card,2 ** (len(numbers) - 1)]) if numbers else 0
+        card_scores.append([card, 2 ** (len(numbers) - 1)]) if numbers else 0
     return card_scores
 
 
