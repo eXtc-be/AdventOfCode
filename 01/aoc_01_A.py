@@ -3,7 +3,7 @@
 # https://adventofcode.com/2023/day/1
 
 
-data_path = './input.txt'
+data_path = './input'
 
 
 def load_data(path):

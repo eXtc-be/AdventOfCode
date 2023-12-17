@@ -6,7 +6,7 @@
 # imports
 
 
-data_path = './input.txt'
+data_path = './input'
 
 colors = {'red': 12, 'green': 13, 'blue': 14}  # serves as list of possible colors AND for checking games
 

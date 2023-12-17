@@ -6,7 +6,7 @@
 # imports
 
 
-data_path = './input.txt'
+data_path = './input'
 
 
 def load_data(path):

@@ -3,7 +3,7 @@
 # https://adventofcode.com/2023/day/1
 
 
-data_path = 'input.txt'
+data_path = 'input'
 
 number_strings = {
     'zero': 0,
