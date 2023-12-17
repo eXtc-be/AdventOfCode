@@ -61,7 +61,7 @@ if write:
     with requests.Session() as session:  # create session object
         input_url = INPUT_URL.format(int(day_number))
         print(f'downloading input file from {input_url}')
-        session.cookies.update(cookiejar_from_dict(SESSION_COOKIE))  # set session cookie to 'authenticate'
+        session.cookies.update(session_cookie)  # set session cookie to 'authenticate'
         response = session.get(input_url)  # get the data from the remote server
         if response.status_code == 200:
             print(f'creating file {(path / INPUT_FILE).absolute()}')
