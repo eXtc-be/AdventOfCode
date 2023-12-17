@@ -159,5 +159,13 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
 
-
+# Notepad++ backup files
 .bak
+
+# session cookie data to authenticate to adventofcode.com
+session_cookie
+
+# test file for downloading input file from adventofcode.com
+dl_input.py
+# test file for downloading artice from adventofcode.com
+dl_article.py
