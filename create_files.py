@@ -38,10 +38,11 @@ if path.exists():
 else:
     write = True
 
-# create folder
-path.mkdir(parents=True, exist_ok=True)
 
 if write:
+    # create folder
+    path.mkdir(parents=True, exist_ok=True)
+
     # create both files from template and replace certain placeholders
     for file, template in zip([file_A, file_B], ['template_A.py', 'template_B.py']):
         print(f'creating file {(path / file).absolute()}')
@@ -54,10 +55,12 @@ if write:
                 if '<file_A>' in line:
                     line = line.replace('<file_A>', file_A[:-3])
                 out_file.write(line)
+
     # download accompanying input file and save it to the folder
     with open(SESSION_COOKIE, 'r', encoding='utf-8') as cookie_file:
         cookie_data = cookie_file.read().strip()  # read session cookie data from file
-        session_cookie = cookiejar_from_dict({'session': cookie_data})  # turn it into a cookie jar
+        session_cookie = cookiejar_from_dict({'session': cookie_data})  # turn it into a cookie jar for use in session
+
     with requests.Session() as session:  # create session object
         input_url = INPUT_URL.format(int(day_number))
         print(f'downloading input file from {input_url}')
