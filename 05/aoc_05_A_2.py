@@ -3,7 +3,7 @@
 # numbers in the input file are too big to create maps explicitly, so we just record source, destination and amount
 # when doing the actual mapping we now can't use 'if val in map' anymore,
 # nor can we do map['map'][value] to get the new value;
-# instead we need to check if value falls between source and source + number, and calculate the new value
+# instead we need to check if value falls between source and source + amount, and calculate the new value
 # https://adventofcode.com/2023/day/5
 
 
