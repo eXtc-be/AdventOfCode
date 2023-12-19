@@ -169,3 +169,7 @@ session_cookie
 dl_input.py
 # test file for downloading artice from adventofcode.com
 dl_article.py
+
+*.csv
+*.xls*
+05/mappings
