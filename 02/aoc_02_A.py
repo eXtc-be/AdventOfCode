@@ -6,7 +6,7 @@
 # imports
 
 
-data_path = './input'
+DATA_PATH = './input'
 
 colors = {'red': 12, 'green': 13, 'blue': 14}  # serves as list of possible colors AND for checking games
 
@@ -62,7 +62,7 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green""".splitlines()
 
 
 if __name__ == "__main__":
-    data_lines = load_data(data_path)
+    data_lines = load_data(DATA_PATH)
     # data_lines = test_data
     print(data_lines)
 

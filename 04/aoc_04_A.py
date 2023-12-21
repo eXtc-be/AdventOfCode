@@ -6,7 +6,7 @@
 # imports
 
 
-data_path = './input'
+DATA_PATH = './input'
 
 
 def load_data(path):
@@ -53,7 +53,7 @@ Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11""".splitlines()
 
 
 if __name__ == "__main__":
-    data_lines = load_data(data_path)
+    data_lines = load_data(DATA_PATH)
     # data_lines = test_data
     print(data_lines)
 

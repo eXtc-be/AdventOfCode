@@ -6,7 +6,7 @@
 # imports
 
 
-data_path = './input'
+DATA_PATH = './input'
 
 
 def load_data(path):
@@ -21,7 +21,7 @@ test_data = """<testdata>""".splitlines()
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(data_path)
+    # data_lines = load_data(DATA_PATH)
     data_lines = test_data
     print(data_lines)
 

@@ -21,7 +21,7 @@
 
 
 from aoc_06_A_1 import (
-    data_path,
+    DATA_PATH,
     load_data,
     test_data,
     create_races,
@@ -40,7 +40,7 @@ def calc_limits_for_race(time, record):
 
 
 if __name__ == "__main__":
-    data_lines = load_data(data_path)
+    data_lines = load_data(DATA_PATH)
     # data_lines = test_data
     # print(data_lines)
 

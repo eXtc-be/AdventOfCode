@@ -4,7 +4,7 @@
 
 
 from <file_A> import (
-    data_path,
+    DATA_PATH,
     load_data,
     test_data,
 )
@@ -14,7 +14,7 @@ from <file_A> import (
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(data_path)
+    # data_lines = load_data(DATA_PATH)
     data_lines = test_data
     print(data_lines)
 

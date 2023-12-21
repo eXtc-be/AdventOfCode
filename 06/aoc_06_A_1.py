@@ -9,7 +9,7 @@ from functools import reduce
 from operator import mul
 
 
-data_path = './input'
+DATA_PATH = './input'
 
 
 def load_data(path):
@@ -39,7 +39,7 @@ Distance:  9  40  200
 
 
 if __name__ == "__main__":
-    data_lines = load_data(data_path)
+    data_lines = load_data(DATA_PATH)
     # data_lines = test_data
     # print(data_lines)
 

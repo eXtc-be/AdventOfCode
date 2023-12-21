@@ -3,7 +3,7 @@
 # https://adventofcode.com/2023/day/1
 
 
-data_path = './input'
+DATA_PATH = './input'
 
 
 def load_data(path):
@@ -24,7 +24,7 @@ def get_numbers(digits):
 
 
 if __name__ == "__main__":
-    data_lines = load_data(data_path)
+    data_lines = load_data(DATA_PATH)
     # data_lines = test_data
     print(data_lines)
 
