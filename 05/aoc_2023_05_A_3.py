@@ -1,6 +1,6 @@
-# aoc_05_A_3.py - Day 5: If You Give A Seed A Fertilizer - part 1
+# aoc_2023_05_A_3.py - Day 5: If You Give A Seed A Fertilizer - part 1
 # create mappings from a text file and use them to map seed numbers to locations
-# not much of a difference with aoc_05_2.py, except for maps being renamed to mappings
+# not much of a difference with aoc_2023_052.py, except for maps being renamed to mappings
 # and being a list instead of a dict
 # I actually had to rewrite this from scratch because I forgot to copy it to my thumb drive :)
 # https://adventofcode.com/2023/day/5
@@ -9,7 +9,7 @@
 from pprint import pprint
 
 
-DATA_PATH = './input'
+DATA_PATH = './input_2023_05'
 
 
 mappings = []

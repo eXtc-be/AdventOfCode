@@ -1,4 +1,4 @@
-# aoc_02_A.py - Day 2: Cube Conundrum - part 1
+# aoc_2023_02_A.py - Day 2: Cube Conundrum - part 1
 # test if certain cube combinations are possible
 # https://adventofcode.com/2023/day/2
 
@@ -6,7 +6,7 @@
 # imports
 
 
-DATA_PATH = './input'
+DATA_PATH = './input_2023_02'
 
 colors = {'red': 12, 'green': 13, 'blue': 14}  # serves as list of possible colors AND for checking games
 

@@ -1,9 +1,9 @@
-# aoc_04_B.py - Day 4: Scratchcards  - part 2
-# <description>
+# aoc_2023_04_B.py - Day 4: Scratchcards  - part 2
+# find winning numbers within an ever-increasing number of cards
 # https://adventofcode.com/2023/day/4
 
 
-from aoc_04_A import (
+from aoc_2023_04_A import (
     DATA_PATH,
     load_data,
     test_data,

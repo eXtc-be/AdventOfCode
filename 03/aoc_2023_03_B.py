@@ -1,9 +1,9 @@
-# aoc_03_B.py - Day 3: Gear Ratios - part 2
+# aoc_2023_03_B.py - Day 3: Gear Ratios - part 2
 # find star symbols that are adjacent to exactly 2 numbers
 # https://adventofcode.com/2023/day/3
 
 
-from aoc_03_A import (
+from aoc_2023_03_A import (
     DATA_PATH,
     load_data,
     test_data,

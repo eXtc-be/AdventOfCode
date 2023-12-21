@@ -1,4 +1,4 @@
-# aoc_06_A_2.py - Day 6: Wait For It - part 1
+# aoc_2023_06_A_2.py - Day 6: Wait For It - part 1
 # use button press to beat records
 # non-naive version: calculate lower and upper limits for button presses
 #                    where the distance traveled is larger than the record
@@ -20,7 +20,7 @@
 # if the formula for calculating the limits were more complex (and thus more time consuming) I would consider it
 
 
-from aoc_06_A_1 import (
+from aoc_2023_06_A_1 import (
     DATA_PATH,
     load_data,
     test_data,

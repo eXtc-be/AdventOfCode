@@ -1,14 +1,14 @@
-# aoc_05_B_3.py - Day 5: If You Give A Seed A Fertilizer - part 2
+# aoc_2023_05_B_3.py - Day 5: If You Give A Seed A Fertilizer - part 2
 # build translation maps from text file and use them to find locations
 # instead of just a list of seed numbers, the seed line must now be considered containing pairs of numbers,
 # the first in the pair being the start number, the second one the number of seeds
-# the naive approach from aoc_05_B_1.py (calculating each and every number) takes way too long,
-# this program will find the target mapping that yields the smallest output (range) and
-# work its way back to find the (range(s) of) seed(s) to result in that output (range)
+# the naive approach from aoc_2023_2023_05_B_1.py (calculating each and every number) takes way too long,
+# this program will find the target mapping that yields the smallest output and
+# work its way back to find the seed to yield that output
 # https://adventofcode.com/2023/day/5
 
 
-from aoc_05_A_3 import (
+from aoc_2023_05_A_3 import (
     DATA_PATH,
     load_data,
     test_data,

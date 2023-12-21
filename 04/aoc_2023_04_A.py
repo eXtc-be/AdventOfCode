@@ -1,12 +1,12 @@
-# aoc_04_A.py - Day 4: Scratchcards  - part 1
-# <description>
+# aoc_2023_04_A.py - Day 4: Scratchcards  - part 1
+# find winning numbers in a list of drawn numbers
 # https://adventofcode.com/2023/day/4
 
 
 # imports
 
 
-DATA_PATH = './input'
+DATA_PATH = './input_2023_04'
 
 
 def load_data(path):

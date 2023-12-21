@@ -1,4 +1,4 @@
-# aoc_05_B_1.py - Day 5: If You Give A Seed A Fertilizer - part 2
+# aoc_2023_05_B_1.py - Day 5: If You Give A Seed A Fertilizer - part 2
 # build translation maps from text file and use them to find locations
 # instead of just a list of seed numbers, the seed line must now be considered containing pairs of numbers,
 # the first in the pair being the start number, the second one the number of seeds
@@ -8,7 +8,7 @@
 # https://adventofcode.com/2023/day/5
 
 
-from aoc_05_A_2 import (
+from aoc_2023_05_A_2 import (
     DATA_PATH,
     load_data,
     test_data,

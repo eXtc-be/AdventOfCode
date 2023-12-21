@@ -1,4 +1,4 @@
-# aoc_06_A_1.py - Day 6: Wait For It - part 1
+# aoc_2023_06_A_1.py - Day 6: Wait For It - part 1
 # use button press to beat records
 # naive version: loop through all possible timings and collect all results
 # then compare them to the record and count how many are beating it
@@ -9,7 +9,7 @@ from functools import reduce
 from operator import mul
 
 
-DATA_PATH = './input'
+DATA_PATH = './input_2023_06'
 
 
 def load_data(path):

@@ -1,9 +1,9 @@
-# aoc_07_B.py - Day 7: Camel Cards - part 2
+# aoc_2023_07_B.py - Day 7: Camel Cards - part 2
 # sort poker hands with a twist
 # https://adventofcode.com/2023/day/7
 
 
-from aoc_07_A import (
+from aoc_2023_07_A import (
     DATA_PATH,
     load_data,
     test_data,

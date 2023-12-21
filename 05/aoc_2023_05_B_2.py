@@ -1,4 +1,4 @@
-# aoc_05_B_2.py - Day 5: If You Give A Seed A Fertilizer - part 2
+# aoc_2023_05_B_2.py - Day 5: If You Give A Seed A Fertilizer - part 2
 # the list of seed numbers becomes a list of start and amount value pairs
 # this version does not calculate the location for every seed in the seed ranges, but instead
 # looks at the start number, checks if the source range is smaller than or equal to the destination range
@@ -8,7 +8,7 @@
 # https://adventofcode.com/2023/day/5
 
 
-from aoc_05_A_3 import (
+from aoc_2023_05_A_3 import (
     DATA_PATH,
     load_data,
     test_data,

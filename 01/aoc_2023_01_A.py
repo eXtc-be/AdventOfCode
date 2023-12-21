@@ -1,9 +1,9 @@
-# aoc_01_A.py - Day 1: Trebuchet?! - part 1
+# aoc_2023_01_A.py - Day 1: Trebuchet?! - part 1
 # extract digits from lines of text, convert them to int and sum them
 # https://adventofcode.com/2023/day/1
 
 
-DATA_PATH = './input'
+DATA_PATH = './input_2023_01'
 
 
 def load_data(path):

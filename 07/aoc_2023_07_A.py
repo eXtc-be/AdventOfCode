@@ -1,4 +1,4 @@
-# aoc_07_A.py - Day 7: Camel Cards - part 1
+# aoc_2023_07_A.py - Day 7: Camel Cards - part 1
 # sort poker hands with a twist and Jokers
 # https://adventofcode.com/2023/day/7
 
@@ -9,7 +9,7 @@ from dataclasses import dataclass, field
 from pprint import pprint
 
 
-DATA_PATH = './input'
+DATA_PATH = './input_2023_07'
 
 
 class Card(IntEnum):

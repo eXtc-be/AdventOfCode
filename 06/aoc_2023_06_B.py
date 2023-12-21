@@ -1,16 +1,16 @@
-# aoc_06_B.py - Day 6: Wait For It - part 2
+# aoc_2023_06_B.py - Day 6: Wait For It - part 2
 # use button press to beat records
-# same formula as aoc_06_A_2, only difference is the time and distance values are now concatenated
+# same formula as aoc_2023_06_A_2, only difference is the time and distance values are now concatenated
 # and only 1 calculation is necessary
 # https://adventofcode.com/2023/day/6
 
 
-from aoc_06_A_1 import (
+from aoc_2023_06_A_1 import (
     DATA_PATH,
     load_data,
     test_data,
 )
-from aoc_06_A_2 import calc_limits_for_race
+from aoc_2023_06_A_2 import calc_limits_for_race
 from math import floor, ceil
 
 

@@ -1,4 +1,4 @@
-# aoc_05_A_2.py - Day 5: If You Give A Seed A Fertilizer - part 1
+# aoc_2023_05_A_2.py - Day 5: If You Give A Seed A Fertilizer - part 1
 # build translation maps from text file and use them to find locations
 # numbers in the input file are too big to create maps explicitly, so we just record source, destination and amount
 # when doing the actual mapping we now can't use 'if val in map' anymore,
@@ -10,7 +10,7 @@
 from pprint import pprint
 
 
-DATA_PATH = './input'
+DATA_PATH = './input_2023_05'
 
 maps = {}
 
