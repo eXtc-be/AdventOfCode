@@ -162,12 +162,23 @@ if __name__ == '__main__':
     # pprint(seed_ranges)
 
     # determine largest value in seed ranges
-    largest_seed_number = max(
-        seed_range.stop for seed_range in seed_ranges
-    )
-    print(f'the largest seed number is {largest_seed_number:,}')
+    # largest_seed_number = max(
+    #     seed_range.stop for seed_range in seed_ranges
+    # )
+    # print(f'the largest seed number is {largest_seed_number:,}')
+
+    # determine largest value in location mappings
+    largest_location_number = 0
+    for mapping in mappings:
+        if mapping['dst'] == 'location':
+            for map in mapping['maps']:
+                if map['dst'] + map['num'] > largest_location_number:
+                    largest_location_number = map['dst'] + map['num']
+            break
+    print(f'the largest location number is {largest_location_number:,}')
 
     # generate csv from mappings for easier tracking of reverse mappings
+    # only use with test data!!!
     # with open('mappings.csv', 'w') as f:
     #     line = ''
     #     # generate header line
