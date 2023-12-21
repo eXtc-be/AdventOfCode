@@ -12,6 +12,7 @@ INPUT_URL = 'https://adventofcode.com/2023/day/{}/input'
 INPUT_FILE = 'input'
 
 day_number = None
+year_number = 2023
 
 if len(sys.argv) > 1:
     day_number = sys.argv[1]
@@ -21,8 +22,8 @@ if not day_number:
 
 # create folder and file names
 day_number = f'{int(day_number):02d}'
-file_A = f'aoc_{day_number}_A.py'
-file_B = f'aoc_{day_number}_B.py'
+file_A = f'aoc_{str(year_number)}_{day_number}_A.py'
+file_B = f'aoc_{str(year_number)}_{day_number}_B.py'
 
 path = Path(day_number)
 
@@ -50,6 +51,8 @@ if write:
             for line in in_file:
                 if '<filename>' in line:
                     line = line.replace('<filename>', file)
+                if '<year>' in line:
+                    line = line.replace('<year>', str(year_number))
                 if '<day>' in line:
                     line = line.replace('<day>', str(int(day_number)))
                 if '<file_A>' in line:
