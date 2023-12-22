@@ -6,7 +6,7 @@
 # imports
 
 
-DATA_PATH = './input_<year>_<day>'
+DATA_PATH = './input_<year>_<0_day>'
 
 
 def load_data(path):

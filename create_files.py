@@ -5,11 +5,12 @@ import sys
 from pathlib import Path
 import requests
 from requests.utils import cookiejar_from_dict
+from shutil import rmtree
 
 OVERWRITE = '{} already exists! Are you sure you want to overwrite it (y/N)? '
 SESSION_COOKIE = 'session_cookie'
 INPUT_URL = 'https://adventofcode.com/2023/day/{}/input'
-INPUT_FILE = 'input'
+INPUT_FILE = 'input_{}_{}'
 
 day_number = None
 year_number = 2023
@@ -32,10 +33,8 @@ write = False
 if path.exists():
     if input(OVERWRITE.format(path)).lower().startswith('y'):
         write = True
-        for file in path.glob('*.*'):
-            print(f'removing file {file.absolute()}')
-            file.unlink()
-        path.rmdir()
+        print(f'removing folder {path.absolute()} and all of its contents')
+        rmtree(path)
 else:
     write = True
 
@@ -55,6 +54,8 @@ if write:
                     line = line.replace('<year>', str(year_number))
                 if '<day>' in line:
                     line = line.replace('<day>', str(int(day_number)))
+                if '<0_day>' in line:
+                    line = line.replace('<0_day>', day_number)
                 if '<file_A>' in line:
                     line = line.replace('<file_A>', file_A[:-3])
                 out_file.write(line)
@@ -70,8 +71,9 @@ if write:
         session.cookies.update(session_cookie)  # set session cookie to 'authenticate'
         response = session.get(input_url)  # get the data from the remote server
         if response.status_code == 200:
-            print(f'creating file {(path / INPUT_FILE).absolute()}')
-            with open(path / INPUT_FILE, 'w') as out_file:
+            input_file = INPUT_FILE.format(year_number, day_number)
+            print(f'creating file {(path / input_file).absolute()}')
+            with open(path / input_file, 'w') as out_file:
                 out_file.write(response.content.decode('utf-8'))
         else:
             print(f'something went wrong, remote server returned status {response.status_code}')
