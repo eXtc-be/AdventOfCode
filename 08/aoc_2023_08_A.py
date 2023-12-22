@@ -6,7 +6,7 @@
 from itertools import cycle
 import re
 
-DATA_PATH = './input_2023_'
+DATA_PATH = './input_2023_08'
 
 
 def load_data(path):
