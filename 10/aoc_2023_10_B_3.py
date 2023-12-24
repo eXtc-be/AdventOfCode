@@ -1,4 +1,4 @@
-# aoc_2023_10_B_1.py - Day 10: Pipe Maze - part 2
+# aoc_2023_10_B_3.py - Day 10: Pipe Maze - part 2
 # find the number of tiles that are enclosed by the loop
 # found a hint saying I should count the number of pipe edges to the left and to the right of a cell
 #   and if both numbers are odd the cell should be considered enclosed

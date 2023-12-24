@@ -1,4 +1,4 @@
-# aoc_2023_10_B_1.py - Day 10: Pipe Maze - part 2
+# aoc_2023_10_B_2.py - Day 10: Pipe Maze - part 2
 # find the number of tiles that are enclosed by the loop
 # new tactic: for each and every cell check if we can reach one of the sides without touching the loop
 # I got this working, except for grids where you have to 'squeeze' between pipes - I can't figure out how to implement that
