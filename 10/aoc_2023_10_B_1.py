@@ -183,7 +183,13 @@ L----J
 """.splitlines()
 
 
-test_data_1i = """S----7
+test_data_2a = """S--7
+|.FJ
+L-J.
+""".splitlines()
+
+
+test_data_2b = """S----7
 |....|
 |.F--J
 |.|...
@@ -192,7 +198,7 @@ L-J...
 """.splitlines()
 
 
-test_data_2 = """..F7.
+test_data_3 = """..F7.
 .FJ|.
 SJ.L7
 |F--J
@@ -200,7 +206,7 @@ LJ...
 """.splitlines()
 
 
-test_data_3 = """...........
+test_data_4 = """...........
 .S-------7.
 .|F-----7|.
 .||.....||.
@@ -212,12 +218,12 @@ test_data_3 = """...........
 """.splitlines()
 
 
-test_data_3b = """.........
+test_data_4b = """.........
 .F-----7.
 .|F--7.|.
 .||..|.|.
 .||..L-J.
--||......
+.||......
 .||..F-7.
 .||..|.|.
 .|L--J.|.
@@ -226,7 +232,7 @@ test_data_3b = """.........
 """.splitlines()
 
 
-test_data_4 = """..........
+test_data_5 = """..........
 .S------7.
 .|F----7|.
 .||....||.
@@ -238,7 +244,7 @@ test_data_4 = """..........
 """.splitlines()
 
 
-test_data_4a = """......
+test_data_5a = """......
 .S--7.
 .|..|.
 .L7FJ.
@@ -246,7 +252,7 @@ test_data_4a = """......
 """.splitlines()
 
 
-test_data_4b = """......
+test_data_5b = """......
 .S--7.
 .|..|.
 .L7FJ.
@@ -255,7 +261,7 @@ test_data_4b = """......
 """.splitlines()
 
 
-test_data_4c = """.........
+test_data_5c = """.........
 .F-----7.
 .|F--7.|.
 .||..|.|.
@@ -268,7 +274,7 @@ test_data_4c = """.........
 """.splitlines()
 
 
-test_data_5 = """.F----7F7F7F7F-7....
+test_data_6 = """.F----7F7F7F7F-7....
 .|F--7||||||||FJ....
 .||.FJ||||||||L7....
 FJL7L7LJLJ||LJ.L-7..
@@ -281,7 +287,7 @@ L--J.L7...LJS7F-7L7.
 """.splitlines()
 
 
-test_data_6 = """FF7FSF7F7F7F7F7F---7
+test_data_7 = """FF7FSF7F7F7F7F7F---7
 L|LJ||||||||||||F--J
 FL-7LJLJ||||||LJL-77
 F--JF--7||LJLJ7F7FJ-

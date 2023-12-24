@@ -13,7 +13,7 @@ from aoc_2023_10_A import (
     create_grid,
     find_start,
     find_loop,
-    # START,
+    START,
     PIPES,
     DIRECTIONS,
 )
@@ -28,17 +28,17 @@ from aoc_2023_10_B_1 import (
     test_data_1e,
     test_data_1f,
     test_data_1g,
-    test_data_1h,
-    test_data_1i,
-    test_data_2,
+    test_data_2a,
+    test_data_2b,
     test_data_3,
-    test_data_3b,
     test_data_4,
-    test_data_4a,
     test_data_4b,
-    test_data_4c,
     test_data_5,
+    test_data_5a,
+    test_data_5b,
+    test_data_5c,
     test_data_6,
+    test_data_7,
 )
 
 from enum import Enum, auto
@@ -59,15 +59,16 @@ INSIDE = '█'
 # INSIDE = '▓'
 
 PIPE_TO_BOX = {
-    'S': 'S',
+    START: START,
     '|': '│',
     '-': '─',
     'L': '└',
     'J': '┘',
     'F': '┌',
     '7': '┐',
-    '.': '.',
+    '.': '░',
     Found.LOOP: INSIDE,
+    INSIDE: INSIDE,
 }
 
 
