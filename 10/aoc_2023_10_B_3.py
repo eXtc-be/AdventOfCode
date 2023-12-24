@@ -134,7 +134,7 @@ if __name__ == "__main__":
     # print(data_lines)
 
     grid = create_grid(data_lines)
-    # draw_grid(grid)
+    # draw_grid(grid ,[])
 
     start_row, start_col = find_start(grid)
     # print(f'start character "{START}" was found on row {start_row}, column {start_col}')
@@ -144,9 +144,9 @@ if __name__ == "__main__":
     # print(loop)
 
     replace_start(grid, loop)
-    draw_grid(grid)
+    draw_grid(grid, loop)
 
     enclosed = find_enclosed(grid, loop)
-    draw_grid(grid)
+    draw_grid(grid, loop)
 
     print(f'End result: {enclosed}')

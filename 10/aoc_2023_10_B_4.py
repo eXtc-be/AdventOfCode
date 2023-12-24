@@ -87,7 +87,7 @@ def _mark_edges(grid, loop, r):
     return line
 
 
-def find_enclosed(grid: list[list[str]], loop: list[tuple[int]]) -> int:
+def find_enclosed(grid: list[list[str]], loop: list[tuple[int, int]]) -> int:
     """returns a list of cells in the grid that are enclosed by the loop"""
 
     enclosed = 0
@@ -131,7 +131,7 @@ if __name__ == "__main__":
     # print(data_lines)
 
     grid = create_grid(data_lines)
-    # draw_grid(grid)
+    # draw_grid(grid ,[])
 
     start_row, start_col = find_start(grid)
     # print(f'start character "{START}" was found on row {start_row}, column {start_col}')
@@ -141,9 +141,9 @@ if __name__ == "__main__":
     # print(loop)
 
     replace_start(grid, loop)
-    draw_grid(grid)
+    draw_grid(grid, loop)
 
     enclosed = find_enclosed(grid, loop)
-    draw_grid(grid)
+    draw_grid(grid, loop)
 
     print(f'End result: {enclosed}')

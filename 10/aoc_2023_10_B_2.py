@@ -28,10 +28,12 @@ from aoc_2023_10_B_1 import (
     test_data_1e,
     test_data_1f,
     test_data_1g,
+    test_data_1h,
     test_data_2a,
     test_data_2b,
     test_data_3,
     test_data_4,
+    test_data_4b,
     test_data_4b,
     test_data_5,
     test_data_5a,
@@ -148,7 +150,14 @@ def find_enclosed(grid: list[list[str]], loop: list[tuple[int, int]]) -> None:
             _find_edge(grid, loop, r, c)
 
 
-def draw_grid(grid: list[list[str|Found]]) -> None:
+def draw_grid(grid: list[list[str|Found]], loop: list[tuple[int, int]]) -> None:
+    def num_to_digits(n: int, w: int) -> list[int]:
+        return [int(c) for c in f'{n:0{w}}']
+
+    BOLD = '\033[1m'
+    FAIL = '\033[91m'  # (red)
+    ENDC = '\033[0m'
+
     height = len(grid)
     row_label_width = len(str(height-1))
 
@@ -157,12 +166,9 @@ def draw_grid(grid: list[list[str|Found]]) -> None:
 
     # print column numbers
     for line in range(col_label_height):
-        print(' ' * (row_label_width) + ' ', end='')
+        print(' ' * (row_label_width) + ' ', end='')  # reserve space for column numbers
         for col in range(width):
-            if line < col_label_height - 1:
-                print(col // 10 ** (col_label_height - (line + 1)), end='')
-            else:
-                print(col % 10, end='')
+            print(num_to_digits(col,col_label_height)[line], end='')
         print()
 
     # print lines
@@ -170,24 +176,26 @@ def draw_grid(grid: list[list[str|Found]]) -> None:
         # print the line number
         print(f'{r:{row_label_width}} ', end='')
         for c, char in enumerate(row):
+            if (r, c) in loop:
+                print(FAIL, end='')
             print(PIPE_TO_BOX[char], end='')
+            if (r, c) in loop:
+                print(ENDC, end='')
+
         print(f' {r:{row_label_width}}')
 
     # print column numbers
     for line in range(col_label_height):
-        print(' ' * (row_label_width) + ' ', end='')
+        print(' ' * (row_label_width) + ' ', end='')  # reserve space for column numbers
         for col in range(width):
-            if line < col_label_height - 1:
-                print(col // 10 ** (col_label_height - (line + 1)), end='')
-            else:
-                print(col % 10, end='')
+            print(num_to_digits(col,col_label_height)[line], end='')
         print()
 
     print()
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
+    data_lines = load_data(DATA_PATH)
     # data_lines = test_data_1
     # data_lines = test_data_1a
     # data_lines = test_data_1b
@@ -197,20 +205,21 @@ if __name__ == "__main__":
     # data_lines = test_data_1f
     # data_lines = test_data_1g
     # data_lines = test_data_1h
-    data_lines = test_data_1i
-    # data_lines = test_data_2
+    # data_lines = test_data_2a
+    # data_lines = test_data_2b
     # data_lines = test_data_3
-    # data_lines = test_data_3b
     # data_lines = test_data_4
-    # data_lines = test_data_4a
     # data_lines = test_data_4b
-    # data_lines = test_data_4c
     # data_lines = test_data_5
+    # data_lines = test_data_5a
+    # data_lines = test_data_5b
+    # data_lines = test_data_5c
     # data_lines = test_data_6
+    # data_lines = test_data_7
     # print(data_lines)
 
     grid = create_grid(data_lines)
-    # draw_grid(grid)
+    # draw_grid(grid, [])
 
     start_row, start_col = find_start(grid)
     # print(f'start character "{START}" was found on row {start_row}, column {start_col}')
@@ -219,10 +228,10 @@ if __name__ == "__main__":
     # print(loop)
 
     replace_start(grid, loop)
-    # draw_grid([['.'] * 100] * 20)
-    draw_grid(grid)
+    # draw_grid([['.'] * 120] * 15, [])
+    draw_grid(grid, loop)
 
-    find_enclosed(grid, loop)
-    draw_grid(grid)
+    # find_enclosed(grid, loop)
+    # draw_grid(grid , loop)
 
-    print(f'End result: {sum(line.count(Found.LOOP) for line in grid)}')
+    # print(f'End result: {sum(line.count(Found.LOOP) for line in grid)}')
