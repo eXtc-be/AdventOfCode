@@ -27,19 +27,19 @@ total_combos = 0
 
 
 def get_combos(conditions: str, numbers: list[int]) -> int:
-    # global combos_skipped, total_combos
+    global combos_skipped, total_combos
 
     combos = 0
 
     for combo in product('.#', repeat=conditions.count('?')):
-        # total_combos += 1
+        total_combos += 1
 
         # inject combo into conditions
         i = iter(combo)
         attempt = ''.join(next(i) if char == '?' else char for char in list(conditions))
 
         if attempt.count('#') != sum(numbers):
-            # combos_skipped += 1
+            combos_skipped += 1
             continue
 
         groups = [group for group in attempt.split('.') if group]  # get non-empty groups
