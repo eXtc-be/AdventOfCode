@@ -25,7 +25,7 @@ test_data = """
 <testdata>
 <testdata>
 <testdata>
-""".splitlines()
+""".strip().splitlines()
 
 
 @time_it
