@@ -1,5 +1,10 @@
-# evaluates an integer and returns the integer and a string
+# tools.py - some tools to be used by other programs
 
+import functools
+import time
+
+
+# evaluates an integer and returns the integer and a string
 # the string is empty if the integer d==1, 's' in any other case
 def evalPlural(d):
     return d, (d != 1 and 's' or '')
@@ -20,7 +25,7 @@ def convertSeconds(duration, mode=3):
     r = ''
 
     # mode 1: return all fields, no matter what their value
-    # eg. 0 days, 0 hours, 3 minutes and 0 seconds
+    # e.g. 0 days, 0 hours, 3 minutes and 0 seconds
     if mode == 1:
         r += '%d day%s, ' % evalPlural(days)
         r += '%d hour%s, ' % evalPlural(hours)
@@ -56,8 +61,23 @@ def convertSeconds(duration, mode=3):
                     r += '%d minute%s and ' % evalPlural(minutes)
                     r += '%d second%s' % evalPlural(seconds)
                 else:
-                    r += '%d second%s' % evalPlural(int(seconds))
+                    r += '%0.3f second%s' % evalPlural(seconds)
 
     if r == '0 seconds': r = 'less than 1 second'
 
     return r
+
+
+def time_it(func):
+    """record and print the runtime of the decorated function"""
+
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        start_time = time.perf_counter()
+        value = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        run_time = end_time - start_time
+        print(f"Finished {func.__name__!r} in {convertSeconds(run_time)}")
+        return value
+
+    return wrapper

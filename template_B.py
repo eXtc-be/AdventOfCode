@@ -9,15 +9,27 @@ from <file_A> import (
     test_data,
 )
 
+from tools import time_it
 
-# functions
+# other imports
 
 
-if __name__ == "__main__":
+# other constants
+
+
+# other functions
+
+
+@time_it
+def main():
     # data_lines = load_data(DATA_PATH)
     data_lines = test_data
     print(data_lines)
 
     # your code
 
-    # print(f'End result: {sum(<last_array>)}')
+    print(f'End result: {0}')
+
+
+if __name__ == "__main__":
+    main()

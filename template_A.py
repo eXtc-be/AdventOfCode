@@ -3,10 +3,14 @@
 # <url>
 
 
-# imports
+from tools import time_it
+
+# other imports
 
 
 DATA_PATH = './input_<year>_<0_day>'
+
+# other constants
 
 
 def load_data(path: str) -> list[str]:
@@ -14,17 +18,26 @@ def load_data(path: str) -> list[str]:
         return f.read().splitlines()
 
 
-# functions
+# other functions
 
 
-test_data = """<testdata>""".splitlines()
+test_data = """
+<testdata>
+<testdata>
+<testdata>
+""".splitlines()
 
 
-if __name__ == "__main__":
+@time_it
+def main():
     # data_lines = load_data(DATA_PATH)
     data_lines = test_data
     print(data_lines)
 
     # your code
 
-    # print(f'End result: {sum(<last_array>)}')
+    print(f'End result: {0}')
+
+
+if __name__ == "__main__":
+    main()

@@ -76,7 +76,7 @@ if write:
             if art_match:
                 article = art_match.group(1)
                 # extract title from article
-                title_match = re.match(r'<h2>--- Day \d\d?: (.*?s) ---</h2>', article)
+                title_match = re.match(r'<h2>--- Day \d\d?: (.*?) ---</h2>', article)
                 if title_match:
                     title = title_match.group(1)
                 # extract description from article (it's the last paragraph)
