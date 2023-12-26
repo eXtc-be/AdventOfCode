@@ -9,7 +9,7 @@
 DATA_PATH = './input_<year>_<0_day>'
 
 
-def load_data(path):
+def load_data(path: str) -> list[str]:
     with open(path) as f:
         return f.read().splitlines()
 
