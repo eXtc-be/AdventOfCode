@@ -1,6 +1,6 @@
 # <filename> - Day <day>: <title> - part 2
 # <description>
-# https://adventofcode.com/2023/day/<day>
+# <url>
 
 
 from <file_A> import (
