@@ -14,14 +14,25 @@ def evalPlural(d):
 # 1. all fields, no matter if they're zero
 # 2. only nonzero fields
 # 3. no zero leading fields
+# TODO: change the seconds accuracy depending on the number of seconds
+#   e.g. 3 significant digits for 0.x seconds, 2 for 1.x, 1 for less than 10, none for more than 10
 def convertSeconds(duration, mode=3):
-    days = duration // (24 * 60 * 60)
-    duration %= (24 * 60 * 60)
-    hours = duration // (60 * 60)
-    duration %= (60 * 60)
-    minutes = duration // (60)
-    duration %= (60)
-    seconds = duration
+    days, hours = divmod(duration, 24 * 60 * 60)
+    hours, minutes = divmod(hours, 60 * 60)
+    minutes, seconds = divmod(minutes, 60)
+    milliseconds = 0
+
+    second_format = ''
+    if days or hours or minutes or seconds > 10:
+        second_format = '%d second%s'
+    elif seconds > 2:
+        second_format = '%0.1f second%s'
+    elif seconds > 1:
+        second_format = '%0.2f second%s'
+    else:  # seconds < 0
+        seconds, milliseconds = round(seconds), round(seconds * 1000)
+        second_format = '%d second%s'
+
     r = ''
 
     # mode 1: return all fields, no matter what their value
@@ -29,8 +40,11 @@ def convertSeconds(duration, mode=3):
     if mode == 1:
         r += '%d day%s, ' % evalPlural(days)
         r += '%d hour%s, ' % evalPlural(hours)
-        r += '%d minute%s and ' % evalPlural(minutes)
-        r += '%d second%s' % evalPlural(seconds)
+        r += '%d minute%s, ' % evalPlural(minutes)
+        r += second_format % evalPlural(seconds) + ', '
+        if milliseconds:
+            r += '%d millisecond%s' % evalPlural(milliseconds)
+        else: r = r[:-2]
 
     # mode 2: don't return any fields with value==0
     # e.g. 3 hours, 2 seconds
@@ -38,10 +52,11 @@ def convertSeconds(duration, mode=3):
         if days: r += '%d day%s, ' % evalPlural(days)
         if hours: r += '%d hour%s, ' % evalPlural(hours)
         if minutes: r += '%d minute%s, ' % evalPlural(minutes)
-        if seconds:
-            r += '%d second%s' % evalPlural(seconds)
+        if seconds: r += second_format % evalPlural(seconds) + ', '
+        if milliseconds:
+            r += '%d millisecond%s' % evalPlural(milliseconds)
         else:
-            r = r[:-1]
+            r = r[:-2]
 
     # mode 3: don't return any leading fields with value==0
     # e.g. 3 minutes and 0 seconds
@@ -50,20 +65,20 @@ def convertSeconds(duration, mode=3):
             r += '%d day%s, ' % evalPlural(days)
             r += '%d hour%s, ' % evalPlural(hours)
             r += '%d minute%s and ' % evalPlural(minutes)
-            r += '%d second%s' % evalPlural(seconds)
+            r += second_format % evalPlural(seconds)
         else:
             if hours:
                 r += '%d hour%s, ' % evalPlural(hours)
                 r += '%d minute%s and ' % evalPlural(minutes)
-                r += '%d second%s' % evalPlural(seconds)
             else:
                 if minutes:
                     r += '%d minute%s and ' % evalPlural(minutes)
-                    r += '%d second%s' % evalPlural(seconds)
+                    r += second_format % evalPlural(seconds)
                 else:
-                    r += '%0.3f second%s' % evalPlural(seconds)
-
-    if r == '0 seconds': r = 'less than 1 second'
+                    if seconds:
+                        r += second_format % evalPlural(seconds)
+                    else:
+                        r += '%d millisecond%s' % evalPlural(milliseconds)
 
     return r
 
@@ -81,3 +96,20 @@ def time_it(func):
         return value
 
     return wrapper
+
+
+if __name__ == "__main__":
+    for test in (
+            0.3456789,
+            1.3456789,
+            2.3456789,
+            12.3456789,
+            56*60+12.3456789,
+            3*3600+56*60+12.3456789,
+            (24*2+3)*3600+56*60+12.3456789,
+            (24*2+0)*3600+0*60+12.3456789,
+    ):
+        print(convertSeconds(test, 1))
+        print(convertSeconds(test, 2))
+        print(convertSeconds(test, 3))
+        print('-' * 50)
