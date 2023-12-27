@@ -14,8 +14,6 @@ def evalPlural(d):
 # 1. all fields, no matter if they're zero
 # 2. only nonzero fields
 # 3. no zero leading fields
-# TODO: change the seconds accuracy depending on the number of seconds
-#   e.g. 3 significant digits for 0.x seconds, 2 for 1.x, 1 for less than 10, none for more than 10
 def convertSeconds(duration, mode=3):
     days, hours = divmod(duration, 24 * 60 * 60)
     hours, minutes = divmod(hours, 60 * 60)
