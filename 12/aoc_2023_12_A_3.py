@@ -1,5 +1,6 @@
 # aoc_2023_12_A_3.py - Day 12: Hot Springs - part 1
-# For each row, count all of the different arrangements of operational and broken springs that meet the given criteria. What is the sum of those counts?
+# For each row, count all the different arrangements of operational and broken springs
+# that meet the given criteria. What is the sum of those counts?
 # third version:
 #   get_combos now only checks 'viable' combinations, i.e. where the number of # (after injecting the combo)
 #       is equal to the sum of numbers
@@ -22,32 +23,32 @@ from tools import time_it
 from pprint import pprint
 
 
-combos_skipped = 0
-total_combos = 0
+# combos_skipped = 0
+# total_combos = 0
 
 
-def get_combos(conditions: str, numbers: list[int]) -> int:
-    global combos_skipped, total_combos
+def get_combos(cfg: str, nums: tuple[int, ...]) -> int:
+    # global combos_skipped, total_combos
 
     combos = 0
 
-    for combo in product('.#', repeat=conditions.count('?')):
-        total_combos += 1
+    for combo in product('.#', repeat=cfg.count('?')):
+        # total_combos += 1
 
-        # inject combo into conditions
+        # inject combo into cfg
         i = iter(combo)
-        attempt = ''.join(next(i) if char == '?' else char for char in list(conditions))
+        attempt = ''.join(next(i) if char == '?' else char for char in list(cfg))
 
-        if attempt.count('#') != sum(numbers):
-            combos_skipped += 1
+        if attempt.count('#') != sum(nums):
+            # combos_skipped += 1
             continue
 
         groups = [group for group in attempt.split('.') if group]  # get non-empty groups
 
-        if len(groups) != len(numbers):
+        if len(groups) != len(nums):
             continue
 
-        if any(group.count('#') != number for group, number in zip(groups, numbers)):
+        if any(group.count('#') != number for group, number in zip(groups, nums)):
             continue
 
         combos += 1
@@ -66,35 +67,35 @@ test_data = """
 
 
 @time_it
-def main():
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
-
+def main(data_lines: list[str]):
     records = create_records(data_lines)
     # pprint(records)
 
     total = 0
     for record in records:
-        conditions, numbers = record
-        combos = get_combos(conditions, numbers)
+        cfg, nums = record
+        combos = get_combos(cfg, nums)
         # print(combos)
         # print(record, combos)
         total += combos
         # total += combos
 
     print(f'End result: {total}')
-    print(f'{combos_skipped} out of {total_combos} combinations were skipped')
+    # print(f'{combos_skipped} out of {total_combos} combinations were skipped')
 
 
 if __name__ == "__main__":
-    main()
+    # data_lines = load_data(DATA_PATH)
+    data_lines = test_data
+    # print(data_lines)
+
+    main(data_lines)
     # using test_data:
     #   End result: 21
-    #   Finished 'main' in 0.002 seconds
+    #   Finished 'main' in 2 milliseconds
     # using input data:
     #   End result: 7047
-    #   Finished 'main' in 15.765 seconds
+    #   Finished 'main' in 15 seconds
     # using input data, without counting skipped combos:
     #   End result: 7047
-    #   Finished 'main' in 15.109 seconds
+    #   Finished 'main' in 15 seconds

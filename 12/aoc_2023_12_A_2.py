@@ -1,5 +1,6 @@
 # aoc_2023_12_A_2.py - Day 12: Hot Springs - part 1
-# For each row, count all of the different arrangements of operational and broken springs that meet the given criteria. What is the sum of those counts?
+# For each row, count all the different arrangements of operational and broken springs
+# that meet the given criteria. What is the sum of those counts?
 # second version:
 #   process_record now returns number of valid combos instead of the list of valid combos
 #   _get_combos now looks at every group separately and multiplies each group's number of valid combinations
@@ -33,11 +34,11 @@ from pprint import pprint
 optimized = 0
 
 
-def _get_combos(conditions: str, numbers: list[int]) -> int:
+def _get_combos(cfg: str, nums: tuple[int, ...]) -> int:
     global optimized
 
-    groups = [group for group in conditions.split('.') if group]  # get non-empty groups
-    if len(groups) == len(numbers):
+    groups = [group for group in cfg.split('.') if group]  # get non-empty groups
+    if len(groups) == len(nums):
         '''
         optimized case where the number of groups is equal to the number of numbers
         so, instead of checking 2 to the power of the number of total ? combinations,
@@ -47,7 +48,7 @@ def _get_combos(conditions: str, numbers: list[int]) -> int:
         '''
         combos = []
         optimized += 1
-        for group, number in zip(groups, numbers):
+        for group, number in zip(groups, nums):
             if '?' in group:
                 combos.append(len([
                     _inject_combo(group, combo)
@@ -57,29 +58,29 @@ def _get_combos(conditions: str, numbers: list[int]) -> int:
         return reduce(mul, combos, 1)
     else:
         # fall back to checking all combinations
-        return len(_get_all_combos(conditions, numbers))
+        return len(_get_all_combos(cfg, nums))
 
 
+def process_record(record: tuple[str, tuple[int, ...]]) -> int:
+    cfg, nums = record
 
-def process_record(record: tuple[str, list[int]]) -> int:
-    conditions, numbers = record
-
-    combos = _get_combos(conditions, numbers)
+    combos = _get_combos(cfg, nums)
 
     return combos
 
 
 test_data = """
-??.???.#?? 1,1,2
+???.### 1,1,3
+.??..??...?##. 1,1,3
+?#?#?#?#?#?#?#? 1,3,1,6
+????.#...#... 4,1,1
+????.######..#####. 1,6,5
+?###???????? 3,2,1
 """.splitlines()
 
 
 @time_it
-def main():
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
-
+def main(data_lines: list[str]):
     records = create_records(data_lines)
     # pprint(records)
 
@@ -95,7 +96,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # data_lines = load_data(DATA_PATH)
+    data_lines = test_data
+    # print(data_lines)
+
+    main(data_lines)
     # using test_data:
     #   End result: 21
     #   Finished 'main' in 0.002 seconds
