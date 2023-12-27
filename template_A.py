@@ -29,7 +29,7 @@ test_data = """
 
 
 @time_it
-def main(data_lines: list[str]):
+def main(data_lines: list[str]) -> None:
     # your code
 
     print(f'End result: {0}')
