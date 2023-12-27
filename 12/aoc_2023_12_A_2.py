@@ -80,7 +80,7 @@ test_data = """
 
 
 @time_it
-def main(data_lines: list[str]):
+def main(data_lines: list[str]) -> None:
     records = create_records(data_lines)
     # pprint(records)
 
