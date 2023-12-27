@@ -87,7 +87,7 @@ def main(data_lines: list[str]) -> None:
     total = 0
     for record in records:
         combos = process_record(record)
-        print(combos)
+        # print(combos)
         # print(record, combos)
         total += combos
 
@@ -96,8 +96,8 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
+    data_lines = load_data(DATA_PATH)
+    # data_lines = test_data
     # print(data_lines)
 
     main(data_lines)
@@ -105,5 +105,5 @@ if __name__ == "__main__":
     #   End result: 21
     #   Finished 'main' in 0.002 seconds
     # using input data:
-    #   End result:
-    #   Finished 'main' in
+    #   End result: 12810 - WRONG
+    #   Finished 'main' in 17 seconds
