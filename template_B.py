@@ -21,15 +21,15 @@ from tools import time_it
 
 
 @time_it
-def main():
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    print(data_lines)
-
+def main(data_lines: list[str]):
     # your code
 
     print(f'End result: {0}')
 
 
 if __name__ == "__main__":
-    main()
+    # data_lines = load_data(DATA_PATH)
+    data_lines = test_data
+    print(data_lines)
+
+    main(data_lines)
