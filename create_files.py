@@ -90,7 +90,7 @@ if write:
             # save html to a file
             html_file = HTML_FILE.format(year_string, day_string)
             print(f'creating file {(path / html_file).absolute()}')
-            with open(path / html_file, 'w') as out_file:
+            with open(path / html_file, 'w', encoding='utf-8') as out_file:
                 out_file.write(html)
         else:
             print(f'something went wrong, remote server returned status {response.status_code}')
@@ -101,7 +101,7 @@ if write:
         if response.status_code == 200:
             input_file = INPUT_FILE.format(year_string, day_string)
             print(f'creating file {(path / input_file).absolute()}')
-            with open(path / input_file, 'w') as out_file:
+            with open(path / input_file, 'w', encoding='utf-8') as out_file:
                 out_file.write(response.text)
         else:
             print(f'something went wrong, remote server returned status {response.status_code}')
@@ -110,7 +110,7 @@ if write:
     # create both files from template and replace placeholders
     for file, template in zip([file_A, file_B], ['template_A.py', 'template_B.py']):
         print(f'creating file {(path / file).absolute()}')
-        with open(template, 'r') as in_file, open(path / file, 'w') as out_file:
+        with open(template, 'r', encoding='utf-8') as in_file, open(path / file, 'w', encoding='utf-8') as out_file:
             for line in in_file:
                 if '<filename>' in line:
                     line = line.replace('<filename>', file)
