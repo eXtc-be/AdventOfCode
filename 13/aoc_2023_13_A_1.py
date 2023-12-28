@@ -71,13 +71,13 @@ def get_reflection(pattern: list[list[str]]) -> int:
     return vertical + 100 * horizontal
 
 
-def summarize(patterns: list[list[list[str]]]):
+def summarize(patterns: list[list[list[str]]]) -> list[int]:
     reflections = []
 
     for pattern in patterns:
         reflections.append(get_reflection(pattern))
 
-    return sum(reflections)
+    return reflections
 
 
 test_data = """
@@ -107,7 +107,7 @@ def main(data_lines: list[str]) -> None:
     summary = summarize(patterns)
     print(summary)
 
-    print(f'End result: {summary}')
+    print(f'End result: {sum(summary)}')
 
 
 if __name__ == "__main__":
