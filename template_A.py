@@ -7,6 +7,8 @@ from tools import time_it
 
 # other imports
 
+from pprint import pprint
+
 
 DATA_PATH = './input_<year>_<0_day>'
 
