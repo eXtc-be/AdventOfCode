@@ -16,6 +16,8 @@ HTML_URL = 'https://adventofcode.com/2023/day/{}'
 HTML_FILE = '{}_{}.html'
 INPUT_URL = 'https://adventofcode.com/2023/day/{}/input'
 INPUT_FILE = 'input_{}_{}'
+TEMPLATE_FILE = 'template_{}.py'
+OUTPUT_FILE = 'aoc_{}_{}_{}_1.py'
 
 day_string = None
 year_string = 2023
@@ -28,8 +30,10 @@ if not day_string:
 
 # create folder and file names
 day_string = f'{int(day_string):02d}'
-file_A = f'aoc_{str(year_string)}_{day_string}_A.py'
-file_B = f'aoc_{str(year_string)}_{day_string}_B.py'
+# file_A = OUTPUT_FILE.format(str(year_string), day_string, 'A')
+# file_B = OUTPUT_FILE.format(str(year_string), day_string, 'B')
+# file_A = f'aoc_{str(year_string)}_{day_string}_A.py'
+# file_B = f'aoc_{str(year_string)}_{day_string}_B.py'
 
 path = Path(day_string)
 
@@ -108,12 +112,21 @@ if write:
             exit()
 
     # create both files from template and replace placeholders
-    for file, template in zip([file_A, file_B], ['template_A.py', 'template_B.py']):
+    file_A = ''
+    for letter in 'A B'.split():
+        file = OUTPUT_FILE.format(str(year_string), day_string, letter)
+        template = TEMPLATE_FILE.format(letter)
+
+        if letter == 'A':
+            file_A = file
+
         print(f'creating file {(path / file).absolute()}')
         with open(template, 'r', encoding='utf-8') as in_file, open(path / file, 'w', encoding='utf-8') as out_file:
             for line in in_file:
                 if '<filename>' in line:
                     line = line.replace('<filename>', file)
+                if '<day>' in line:
+                    line = line.replace('<day>', str(int(day_string)))
                 if '<title>' in line:
                     line = line.replace('<title>', title)
                 if '<description>' in line:
@@ -122,10 +135,8 @@ if write:
                     line = line.replace('<url>', html_url)
                 if '<year>' in line:
                     line = line.replace('<year>', str(year_string))
-                if '<day>' in line:
-                    line = line.replace('<day>', str(int(day_string)))
                 if '<0_day>' in line:
                     line = line.replace('<0_day>', day_string)
-                if '<file_A>' in line:
-                    line = line.replace('<file_A>', file_A[:-3])
+                if '<file_A>' in line:  # from <file_A> import
+                    line = line.replace('<file_A>', file_A[:-3])  # cut '.py.
                 out_file.write(line)
