@@ -1,7 +1,13 @@
-# <filename> - Day <day>: <title> - part 1
+# <filename> - Day <day>: <title> - part 2
 # <description>
 # <url>
 
+
+from <file_A> import (
+    DATA_PATH,
+    load_data,
+    test_data,
+)
 
 from tools import time_it
 
@@ -10,24 +16,10 @@ from tools import time_it
 from pprint import pprint
 
 
-DATA_PATH = './input_<year>_<0_day>'
-
 # other constants
 
 
-def load_data(path: str) -> list[str]:
-    with open(path) as f:
-        return f.read().splitlines()
-
-
 # other functions
-
-
-test_data = """
-<testdata>
-<testdata>
-<testdata>
-""".strip().splitlines()
 
 
 @time_it
@@ -43,3 +35,9 @@ if __name__ == "__main__":
     print(data_lines)
 
     main(data_lines)
+    # using test_data:
+    #   End result: xxx
+    #   Finished 'main' in xxx
+    # using input data:
+    #   End result: xxx
+    #   Finished 'main' in xxx
