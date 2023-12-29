@@ -16,7 +16,7 @@ HTML_URL = 'https://adventofcode.com/2023/day/{}'
 HTML_FILE = '{}_{}.html'
 INPUT_URL = 'https://adventofcode.com/2023/day/{}/input'
 INPUT_FILE = 'input_{}_{}'
-TEMPLATE_FILE = 'template_{}.py'
+TEMPLATE_FILE = 'template_{}.txt'
 OUTPUT_FILE = 'aoc_{}_{}_{}_1.py'
 
 day_string = None
@@ -28,13 +28,8 @@ if len(sys.argv) > 1:
 if not day_string:
     day_string = input('Day number? ')
 
-# create folder and file names
+# create folder name and Path
 day_string = f'{int(day_string):02d}'
-# file_A = OUTPUT_FILE.format(str(year_string), day_string, 'A')
-# file_B = OUTPUT_FILE.format(str(year_string), day_string, 'B')
-# file_A = f'aoc_{str(year_string)}_{day_string}_A.py'
-# file_B = f'aoc_{str(year_string)}_{day_string}_B.py'
-
 path = Path(day_string)
 
 # check for existing folder and ask permission to delete/overwrite
@@ -93,7 +88,7 @@ if write:
 
             # save html to a file
             html_file = HTML_FILE.format(year_string, day_string)
-            print(f'creating file {(path / html_file).absolute()}')
+            print(f'creating html file {(path / html_file).absolute()}')
             with open(path / html_file, 'w', encoding='utf-8') as out_file:
                 out_file.write(html)
         else:
@@ -104,7 +99,7 @@ if write:
         response = session.get(input_url)  # get the data from the remote server
         if response.status_code == 200:
             input_file = INPUT_FILE.format(year_string, day_string)
-            print(f'creating file {(path / input_file).absolute()}')
+            print(f'creating input file {(path / input_file).absolute()}')
             with open(path / input_file, 'w', encoding='utf-8') as out_file:
                 out_file.write(response.text)
         else:
@@ -114,17 +109,17 @@ if write:
     # create both files from template and replace placeholders
     file_A = ''
     for letter in 'A B'.split():
-        file = OUTPUT_FILE.format(str(year_string), day_string, letter)
+        output_file = OUTPUT_FILE.format(str(year_string), day_string, letter)
         template = TEMPLATE_FILE.format(letter)
 
         if letter == 'A':
-            file_A = file
+            file_A = output_file
 
-        print(f'creating file {(path / file).absolute()}')
-        with open(template, 'r', encoding='utf-8') as in_file, open(path / file, 'w', encoding='utf-8') as out_file:
+        print(f'creating output file {(path / output_file).absolute()}')
+        with open(template, 'r', encoding='utf-8') as in_file, open(path / output_file, 'w', encoding='utf-8') as out_file:
             for line in in_file:
                 if '<filename>' in line:
-                    line = line.replace('<filename>', file)
+                    line = line.replace('<filename>', output_file)
                 if '<day>' in line:
                     line = line.replace('<day>', str(int(day_string)))
                 if '<title>' in line:
