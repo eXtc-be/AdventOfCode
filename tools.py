@@ -42,7 +42,11 @@ def convertSeconds(duration, mode=3):
         r += second_format % evalPlural(seconds) + ', '
         if milliseconds:
             r += '%d millisecond%s' % evalPlural(milliseconds)
-        else: r = r[:-2]
+        else:
+            if days or hours or minutes or seconds:
+                r = r[:-2]
+            else:
+                r = 'less than a millisecond'
 
     # mode 2: don't return any fields with value==0
     # e.g. 3 hours, 2 seconds
@@ -54,7 +58,10 @@ def convertSeconds(duration, mode=3):
         if milliseconds:
             r += '%d millisecond%s' % evalPlural(milliseconds)
         else:
-            r = r[:-2]
+            if r:
+                r = r[:-2]
+            else:
+                r = 'less than a millisecond'
 
     # mode 3: don't return any leading fields with value==0
     # e.g. 3 minutes and 0 seconds
@@ -76,7 +83,10 @@ def convertSeconds(duration, mode=3):
                     if seconds:
                         r += second_format % evalPlural(seconds)
                     else:
-                        r += '%d millisecond%s' % evalPlural(milliseconds)
+                        if milliseconds:
+                            r += '%d millisecond%s' % evalPlural(milliseconds)
+                        else:
+                            r = 'less than a millisecond'
 
     return r
 
@@ -98,6 +108,8 @@ def time_it(func):
 
 if __name__ == "__main__":
     for test in (
+            0.0001234,
+            (24*2+0)*3600+0*60+12.0001234,
             0.3456789,
             1.3456789,
             2.3456789,
