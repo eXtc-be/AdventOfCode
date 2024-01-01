@@ -23,11 +23,11 @@ def load_data(path: str) -> list[str]:
 # other functions
 
 
-test_data = """
+test_data = '''
 <testdata>
 <testdata>
 <testdata>
-""".strip().splitlines()
+'''.strip().splitlines()
 
 
 @time_it
