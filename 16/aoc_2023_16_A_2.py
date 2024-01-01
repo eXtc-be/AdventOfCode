@@ -4,6 +4,7 @@
 # how many tiles end up being energized?
 # this version will try a different loop detecting strategy: for each cell on the grid, keep track of the
 #   directions from which it has been entered and stop a particular path if all 4 directions are used
+# I also discovered by chance that the upper left corner of the grid (the starting position) was not processed properly
 # https://adventofcode.com/2023/day/16
 
 
@@ -39,6 +40,13 @@ def draw_energized(energized: list[list[list[str | bool | int]]]) -> None:
     print('-' * 100)
 
 
+def _get_dir(rc: tuple[int, int]) -> int | None:
+    for dir, RC in DIRECTIONS.items():
+        if rc == RC:
+            return dir
+    return None
+
+
 def _travel_grid(
         grid: list[list[str]],
         energized: list[list[list[str | bool | int]]],
@@ -50,16 +58,8 @@ def _travel_grid(
 
     while True:
         energized[row][col][0] = '#'
-        energized[row][col][dir] = True  # dir: 1 to 4
+        energized[row][col][_get_dir((delta_r, delta_c))] = True  # dir: 1 to 4
         energized[row][col][5] += 1  # visited counter
-
-        # calculate next cell
-        row += delta_r
-        col += delta_c
-
-        # verify bounds
-        if row < 0 or row > len(grid) - 1 or col < 0 or col > len(grid[row]) - 1:
-            break  # when we hit the edge of the grid we stop
 
         if all(energized[row][col][1:-1]):  # already visited from all directions
             break
@@ -67,32 +67,40 @@ def _travel_grid(
         if energized[row][col][5] > MAX_VISIT:  # visited too much
             break
 
-        next_cell = grid[row][col]
+        cell_content = grid[row][col]
 
-        if next_cell == '.':  # continue in same direction
-            continue
-        elif next_cell == '/':  # deflect right to up, left to down, up to right, down to left
+        if cell_content == '.':  # continue in same direction
+            pass
+        elif cell_content == '/':  # deflect right to up, left to down, up to right, down to left
             rr = 0 if delta_r else -delta_c
             cc = 0 if delta_c else -delta_r
             delta_r, delta_c = rr, cc
-        elif next_cell == '\\':  # deflect right to down, left to up, up to left, down to right
+        elif cell_content == '\\':  # deflect right to down, left to up, up to left, down to right
             rr = 0 if delta_r else delta_c
             cc = 0 if delta_c else delta_r
             delta_r, delta_c = rr, cc
-        elif next_cell == '|':  # split horizontal beam to 2 verticals, pass vertical beam
+        elif cell_content == '|':  # split horizontal beam to 2 verticals, pass vertical beam
             if delta_c:  # split horizontal beam
                 _travel_grid(grid, energized, row, col, 1)  # split to down
                 _travel_grid(grid, energized, row, col, 2)  # split to up
                 break  # don't continue
             else:  # pass through
-                continue
-        elif next_cell == '-':  # split vertical beam to 2 horizontals, pass horizontal beam
+                pass
+        elif cell_content == '-':  # split vertical beam to 2 horizontals, pass horizontal beam
             if delta_r:  # split vertical beam
                 _travel_grid(grid, energized, row, col, 3)  # split to the right
                 _travel_grid(grid, energized, row, col, 4)  # split to the left
                 break  # don't continue
             else:  # pass through
-                continue
+                pass
+
+        # calculate next cell's row and column
+        row += delta_r
+        col += delta_c
+
+        # verify bounds
+        if row < 0 or row > len(grid) - 1 or col < 0 or col > len(grid[row]) - 1:
+            break  # when we hit the edge of the grid we stop
 
 
 def find_energized(grid: list[list[str]]) -> list[list[list[str | bool | int]]]:
@@ -113,18 +121,53 @@ def main(data_lines: list[str]) -> None:
     grid = create_grid(data_lines)
     # draw_grid(grid)
 
-    old_limit = sys.getrecursionlimit()
-    sys.setrecursionlimit(100000)
+    # old_limit = sys.getrecursionlimit()
+    # sys.setrecursionlimit(100000)
     energized = find_energized(grid)
-    sys.setrecursionlimit(old_limit)
-    draw_energized(energized)
+    # sys.setrecursionlimit(old_limit)
+    # draw_energized(energized)
 
     print(f'End result: {sum(sum(cell[0] == "#" for cell in row) for row in energized)}')
+
+
+test_data_2 = r'''
+\.......................\..........................................-..................-.../................-..
+....../.......\...-......-.|...\..............\.................|............././....-........................
+...............-...-........................................\......\..-.............|......-....\....-........
+..\..|.|...........................-.|........................................./.|....|................|......
+|../................|............................................................\........../..\..............
+........\............../................/..........................\...\....|............./....-.........\\...
+.................-...-...................\../........-|.................../......-...........|................
+........-............/...|-............-.....\.|..............-....-../\../..................\...\././........
+........................-|................................................................-........-..........
+-......./.................|.....\.................\.....//............-........./..../....|...................
+....-.............-........-..........-|.......|...../...\...................\.....................|..........
+...|...\.........|.................|.....|....-....\.......\./........................-.../..../.....-........
+....|....-.-..............\.........|.......................-.......-..............\................/.........
+.....|.\...........-.................-.-........../...\............|...............|...|......./.......|...../
+.....\.........................-.../..-./...\...................../......\...-.......|.\........-|............
+............|.....................................-....../....\.............../-...|...\..\................./.
+......-./|....../............|.........\............-../...-......./.\..\....../......|/...\..................
+................................|.......|..-..../.............................../.-..................-..-/..|.
+...............................-......./......................|./...............-............./....../........
+..................../....................\........\...........................-............/.../..............
+.|||......../.................|.................../..\............................-......./..|...|/.-.........
+......-......./\....../.........|....../.......-...............|.\........-............/.../..................
+.....................-.\/|................//.../.........|.|......\.-..|.........|.........\..................
+.........................\/.......|.|............................|........|.............................././..
+.................................|.................\../..|/.................\.................-...-........-/.
+......................-...-.........../...........................\....\......-..-.......\.-....\....|........
+......-......../..............\/..................\..|........-..............|...-...../......|...............
+|.......|.../....|..............//.....................|..........|/......../................|................
+...|.|..................../|..../.-.......-...........|.....|./....\......-......-................|...........
+......\/./.|\..../|.|..|..........-....|...........|.-.|...................-.\.....|....................\.....
+'''.strip().splitlines()
 
 
 if __name__ == "__main__":
     data_lines = load_data(DATA_PATH)
     # data_lines = test_data
+    # data_lines = test_data_2
     # print(data_lines)
 
     main(data_lines)
@@ -134,6 +177,8 @@ if __name__ == "__main__":
     # using input data:
     #   End result: 8037 (MAX_VISIT=10) - incorrect
     #   Finished 'main' in 27 milliseconds
+    #   End result: 7598 (MAX_VISIT=10) - incorrect
+    #   Finished 'main' in 34 milliseconds
 
     # test find_energized
     # grid = create_grid(['.....', '.....', '.....', '.....', '.....'])  # no mirrors, straight through
