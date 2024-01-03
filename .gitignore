@@ -175,3 +175,5 @@ dl_article.py
 *.ods
 
 05/mappings
+/17/a_star.py
+/17/dijkstra.py
