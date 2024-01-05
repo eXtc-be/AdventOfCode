@@ -60,6 +60,12 @@ class Coord:
     row: int
     col: int
 
+    def __add__(self, other):
+        return Coord(self.row + other.row, self.col + other.col)
+
+    def __mul__(self, factor):
+        return Coord(self.row * factor, self.col * factor)
+
 
 @dataclass
 class Direction:
