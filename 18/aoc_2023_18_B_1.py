@@ -22,12 +22,18 @@ from dataclasses import dataclass, field
 
 from pprint import pprint
 
-
 INT_TO_DIR = {
     0: 'R',
     1: 'D',
     2: 'L',
     3: 'U',
+}
+
+WALL_TO_VERT: dict[str, str] = {
+    '┐': 'D',
+    '┌': 'D',
+    '┘': 'U',
+    '└': 'U',
 }
 
 
@@ -67,8 +73,19 @@ class HugeGrid:
             next_vertex = Vertex(current_vertex.position + delta * value, 1, '░')
             self.vertices.append(next_vertex)
 
-            # add vertex
-            self.edges.append(Edge((current_vertex, next_vertex), 1, DIR_TO_WALL[move]))
+            # add edge
+            # make sure the vertex with the lowest row number is stored first for vertical movements
+            if move in 'UD':
+                if current_vertex.position.row < next_vertex.position.row:
+                    self.edges.append(Edge((current_vertex, next_vertex), 1, DIR_TO_WALL[move]))
+                else:
+                    self.edges.append(Edge((next_vertex, current_vertex), 1, DIR_TO_WALL[move]))
+            # make sure the vertex with the lowest column number is stored first for horizontal movements
+            if move in 'LR':
+                if current_vertex.position.col < next_vertex.position.col:
+                    self.edges.append(Edge((current_vertex, next_vertex), 1, DIR_TO_WALL[move]))
+                else:
+                    self.edges.append(Edge((next_vertex, current_vertex), 1, DIR_TO_WALL[move]))
 
             previous_move = move
             current_vertex = next_vertex
@@ -93,27 +110,97 @@ class HugeGrid:
             for vertex in self.vertices:
                 vertex.position.col -= col_min
 
-    def _get_edges(self, rr) -> list:
-        """returns all edges for a given row"""
-        edges = []
+    def _get_walls(self, rr: int) -> list:
+        """returns all walls for a given row"""
         # get all vertical lines crossing the current row
         verticals = [
             edge
             for edge in self.edges
-            if edge.wall == '│' and edge.vertices[0].position.row < rr < edge.vertices[1].position.row
+            if edge.wall == '│' and
+               edge.vertices[0].position.row < rr < edge.vertices[1].position.row
         ]
+
+        horizontals = [
+            edge
+            for edge in self.edges
+            if edge.vertices[0].position.row == rr and
+               edge.wall == '─'
+        ]
+
+        return verticals + horizontals
+
+    def trench(self) -> int:
+        """returns the number of cells in the trench"""
+        total = 0
+
+        for rr in range(max(vertex.position.row for vertex in self.vertices) + 1):
+            walls = self._get_walls(rr)
+            for wall in walls:
+                if wall.wall == '│':
+                    total += 1
+                else:
+                    total += wall.vertices[1].position.col - wall.vertices[0].position.col + 1
+
+        return total
+
+    def _get_edges(self, rr: int) -> list[int]:
+        """returns all edges for a given row"""
+        edges = []
+
+        # get all vertical lines crossing the current row
+        verticals = [
+            edge
+            for edge in self.edges
+            if edge.wall == '│' and
+               edge.vertices[0].position.row < rr < edge.vertices[1].position.row
+        ]
+
+        # get all horizontal lines in the current row
+        horizontals = [
+            edge
+            for edge in self.edges
+            if edge.wall == '─' and
+               edge.vertices[0].position.row == rr
+        ]
+
+        # generate the list of columns where outside becomes inside and vice versa
+        inside = False
+        for edge in sorted(verticals + horizontals, key=lambda edge: edge.vertices[0].position.col):
+            if edge.wall == '│':
+                edges.append(edge.vertices[0].position.col)
+                inside = not inside
+            else:
+                if WALL_TO_VERT[edge.vertices[0].wall] == WALL_TO_VERT[edge.vertices[1].wall]:  # ┌─┐ or └─┘
+                    if inside:
+                        edges.append(edge.vertices[0].position.col)
+                        edges.append(edge.vertices[1].position.col)
+                else:  # └─┐ or ┌─┘
+                    if inside:
+                        edges.append(edge.vertices[0].position.col)
+                    else:
+                        edges.append(edge.vertices[1].position.col)
+                    inside = not inside
 
         return edges
 
-    def dig(self) -> int:
-        """calculates the area of the grid enclosed by the trench"""
+    def dugout(self) -> int:
+        """returns the number of cells in the grid enclosed by the trench"""
         total = 0
         # cells in the first and last rows and columns can only be part of the loop or outside the loop,
-        # so we don't bother to check those
+        # so we don't bother to check those rows and columns to determine the number of cells to dig out
         for rr in range(max(vertex.position.row for vertex in self.vertices) + 1)[1:-1]:
             edges = self._get_edges(rr)
+            for left, right in zip(edges[::2], edges[1::2]):
+                total += right - left - 1
 
         return total
+
+    @property
+    def size(self) -> tuple[int, int]:
+        # calculate the number of rows and columns
+        num_rows = max(vertex.position.row for vertex in self.vertices) + 1
+        num_cols = max(vertex.position.col for vertex in self.vertices) + 1
+        return num_rows, num_cols
 
     def __str__(self) -> str:
         """
@@ -124,8 +211,9 @@ class HugeGrid:
         """
 
         # calculate the number of rows and columns needed
-        num_rows = max(vertex.position.row for vertex in self.vertices) + 1
-        num_cols = max(vertex.position.col for vertex in self.vertices) + 1
+        # num_rows = max(vertex.position.row for vertex in self.vertices) + 1
+        # num_cols = max(vertex.position.col for vertex in self.vertices) + 1
+        num_rows, num_cols = self.size
 
         # create the array with the calculated dimensions
         array = [['.' for _ in range(num_cols)] for _ in range(num_rows)]
@@ -137,14 +225,12 @@ class HugeGrid:
         # populate the array: edges
         for edge in self.edges:
             if edge.wall == '│':
-                start = min(edge.vertices[0].position.row, edge.vertices[1].position.row) + 1
-                end = max(edge.vertices[0].position.row, edge.vertices[1].position.row)
-                for row in range(start, end):
+                # vertices in vertical edges are sorted by row number
+                for row in range(edge.vertices[0].position.row + 1, edge.vertices[1].position.row):
                     array[row][edge.vertices[0].position.col] = edge.wall
             else:
-                start = min(edge.vertices[0].position.col, edge.vertices[1].position.col) + 1
-                end = max(edge.vertices[0].position.col, edge.vertices[1].position.col)
-                for col in range(start, end):
+                # vertices in horizontal edges are sorted by column number
+                for col in range(edge.vertices[0].position.col + 1, edge.vertices[1].position.col):
                     array[edge.vertices[0].position.row][col] = edge.wall
 
         # return the array as a string
@@ -170,34 +256,41 @@ def main(data_lines: list[str]) -> None:
     instructions = get_instructions(data_lines)
     # pprint(instructions)
 
-    grid.follow_instructions(instructions)
-    # pprint(grid)
+    # grid.follow_instructions(instructions)
+    # # pprint(grid)
     # print(grid)
+    # print(f'Grid size: {grid.size[0]} x {grid.size[1]}')
 
-    dugout = grid.dig()
+    new_instructions = convert_instructions(instructions)
+    # pprint(new_instructions)
+
+    grid.follow_instructions(new_instructions)
+    # pprint(grid)
+    print(f'Grid size: {grid.size[0]} x {grid.size[1]}')
+
+    trench = grid.trench()
+    print(trench)
+
+    dugout = grid.dugout()
     print(dugout)
 
-    # new_instructions = convert_instructions(instructions)
-    # # pprint(new_instructions)
-    #
-    # grid.follow_instructions(new_instructions)
-    # pprint(grid)
-
-    # print(f'End result: {0}')
+    print(f'End result: {trench + dugout}')
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
+    data_lines = load_data(DATA_PATH)
+    # data_lines = test_data
     # print(data_lines)
 
     main(data_lines)
     # using test_data:
-    #   End result: xxx
-    #   Finished 'main' in xxx
+    #   Final grid size: 1,186,329 x 1,186,329
+    #   End result: 952408144115
+    #   Finished 'main' in 7.6 seconds
     # using input data:
-    #   End result: xxx
-    #   Finished 'main' in xxx
+    #   Final grid size: 12,231,325 x 16,768,543
+    #   End result: 68548301037382
+    #   Finished 'main' in 40 minutes and 29 seconds
 
     # # test class HugeGrid
     # grid = HugeGrid()
