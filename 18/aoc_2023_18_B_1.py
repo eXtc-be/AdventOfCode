@@ -77,16 +77,11 @@ class HugeGrid:
         current_vertex.pipe = DIR_TO_WALL[previous_move+instructions[0].direction.name]
         self.vertices[0].pipe = DIR_TO_WALL[previous_move+instructions[0].direction.name]
 
-    def __str__(self) -> str:
-        """
-        returns a string representation of the grid
-        it does this by creating an array that will hold the complete grid,
-        so don't do this with huge grids, lest you want to wait alot and
-        possibly/likely get a memory overflow error
-        """
+        self._normalize_grid()
 
-        # we can't use negative coordinates,
-        # so we need add an offset to every vertex's coordinates if necessary
+    def _normalize_grid(self):
+        """if any of the vertices' coordinates are negative,
+        add an offset to every vertex so all the coordinates are positive again"""
         row_min = min(vertex.position.row for vertex in self.vertices)
         col_min = min(vertex.position.col for vertex in self.vertices)
 
@@ -98,17 +93,26 @@ class HugeGrid:
             for vertex in self.vertices:
                 vertex.position.col -= col_min
 
-        # calculate the number of rows and columns we need
+    def __str__(self) -> str:
+        """
+        returns a string representation of the grid
+        it does this by creating an array that will hold the complete grid,
+        so DON'T USE THIS WITH LARGE GRIDS, lest you want to wait alot and
+        possibly/likely get a memory overflow error
+        """
+
+        # calculate the number of rows and columns needed
         num_rows = max(vertex.position.row for vertex in self.vertices) + 1
         num_cols = max(vertex.position.col for vertex in self.vertices) + 1
 
-        # create an array
+        # create the array with the calculated dimensions
         array = [['.' for _ in range(num_cols)] for _ in range(num_rows)]
 
-        # populate the array
+        # populate the array: corners
         for vertex in self.vertices:
             array[vertex.position.row][vertex.position.col] = vertex.pipe
 
+        # populate the array: edges
         for edge in self.edges:
             if edge.pipe == '│':
                 start = min(edge.vertices[0].position.row, edge.vertices[1].position.row) + 1
@@ -147,6 +151,7 @@ def main(data_lines: list[str]) -> None:
     grid.follow_instructions(instructions)
     # pprint(grid)
     print(grid)
+    pprint(grid)
 
     # new_instructions = convert_instructions(instructions)
     # # pprint(new_instructions)
