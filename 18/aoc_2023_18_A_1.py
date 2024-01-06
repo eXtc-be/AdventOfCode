@@ -380,6 +380,21 @@ def get_instructions(data_lines: list[str]) -> list[Instruction]:
 # D 2 (#7a21e3)
 # '''.strip().splitlines()
 
+# test_data = '''
+# R 10 (#000000)
+# D 4 (#000000)
+# L 2 (#000000)
+# U 2 (#000000)
+# L 2 (#000000)
+# D 3 (#000000)
+# L 2 (#000000)
+# U 3 (#000000)
+# L 2 (#000000)
+# D 2 (#000000)
+# L 2 (#000000)
+# U 4 (#000000)
+# '''.strip().splitlines()
+
 test_data = '''
 R 6 (#70c710)
 D 5 (#0dc571)
@@ -491,5 +506,5 @@ if __name__ == "__main__":
     # # test dig_out
     # grid = Grid.from_string(test_grid)
     # print(grid)
-    # grid.dig_out()
+    # grid.rows[0].dig_out()
     # print(grid)
