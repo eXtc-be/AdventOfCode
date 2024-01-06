@@ -131,10 +131,10 @@ class Instruction(NamedTuple):
 class Cell:
     color: Color = Color()
     depth: int = 0
-    pipe: str = '.'
+    wall: str = '.'
 
     def __str__(self) -> str:
-        return COLOR_FORMAT.format(self.color.r, self.color.g, self.color.b) + str(self.pipe) + ENDC
+        return COLOR_FORMAT.format(self.color.r, self.color.g, self.color.b) + str(self.wall) + ENDC
 
 
 @dataclass
@@ -170,35 +170,35 @@ class Row:
                 edges.append(' ')
                 continue  # skip if this cell isn't part of the loop
 
-            if cell.pipe == '│':
+            if cell.wall == '│':
                 edges.append('E')  # in/out status changed
-            elif cell.pipe == '─':
+            elif cell.wall == '─':
                 edges.append('-')  # in/out status not changed, condition for next edge not changed
-            elif cell.pipe == '┌':
+            elif cell.wall == '┌':
                 edges.append(' ')
-                prev = cell.pipe  # in/out status changed, condition for next edge changed
-            elif cell.pipe == '└':
+                prev = cell.wall  # in/out status changed, condition for next edge changed
+            elif cell.wall == '└':
                 edges.append(' ')
-                prev = cell.pipe  # in/out status changed, condition for next edge changed
-            elif cell.pipe == '┘':
+                prev = cell.wall  # in/out status changed, condition for next edge changed
+            elif cell.wall == '┘':
                 if prev in list('┌'):
                     edges.append('E')
                 else:
                     edges.append(' ')
-                prev = cell.pipe  # in/out status changed, condition for next edge changed
-            elif cell.pipe == '┐':
+                prev = cell.wall  # in/out status changed, condition for next edge changed
+            elif cell.wall == '┐':
                 if prev in list('└'):
                     edges.append('E')
                 else:
                     edges.append(' ')
-                prev = cell.pipe  # in/out status changed, condition for next edge changed
+                prev = cell.wall  # in/out status changed, condition for next edge changed
             else:
                 edges.append(' ')
 
         return edges
 
     def dig_out(self) -> None:
-        # print(''.join([cell.pipe for cell in self.cells]))
+        # print(''.join([cell.wall for cell in self.cells]))
 
         edges = self._find_edges()
         # print(''.join(edges))
@@ -213,11 +213,11 @@ class Row:
                 if left.count('E') % 2 == 1 and right.count('E') % 2 == 1:
                     cell.depth = 1
                     cell.color = last_color
-                    cell.pipe = '░'
+                    cell.wall = '░'
             else:
                 last_color = cell.color
 
-        # print(''.join([cell.pipe for cell in self.cells]))
+        # print(''.join([cell.wall for cell in self.cells]))
         # row.cells[i].color = row.cells[start].color
         # row.cells[i].depth += 1
 
@@ -270,7 +270,7 @@ class Grid:
     def follow_instructions(self, instructions: list[Instruction]) -> None:  # changes the grid in place
         # DONE: make this a class method
         current_position = Coord(0, 0)
-        self[current_position].pipe = '░'
+        self[current_position].wall = '░'
         previous_move = ''
         for instruction in instructions:
             move = instruction.direction.name
@@ -291,29 +291,29 @@ class Grid:
                 self.grow(current_position.row + delta.row * (value + 1) - self.num_rows, 0)
 
             if previous_move:
-                self[current_position].pipe = DIR_TO_WALL[previous_move+move]
+                self[current_position].wall = DIR_TO_WALL[previous_move + move]
 
             if delta.col:
                 for _ in range(value):
                     current_position.col += delta.col
                     self[current_position].color = color
                     self[current_position].depth = 1
-                    self[current_position].pipe = DIR_TO_WALL[move]
+                    self[current_position].wall = DIR_TO_WALL[move]
 
             if delta.row:
                 for _ in range(value):
                     current_position.row += delta.row
                     self[current_position].color = color
                     self[current_position].depth = 1
-                    self[current_position].pipe = DIR_TO_WALL[move]
+                    self[current_position].wall = DIR_TO_WALL[move]
 
             previous_move = move
 
             # print(self)
 
         # change first/last corner
-        # self[current_position].pipe = '░'
-        self[current_position].pipe = DIR_TO_WALL[previous_move+instructions[0].direction.name]
+        # self[current_position].wall = '░'
+        self[current_position].wall = DIR_TO_WALL[previous_move + instructions[0].direction.name]
 
     def dig_out(self) -> None:  # changes the grid in place
         # DONE: make this a class method

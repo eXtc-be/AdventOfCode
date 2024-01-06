@@ -35,14 +35,14 @@ INT_TO_DIR = {
 class Vertex:
     position: Coord
     depth: int = 0
-    pipe: str = '.'
+    wall: str = '.'
 
 
 @dataclass
 class Edge:
     vertices: tuple[Vertex, Vertex] = field(default_factory=list)
     depth: int = 0
-    pipe: str = '.'
+    wall: str = '.'
 
 
 @dataclass
@@ -59,9 +59,9 @@ class HugeGrid:
             delta = instruction.direction.delta
             value = instruction.value
 
-            # update current_vertex's pipe character
+            # update current_vertex's wall character
             if previous_move:
-                current_vertex.pipe = DIR_TO_WALL[previous_move+move]
+                current_vertex.wall = DIR_TO_WALL[previous_move + move]
 
             # create next vertex
             next_vertex = Vertex(current_vertex.position + delta * value, 1, '░')
@@ -74,8 +74,8 @@ class HugeGrid:
             current_vertex = next_vertex
 
         # change first/last corner
-        current_vertex.pipe = DIR_TO_WALL[previous_move+instructions[0].direction.name]
-        self.vertices[0].pipe = DIR_TO_WALL[previous_move+instructions[0].direction.name]
+        current_vertex.wall = DIR_TO_WALL[previous_move + instructions[0].direction.name]
+        self.vertices[0].wall = DIR_TO_WALL[previous_move + instructions[0].direction.name]
 
         self._normalize_grid()
 
@@ -92,6 +92,28 @@ class HugeGrid:
         if col_min < 0:
             for vertex in self.vertices:
                 vertex.position.col -= col_min
+
+    def _get_edges(self, rr) -> list:
+        """returns all edges for a given row"""
+        edges = []
+        # get all vertical lines crossing the current row
+        verticals = [
+            edge
+            for edge in self.edges
+            if edge.wall == '│' and edge.vertices[0].position.row < rr < edge.vertices[1].position.row
+        ]
+
+        return edges
+
+    def dig(self) -> int:
+        """calculates the area of the grid enclosed by the trench"""
+        total = 0
+        # cells in the first and last rows and columns can only be part of the loop or outside the loop,
+        # so we don't bother to check those
+        for rr in range(max(vertex.position.row for vertex in self.vertices) + 1)[1:-1]:
+            edges = self._get_edges(rr)
+
+        return total
 
     def __str__(self) -> str:
         """
@@ -110,20 +132,20 @@ class HugeGrid:
 
         # populate the array: corners
         for vertex in self.vertices:
-            array[vertex.position.row][vertex.position.col] = vertex.pipe
+            array[vertex.position.row][vertex.position.col] = vertex.wall
 
         # populate the array: edges
         for edge in self.edges:
-            if edge.pipe == '│':
+            if edge.wall == '│':
                 start = min(edge.vertices[0].position.row, edge.vertices[1].position.row) + 1
                 end = max(edge.vertices[0].position.row, edge.vertices[1].position.row)
                 for row in range(start, end):
-                    array[row][edge.vertices[0].position.col] = edge.pipe
+                    array[row][edge.vertices[0].position.col] = edge.wall
             else:
                 start = min(edge.vertices[0].position.col, edge.vertices[1].position.col) + 1
                 end = max(edge.vertices[0].position.col, edge.vertices[1].position.col)
                 for col in range(start, end):
-                    array[edge.vertices[0].position.row][col] = edge.pipe
+                    array[edge.vertices[0].position.row][col] = edge.wall
 
         # return the array as a string
         return '\n'.join(''.join(str(cell) for cell in row) for row in array)
@@ -150,8 +172,10 @@ def main(data_lines: list[str]) -> None:
 
     grid.follow_instructions(instructions)
     # pprint(grid)
-    print(grid)
-    pprint(grid)
+    # print(grid)
+
+    dugout = grid.dig()
+    print(dugout)
 
     # new_instructions = convert_instructions(instructions)
     # # pprint(new_instructions)
