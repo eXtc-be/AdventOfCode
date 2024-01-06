@@ -38,7 +38,6 @@ class Vertex:
     pipe: str = '.'
 
 
-
 @dataclass
 class Edge:
     vertices: tuple[Vertex, Vertex] = field(default_factory=list)
@@ -130,7 +129,7 @@ def _convert_instruction(instruction: Instruction) -> Instruction:
     return Instruction(
         Direction(INT_TO_DIR[int(instruction.color.hex[6], 16)]),
         int(instruction.color.hex[1:6], 16),
-        Color(0, 0, 0)
+        Color()
     )
 
 

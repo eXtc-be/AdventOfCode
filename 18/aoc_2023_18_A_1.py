@@ -4,7 +4,6 @@
 # The Elves are concerned the lagoon won't be large enough;
 # if they follow their dig plan, how many cubic meters of lava could it hold?
 # https://adventofcode.com/2023/day/18
-from enum import Enum
 
 from tools import time_it
 
@@ -80,9 +79,9 @@ class Direction:
 
 
 class Color(NamedTuple):
-    r: int
-    g: int
-    b: int
+    r: int = 0
+    g: int = 0
+    b: int = 0
 
     @classmethod
     def from_hex(cls, hex_str: str) -> 'Color':
@@ -130,7 +129,7 @@ class Instruction(NamedTuple):
 
 @dataclass
 class Cell:
-    color: Color = Color(0, 0, 0)
+    color: Color = Color()
     depth: int = 0
     pipe: str = '.'
 
@@ -204,7 +203,7 @@ class Row:
         edges = self._find_edges()
         # print(''.join(edges))
 
-        last_color = Color(0, 0, 0)
+        last_color = Color()
 
         # cells in the first and last rows and columns can only be part of the loop or outside the loop,
         # so we don't bother to check those
@@ -237,7 +236,6 @@ class Row:
 
     def __str__(self) -> str:
         return ''.join(str(cell) for cell in self.cells)
-
 
 
 @dataclass
@@ -319,8 +317,8 @@ class Grid:
 
     def dig_out(self) -> None:  # changes the grid in place
         # DONE: make this a class method
-        # cells in the first and last rows and columns can only be part of the loop or outside the loop,
-        # so we don't bother to check those
+        # cells in the first and last rows and columns can only be part of the loop or be outside the loop,
+        # so we don't bother to check those rows 0 and -1
         # for row in self:
         for row in self[1:-1]:
             row.dig_out()
@@ -417,7 +415,7 @@ def main(data_lines: list[str]) -> None:
     # print(grid.active)
 
     grid.dig_out()
-    print(grid)
+    # print(grid)
     # print(grid.active)
 
     print(f'End result: {grid.active}')
