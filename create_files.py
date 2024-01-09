@@ -12,25 +12,31 @@ import re
 
 OVERWRITE = '{} already exists! Are you sure you want to overwrite it (y/N)? '
 SESSION_COOKIE = 'session_cookie'
-HTML_URL = 'https://adventofcode.com/2023/day/{}'
+HTML_URL = 'https://adventofcode.com/{}/day/{}'
 HTML_FILE = '{}_{}.html'
-INPUT_URL = 'https://adventofcode.com/2023/day/{}/input'
+INPUT_URL = 'https://adventofcode.com/{}/day/{}/input'
 INPUT_FILE = 'input_{}_{}'
 TEMPLATE_FILE = 'template_{}.txt'
 OUTPUT_FILE = 'aoc_{}_{}_{}_1.py'
 
 day_string = None
-year_string = 2023
+year_string = None
 
 if len(sys.argv) > 1:
-    day_string = sys.argv[1]
+    year_string = sys.argv[1]
+
+if len(sys.argv) > 2:
+    day_string = sys.argv[2]
+
+if not year_string:
+    year_string = input('Year number? ')
 
 if not day_string:
     day_string = input('Day number? ')
 
 # create folder name and Path
 day_string = f'{int(day_string):02d}'
-path = Path(day_string)
+path = Path(year_string) / Path(day_string)
 
 # check for existing folder and ask permission to delete/overwrite
 write = False
@@ -52,8 +58,8 @@ if write:
         cookie_data = cookie_file.read().strip()  # read session cookie data from file
         session_cookie = cookiejar_from_dict({'session': cookie_data})  # turn it into a cookie jar for use in session
 
-    input_url = INPUT_URL.format(int(day_string))
-    html_url = HTML_URL.format(int(day_string))
+    input_url = INPUT_URL.format(int(year_string), int(day_string))
+    html_url = HTML_URL.format(int(year_string), int(day_string))
 
     title = ''  # make sure title is accessible outside with-block
     description = ''  # make sure description is accessible outside with-block
