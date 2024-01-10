@@ -29,10 +29,16 @@ if len(sys.argv) > 2:
     day_string = sys.argv[2]
 
 if not year_string:
-    year_string = input('Year number? ')
+    while True:
+        year_string = input('Year number? ')
+        if year_string.isdigit() and len(year_string) == 4 and 1970 <= int(year_string) <= 2100:
+            break
 
 if not day_string:
-    day_string = input('Day number? ')
+    while True:
+        day_string = input('Day number? ')
+        if day_string.isdigit() and 0 < len(day_string) <= 2 and 1 <= int(day_string) <= 12:
+            break
 
 # create folder name and Path
 day_string = f'{int(day_string):02d}'
@@ -114,12 +120,12 @@ if write:
 
     # create both files from template and replace placeholders
     file_A = ''
-    for letter in 'A B'.split():
+    for letter in 'AB':
         output_file = OUTPUT_FILE.format(str(year_string), day_string, letter)
         template = TEMPLATE_FILE.format(letter)
 
         if letter == 'A':
-            file_A = output_file
+            file_A = output_file  # remember name of first script so we can import from it in the next one(s)
 
         print(f'creating output file {(path / output_file).absolute()}')
         with open(template, 'r', encoding='utf-8') as in_file, open(path / output_file, 'w', encoding='utf-8') as out_file:
