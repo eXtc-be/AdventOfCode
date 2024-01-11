@@ -12,7 +12,7 @@ from pprint import pprint
 
 DATA_PATH = './input_2015_10'
 
-REPEATS = 50
+REPEATS = 40
 
 
 def load_data(path: str) -> list[str]:
@@ -21,14 +21,8 @@ def load_data(path: str) -> list[str]:
 
 
 def look_and_say(string: str) -> str:
-    # retval = ''
-    #
-    # for char, sequence in groupby(string):
-    #     num = sum(1 for i in sequence)
-    #     retval += str(num) + char
-    #
-    # return retval
     return ''.join(str(len(list(v))) + k for k, v in groupby(string))
+
 
 test_data = '''
 1
