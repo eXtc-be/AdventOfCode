@@ -1,5 +1,5 @@
 # aoc_2015_13_B_1.py - Day 13: Knights of the Dinner Table - part 2
-# What is the total change in happiness for the optimal seating arrangement of the actual guest list?
+# What is the total change in happiness for the optimal seating arrangement of the guest list plus one?
 # https://adventofcode.com/2015/day/13
 
 
