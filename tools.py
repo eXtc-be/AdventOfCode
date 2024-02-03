@@ -75,6 +75,7 @@ def convertSeconds(duration, mode=3):
             if hours:
                 r += '%d hour%s, ' % evalPlural(hours)
                 r += '%d minute%s and ' % evalPlural(minutes)
+                r += second_format % evalPlural(seconds)
             else:
                 if minutes:
                     r += '%d minute%s and ' % evalPlural(minutes)
@@ -108,16 +109,16 @@ def time_it(func):
 
 if __name__ == "__main__":
     for test in (
-            0.0001234,
-            (24*2+0)*3600+0*60+12.0001234,
-            0.3456789,
-            1.3456789,
-            2.3456789,
-            12.3456789,
-            56*60+12.3456789,
-            3*3600+56*60+12.3456789,
-            (24*2+3)*3600+56*60+12.3456789,
-            (24*2+0)*3600+0*60+12.3456789,
+            0.0001234,                       # less than a millisecond - idem - idem
+            (24*2+0)*3600+0*60+12.0001234,   # 2 d, 0 h, 0 m, 12 s - 2 d, 12 s - 2 d, 0 h, 0 m and 12 s
+            0.3456789,                       # 0 d, 0 h, 0 m, 0 s, 346 ms - 346 ms - 346 ms
+            1.3456789,                       # 0 d, 0 h, 0 m, 1.35 s - 1.35 s - 1.35 s
+            2.3456789,                       # 0 d, 0 h, 0 m, 2.3 s - 2.3 s - 2.3 s
+            12.3456789,                      # 0 d, 0 h, 0 m, 12 s - 12 s - 12 s
+            56*60+12.3456789,                # 0 d, 0 h, 56 m, 12 s - 56 m, 12 s - 56 m and 12 s
+            3*3600+56*60+12.3456789,         # 0 d, 3 h, 56 m, 12 s - 3 h, 56 m, 12 s - 3 h, 56 m and 12 s ***
+            (24*2+3)*3600+56*60+12.3456789,  # 2 d, 3 h, 56 m, 12 s - 2 d, 3 h, 56 m, 12 s - 2 d, 3 h, 56 m and 12 s
+            (24*2+0)*3600+0*60+12.3456789,   # 2 d, 0 h, 0 m, 12 s - 2 d, 12 s - 2 d, 0 h, 0 m and 12 s
     ):
         print(convertSeconds(test, 1))
         print(convertSeconds(test, 2))
