@@ -105,7 +105,7 @@ if write:
                 out_file.write(html)
         else:
             print(f'something went wrong, remote server returned status {response.status_code}')
-            exit()
+            # exit()
 
         print(f'downloading input file from {input_url}')
         response = session.get(input_url)  # get the data from the remote server
@@ -116,7 +116,7 @@ if write:
                 out_file.write(response.text)
         else:
             print(f'something went wrong, remote server returned status {response.status_code}')
-            exit()
+            # exit()
 
     # create both files from template and replace placeholders
     file_A = ''
