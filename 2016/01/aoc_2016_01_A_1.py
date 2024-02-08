@@ -15,8 +15,8 @@ DATA_PATH = './input_2016_01'
 HEADINGS = {
     'N': {'L': 'W', 'R': 'E', 'friendly': 'norht'},
     'E': {'L': 'N', 'R': 'S', 'friendly': 'east'},
-    'S': {'L': 'E', 'R': 'W', 'friendly': 'west'},
-    'W': {'L': 'S', 'R': 'N', 'friendly': 'south'},
+    'S': {'L': 'E', 'R': 'W', 'friendly': 'south'},
+    'W': {'L': 'S', 'R': 'N', 'friendly': 'west'},
 }
 
 TURNS = {
@@ -64,9 +64,9 @@ def main(direction_string: str) -> None:
         current_position[1] += DIRECTIONS[current_heading][1] * blocks
         print(f'to position {current_position}')
 
-    print(f'\nFinal position: {current_position}')
+    print(f'\nEaster Bunny Headquarters position: {current_position}')
 
-    print(f'\nDistance from start: {sum(abs(axis) for axis in current_position)}')
+    print(f'Distance from start: {sum(abs(axis) for axis in current_position)}\n')
 
 
 if __name__ == "__main__":
