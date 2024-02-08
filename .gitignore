@@ -181,3 +181,5 @@ dl_article.py
 
 *.htm?
 input_*
+
+*_extern.py
