@@ -5,9 +5,21 @@
 
 from tools import time_it
 
-# other imports
+from dataclasses import dataclass
 
 from pprint import pprint
+
+@dataclass
+class Coordinates:
+    x: int
+    y: int
+
+    def distance(self, origin: 'Coordinates' = None) -> int:
+        origin = Coordinates(0, 0) if origin is None else origin
+        return abs(self.x - origin.x) + abs(self.y - origin.y)
+
+    def __str__(self):
+        return f'({self.x}, {self.y})'
 
 
 DATA_PATH = './input_2016_01'
@@ -25,10 +37,10 @@ TURNS = {
 }
 
 DIRECTIONS = {
-    'N': (0, 1),
-    'E': (1, 0),
-    'S': (0, -1),
-    'W': (-1, 0),
+    'N': Coordinates(0, 1),
+    'E': Coordinates(1, 0),
+    'S': Coordinates(0, -1),
+    'W': Coordinates(-1, 0),
 }
 
 
@@ -54,19 +66,19 @@ def main(direction_string: str) -> None:
     # pprint(directions)
 
     current_heading = 'N'
-    current_position = [0, 0]
+    current_position = Coordinates(0, 0)
 
     for direction in directions:
         turn, blocks = direction[0], int(direction[1:])
         current_heading = HEADINGS[current_heading][turn]
         print(f'turning {TURNS[turn]} heading {HEADINGS[current_heading]["friendly"]} moving {blocks} blocks ', end='')
-        current_position[0] += DIRECTIONS[current_heading][0] * blocks
-        current_position[1] += DIRECTIONS[current_heading][1] * blocks
+        current_position.x += DIRECTIONS[current_heading].x * blocks
+        current_position.y += DIRECTIONS[current_heading].y * blocks
         print(f'to position {current_position}')
 
     print(f'\nEaster Bunny Headquarters position: {current_position}')
 
-    print(f'Distance from start: {sum(abs(axis) for axis in current_position)}\n')
+    print(f'Distance from start: {current_position.distance()}\n')
 
 
 if __name__ == "__main__":
@@ -89,3 +101,8 @@ if __name__ == "__main__":
     # using input data:
     #   End result: 146
     #   Finished 'main' in 3 milliseconds
+
+    # test Coordinates.distance()
+    # coord = Coordinates(10, 10)
+    # print(coord, coord.distance())
+    # print(coord, coord.distance(Coordinates(5, 5)))

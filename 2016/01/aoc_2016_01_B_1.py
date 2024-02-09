@@ -7,6 +7,7 @@ from aoc_2016_01_A_1 import (
     DATA_PATH,
     load_data,
     test_data,
+    Coordinates,
     get_directions,
     HEADINGS,
     TURNS,
@@ -23,30 +24,30 @@ from pprint import pprint
 # other constants
 
 
-def check_visited(visited: list[list[int]], current: list[int], previous: list[int]) -> list[int] | None:
+def check_visited(visited: list[Coordinates], current: Coordinates, previous: Coordinates) -> Coordinates | None:
     """returns the coordinates of the block previously visited, else None"""
     if current in visited:  # check if current is in visited end points
         return current
     else:
         for first, last in zip(visited[:-1], visited[1:-1]):  # create first, last coordinates from visited list
-            if first[0] == last[0]:  # X-coordinates are identical -> vertical line
-                if current[0] == previous[0]:  # also a vertical line, so no crossing
+            if first.x == last.x:  # X-coordinates are identical -> vertical line
+                if current.x == previous.x:  # also a vertical line, so no crossing
                     continue  # next pair of coordinates
                 else:
-                    y1, y2 = sorted((first[1], last[1]))
-                    if y1 <= current[1] <= y2:
-                        x1, x2 = sorted((current[0], previous[0]))
-                        if x1 <= first[0] <= x2:
-                            return [first[0], current[1]]
+                    y1, y2 = sorted((first.y, last.y))
+                    if y1 <= current.y <= y2:
+                        x1, x2 = sorted((current.x, previous.x))
+                        if x1 <= first.x <= x2:
+                            return Coordinates(first.x, current.y)
             else:  # using Taxicab geometry, the line must be horizontal if it is not vertical
-                if current[1] == previous[1]:  # also a horizontal line, so no crossing
+                if current.y == previous.y:  # also a horizontal line, so no crossing
                     continue  # next pair of coordinates
                 else:
-                    x1, x2 = sorted((first[0], last[0]))
-                    if x1 <= current[0] <= x2:
-                        y1, y2 = sorted((current[1], previous[1]))
-                        if y1 <= first[1] <= y2:
-                            return [current[0], first[1]]
+                    x1, x2 = sorted((first.x, last.x))
+                    if x1 <= current.x <= x2:
+                        y1, y2 = sorted((current.y, previous.y))
+                        if y1 <= first.y <= y2:
+                            return Coordinates(current.x, first.y)
 
     return None  # no crossing found
 
@@ -57,18 +58,18 @@ def main(direction_string: str) -> None:
     # pprint(directions)
 
     current_heading = 'N'
-    current_position = [0, 0]
+    current_position = Coordinates(0, 0)
     visited = []
     previously_visited = None
 
     for direction in directions:
         print(f'{direction:4} - ', end='')
-        visited.append(current_position[:])  # deep copy
+        visited.append(Coordinates(current_position.x, current_position.y))  # deep copy
         turn, blocks = direction[0], int(direction[1:])
         current_heading = HEADINGS[current_heading][turn]
         print(f'turning {TURNS[turn]} heading {HEADINGS[current_heading]["friendly"]} moving {blocks} block(s) ', end='')
-        current_position[0] += DIRECTIONS[current_heading][0] * blocks
-        current_position[1] += DIRECTIONS[current_heading][1] * blocks
+        current_position.x += DIRECTIONS[current_heading].x * blocks
+        current_position.y += DIRECTIONS[current_heading].y * blocks
         print(f'to position {current_position}')
         if len(visited) > 3 and (previously_visited := check_visited(visited, current_position, visited[-1])):
             print(f'=== intersection found at {previously_visited} ===')
@@ -76,7 +77,7 @@ def main(direction_string: str) -> None:
 
     print(f'\nEaster Bunny Headquarters position: {previously_visited}')
 
-    print(f'Distance from start: {sum(abs(axis) for axis in previously_visited)}\n')
+    print(f'Distance from start: {previously_visited.distance()}\n')
 
 
 if __name__ == "__main__":
