@@ -6,7 +6,6 @@
 from tools import time_it
 
 from dataclasses import dataclass, field
-from typing import Callable
 
 from pprint import pprint
 
