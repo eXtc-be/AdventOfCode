@@ -1,5 +1,6 @@
 # aoc_2016_13_B_1.py - Day 13: A Maze of Twisty Little Cubicles - part 2
 # How many locations (distinct x,y coordinates, including your starting location) can you reach in at most 50 steps?
+# Solution 1: looping through all cells in the maze calculating paths using the A* algorithm from part 1
 # https://adventofcode.com/2016/day/13
 
 
@@ -24,13 +25,13 @@ from pprint import pprint
 # other constants
 
 
-def Manhattan(start_node: Point, stop_node: Point) -> int:  # return Manhattan distance between start_node and stop_node
+def manhattan(start_node: Point, stop_node: Point) -> int:  # return Manhattan distance between start_node and stop_node
     return abs(start_node.x - stop_node.x) + abs(start_node.y - stop_node.y)
 
 
 @time_it
 def main(data_lines: list[str], start: Point, end: Point, reach: int) -> None:
-    maze = maze = build_maze(end.y * 2, end.x * 2, int(data_lines[0]))
+    maze = build_maze(end.y * 2, end.x * 2, int(data_lines[0]))
     # print_maze(maze)
 
     reachable = []
@@ -38,7 +39,7 @@ def main(data_lines: list[str], start: Point, end: Point, reach: int) -> None:
     for row in range(len(maze)):
         for col in range(len(maze[0])):
             stop = Point(col, row)
-            if maze[row][col] == OPEN and Manhattan(start, stop) <= reach:
+            if maze[row][col] == OPEN and manhattan(start, stop) <= reach:
                 path = find_path(maze, start, stop)
                 if path is not None and len(path)-1 <= reach:
                     reachable.append((stop, path))
