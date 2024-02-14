@@ -175,6 +175,7 @@ dl_article.py
 *.ods
 
 a_star.py
+dijkstra.py
 
 _curses_tut/
 
