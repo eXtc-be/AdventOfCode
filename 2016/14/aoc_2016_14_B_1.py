@@ -7,7 +7,13 @@
 from aoc_2016_14_A_1 import (
     DATA_PATH,
     load_data,
-    test_data, CONSEC_1, CONSEC_2, NEXT, LIMIT, find_consecutive, check_consecutive
+    test_data,
+    CONSEC_1,
+    CONSEC_2,
+    NEXT,
+    LIMIT,
+    find_consecutive,
+    check_consecutive,
 )
 
 from tools import time_it
