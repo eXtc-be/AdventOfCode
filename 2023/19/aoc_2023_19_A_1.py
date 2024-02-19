@@ -1,5 +1,7 @@
 # aoc_2023_19_A_1.py - Day 19: Aplenty - part 1
-# Sort through all of the parts you've been given; what do you get if you add together all of the rating numbers for all of the parts that ultimately get accepted?
+# Sort through all the parts you've been given;
+# what do you get if you add together all the rating numbers
+# for all the parts that ultimately get accepted?
 # https://adventofcode.com/2023/day/19
 
 
@@ -53,7 +55,7 @@ class Rule:
     def process_part(self, part: 'Part') -> bool:
         if self.condition:
             return self.condition.process_part(part)
-        else:  # last rule in the list
+        else:  # last rule in the list has no condition
             return True
 
 
@@ -128,7 +130,7 @@ def load_data(path: str) -> list[str]:
 
 
 def _extract_condition(condition: str) -> Condition:
-    """creates a Condition object form the condition string"""
+    """creates a Condition object from the condition string"""
     category, operator, value = None, None, None
     if '<' in condition:
         category, value = condition.split('<')
@@ -153,7 +155,7 @@ def _extract_rules(rulez: str) -> list[Rule]:
     return [_extract_rule(rule) for rule in rulez.split(',')]
 
 
-def extract_workflow(data_line: str) -> Workflow:
+def _extract_workflow(data_line: str) -> Workflow:
     """processes one line of data and extracts a Workflow instance from it"""
     name = data_line[:data_line.find('{')]
     rules = _extract_rules(data_line[data_line.find('{') + 1:data_line.find('}')])
@@ -184,7 +186,7 @@ def extract_workflows_and_parts(data_lines: list[str]) -> tuple[Workflows, list[
         if not line:
             current = 'parts'
         elif current == 'workflows':
-            workflows.append(extract_workflow(line))
+            workflows.append(_extract_workflow(line))
         else:
             parts.append(extract_part(line))
 
