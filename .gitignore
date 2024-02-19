@@ -182,4 +182,8 @@ _curses_tut/
 *.htm?
 input_*
 
+*.drawio
+
 *_extern.py
+
+mappings
