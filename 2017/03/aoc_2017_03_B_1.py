@@ -5,7 +5,7 @@
 
 from aoc_2017_03_A_1 import (
     DATA_PATH,
-    load_data, Point,
+    load_data,
     # test_data,
 )
 
@@ -21,7 +21,7 @@ class Point(NamedTuple):
     x: int
     y: int
 
-    def __add__(self, other: Point) -> Point:
+    def __add__(self, other: 'Point') -> 'Point':
         return Point(self.x + other.x, self.y + other.y)
 
 
@@ -45,11 +45,6 @@ NEIGHBOURS = [
 
 
 def _get_number(grid: dict[Point, int], point: Point) -> int:
-    # total = 0
-    # for neighbor in NEIGHBOURS:
-    #     if point + neighbor in grid:
-    #         total += grid[point + neighbor]
-    #
     return sum(grid[point + neighbor] for neighbor in NEIGHBOURS if point + neighbor in grid)
 
 
