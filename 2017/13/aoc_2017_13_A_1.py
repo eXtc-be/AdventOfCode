@@ -29,7 +29,6 @@ def draw_layers(
         layers: dict[int: int],
         time: int = None,
         delta: int = 0,
-        break_on_caught: bool = False,
         verbose: bool = False
 ) -> int | None:
     caught = None
@@ -61,8 +60,6 @@ def draw_layers(
                     if verbose:
                         print(f'[{packet}]', end=' ')
                     if packet == '(S)':
-                        if break_on_caught:
-                            return 1
                         caught = col
                 else:
                     if verbose:
@@ -98,7 +95,7 @@ def main(data_lines: list[str], verbose: bool = False) -> None:
 
     severity = 0
     for time in range(max(layers.keys()) + 1):
-        caught = draw_layers(layers, time, 3, verbose)
+        caught = draw_layers(layers, time, 0, verbose)
         if caught is not None:
             severity += caught * layers[caught]
         if verbose:
@@ -108,12 +105,12 @@ def main(data_lines: list[str], verbose: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
+    data_lines = load_data(DATA_PATH)
+    # data_lines = test_data
     # print(data_lines)
 
-    # main(data_lines)
-    main(data_lines, verbose=True)
+    main(data_lines)
+    # main(data_lines, verbose=True)
     # using test_data:
     #   End result: 24
     #   Finished 'main' in less than a millisecond
