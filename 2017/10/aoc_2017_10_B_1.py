@@ -54,16 +54,8 @@ def hash_numbers(numbers: list[int]) -> list[int]:
 
     return hashed
 
-test_data = '''
-AoC 2017
 
-1,2,3
-1,2,4
-'''.strip().splitlines()
-
-
-@time_it
-def main(data: str, list_length: int = LIST_LENGTH_REAL) -> None:
+def knothash(data: str, list_length: int = LIST_LENGTH_REAL) -> str:
     lengths = get_lengths(data)
     # print(lengths)
 
@@ -76,7 +68,20 @@ def main(data: str, list_length: int = LIST_LENGTH_REAL) -> None:
     dense_hash = hash_numbers(numbers)
     # print(dense_hash)
 
-    print(f'End result: {"".join(f"{n:02x}" for n in dense_hash)}')
+    return ''.join(f"{n:02x}" for n in dense_hash)
+
+
+test_data = '''
+AoC 2017
+
+1,2,3
+1,2,4
+'''.strip().splitlines()
+
+
+@time_it
+def main(data: str, list_length: int = LIST_LENGTH_REAL) -> None:
+    print(f'End result: {knothash(data, list_length)}')
 
 
 if __name__ == "__main__":
