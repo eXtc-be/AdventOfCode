@@ -160,7 +160,7 @@ cython_debug/
 .idea/
 
 # WinMerge/Notepad++ backup files
-*.bak
+*.bak*
 
 # session cookie data to authenticate to adventofcode.com
 session_cookie
