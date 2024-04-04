@@ -20,48 +20,6 @@ class Register:
     id: int
     value: int = 0
 
-    # def __add__(self, other):
-    #     if isinstance(other, int):
-    #         return self.value + other
-    #     else:
-    #         return self.value + other.value
-    #
-    # def __mul__(self, other):
-    #     if isinstance(other, int):
-    #         return self.value * other
-    #     else:
-    #         return self.value * other.value
-    #
-    # def __or__(self, other):
-    #     if isinstance(other, int):
-    #         return self.value | other
-    #     else:
-    #         return self.value | other.value
-    #
-    # def __and__(self, other):
-    #     if isinstance(other, int):
-    #         return self.value & other
-    #     else:
-    #         return self.value & other.value
-    #
-    # def __eq__(self, other):
-    #     if isinstance(other, int):
-    #         return self.value == other
-    #     else:
-    #         return self.value == other.value
-    #
-    # def __gt__(self, other):
-    #     if isinstance(other, int):
-    #         return self.value > other
-    #     else:
-    #         return self.value > other.value
-    #
-    # def __lt__(self, other):
-    #     if isinstance(other, int):
-    #         return self.value < other
-    #     else:
-    #         return self.value < other.value
-
 
 @dataclass
 class Instruction:

@@ -1,5 +1,5 @@
 # aoc_2016_22_B_1.py - Day 22: Grid Computing - part 2
-# How many viable pairs of nodes are there?
+# What is the fewest number of steps required to move your goal data to node-x0-y0?
 # https://adventofcode.com/2016/day/22
 
 

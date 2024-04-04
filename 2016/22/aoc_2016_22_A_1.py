@@ -60,7 +60,7 @@ def find_viable_pairs(nodes: list[Node]) -> list[tuple[Node, Node]]:
     pairs = []
 
     for node_a, node_b in permutations(nodes, 2):
-        if node_a.used >0 and node_a.used <= node_b.free:
+        if 0 < node_a.used <= node_b.free:
             pairs.append((node_a, node_b))
 
     return pairs
@@ -88,7 +88,7 @@ def main(data_lines: list[str]) -> None:
     # pprint(nodes)
 
     pairs = find_viable_pairs(nodes)
-    pprint(pairs)
+    # pprint(pairs)
 
     print(f'End result: {len(pairs)}')
 
