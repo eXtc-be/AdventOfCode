@@ -71,7 +71,7 @@ def main():
                 continue
             heapq.heappush(queue, (minutes + 1, newx, newy, cannot))
 
-        if len(best) % 1000 == 0:
+        if len(best) % 10000 == 0:
             print(len(best))
 
 

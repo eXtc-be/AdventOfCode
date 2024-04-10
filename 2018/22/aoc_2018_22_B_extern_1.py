@@ -152,7 +152,7 @@ def main(data_lines: list[str]) -> None:
 
     print(f'End result: {minutes}')
 
-    print(len(grid.grid), len(grid.grid[0]))
+    # print(len(grid.grid), len(grid.grid[0]))
 
 
 if __name__ == "__main__":
