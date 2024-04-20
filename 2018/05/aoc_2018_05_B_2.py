@@ -1,4 +1,4 @@
-# aoc_2018_05_B_1.py - Day 5: Alchemical Reduction - part 2
+# aoc_2018_05_B_2.py - Day 5: Alchemical Reduction - part 2
 # What is the length of the shortest polymer you can produce by removing all units
 # of exactly one type and fully reacting the result?
 # https://adventofcode.com/2018/day/5

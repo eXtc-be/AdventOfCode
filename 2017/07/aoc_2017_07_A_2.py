@@ -1,4 +1,4 @@
-# aoc_2017_07_A_1.py - Day 7: Recursive Circus - part 1
+# aoc_2017_07_A_2.py - Day 7: Recursive Circus - part 1
 # What is the name of the bottom program?
 # https://adventofcode.com/2017/day/7
 # solution 2: finding the bottom program by making a tree structure of all nodes

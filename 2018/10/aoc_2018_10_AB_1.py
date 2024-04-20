@@ -1,4 +1,4 @@
-# aoc_2018_10_A_1.py - Day 10: The Stars Align - parts 1 & 2
+# aoc_2018_10_AB_1.py - Day 10: The Stars Align - part 1 + part 2
 # Part 1: What message will eventually appear in the sky?
 # Part 2: Exactly how many seconds would they have needed to wait for that message to appear?
 # https://adventofcode.com/2018/day/10

@@ -1,4 +1,4 @@
-# aoc_2023_11_B.py - Day 11: Cosmic Expansion - part 2
+# aoc_2023_11_B_1.py - Day 11: Cosmic Expansion - part 2
 # sum the shortest paths between galaxies in a massively expanded universe
 # even with the refactoring in aoc_2023_11_A_2, the shortest_path function is still creating arrays for
 # every line that is 'drawn' between galaxies. with galaxy coordinates in the millions this is no longer feasible,

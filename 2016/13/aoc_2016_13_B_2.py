@@ -1,4 +1,4 @@
-# aoc_2016_13_B_1.py - Day 13: A Maze of Twisty Little Cubicles - part 2
+# aoc_2016_13_B_2.py - Day 13: A Maze of Twisty Little Cubicles - part 2
 # How many locations (distinct x,y coordinates, including your starting location) can you reach in at most 50 steps?
 # Solution 2: using Dijkstra's algorithm to find all distances - should be much faster
 # https://adventofcode.com/2016/day/13

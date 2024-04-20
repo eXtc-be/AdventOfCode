@@ -6,7 +6,7 @@
 # https://adventofcode.com/2023/day/10
 
 
-from aoc_2023_10_A import (
+from aoc_2023_10_A_1 import (
     DATA_PATH,
     load_data,
     # test_data_1,

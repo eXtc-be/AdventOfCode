@@ -1,4 +1,4 @@
-# aoc_2023_02_A.py - Day 2: Cube Conundrum - part 1
+# aoc_2023_02_A_1.py - Day 2: Cube Conundrum - part 1
 # test if certain cube combinations are possible
 # https://adventofcode.com/2023/day/2
 

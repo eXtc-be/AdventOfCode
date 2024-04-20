@@ -1,4 +1,4 @@
-# aoc_2023_05_A_2.py - Day 5: If You Give A Seed A Fertilizer - part 1
+# aoc_2023_05_A_1.py - Day 5: If You Give A Seed A Fertilizer - part 1
 # build translation maps from text file and use them to find locations
 # this version creates the maps explicitly: {a: x, b: y, etc.}
 # https://adventofcode.com/2023/day/5

@@ -1,4 +1,4 @@
-# aoc_2023_14_B_1.py - Day 14: Parabolic Reflector Dish - part 2
+# aoc_2023_14_B_2.py - Day 14: Parabolic Reflector Dish - part 2
 # Tilt the platform a large number of times.
 # Afterward, what is the total load on the north support beams?
 # first optimization: compare the current total load with the previous one and if the value stays stable

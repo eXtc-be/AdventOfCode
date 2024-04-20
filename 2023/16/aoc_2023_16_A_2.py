@@ -1,4 +1,4 @@
-# aoc_2023_16_A_1.py - Day 16: The Floor Will Be Lava - part 1
+# aoc_2023_16_A_2.py - Day 16: The Floor Will Be Lava - part 1
 # The light isn't energizing enough tiles to produce lava; to debug the contraption,
 # you need to start by analyzing the current situation. With the beam starting in the top-left heading right,
 # how many tiles end up being energized?

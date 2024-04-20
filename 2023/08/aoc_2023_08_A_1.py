@@ -1,4 +1,4 @@
-# aoc_2023_08_A.py - Day 8: Haunted Wasteland - part 1
+# aoc_2023_08_A_1.py - Day 8: Haunted Wasteland - part 1
 # follow instructions to choose the next node in a bunch of nodes and try to get to the end
 # https://adventofcode.com/2023/day/8
 

@@ -1,4 +1,4 @@
-# aoc_2017_20_A_1.py - Day 20: Particle Swarm - part 1
+# aoc_2017_20_A_2.py - Day 20: Particle Swarm - part 1
 # Which particle will stay closest to position <0,0,0> in the long term?
 # https://adventofcode.com/2017/day/20
 # strategy 2: - find the particle(s) with the lowest absolute value

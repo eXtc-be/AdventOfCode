@@ -1,4 +1,4 @@
-# aoc_2018_15_A_extern_1.py - Day 15: Beverage Bandits - part 1
+# aoc_2018_15_A_extern_2.py - Day 15: Beverage Bandits - part 1
 # What is the outcome of the combat described in your puzzle input?
 # https://adventofcode.com/2018/day/15
 # I found a solution by reddit user daggerdragon that managed to find the correct solution for my input (extern_2.py)

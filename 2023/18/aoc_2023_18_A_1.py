@@ -1,5 +1,3 @@
-#! /usr/bin/python3
-
 # aoc_2023_18_A_1.py - Day 18: Lavaduct Lagoon - part 1
 # The Elves are concerned the lagoon won't be large enough;
 # if they follow their dig plan, how many cubic meters of lava could it hold?

@@ -1,4 +1,4 @@
-# aoc_2023_04_A.py - Day 4: Scratchcards  - part 1
+# aoc_2023_04_A_1.py - Day 4: Scratchcards  - part 1
 # find winning numbers in a list of drawn numbers
 # https://adventofcode.com/2023/day/4
 

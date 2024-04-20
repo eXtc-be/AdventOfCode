@@ -1,4 +1,4 @@
-# aoc_2023_10_A.py - Day 10: Pipe Maze - part 1
+# aoc_2023_10_A_1.py - Day 10: Pipe Maze - part 1
 # follow pipes in a grid to find a loop
 # https://adventofcode.com/2023/day/10
 

@@ -1,4 +1,4 @@
-# aoc_2023_06_B.py - Day 6: Wait For It - part 2
+# aoc_2023_06_B_2.py - Day 6: Wait For It - part 2
 # use button press to beat records
 # same formula as aoc_2023_06_A_2, only difference is the time and distance values are now concatenated
 # and only 1 calculation is necessary
@@ -24,8 +24,8 @@ def create_race(data_lines):
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
+    data_lines = load_data(DATA_PATH)
+    # data_lines = test_data
     print(data_lines)
 
     race = create_race(data_lines)

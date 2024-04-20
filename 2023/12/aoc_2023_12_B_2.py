@@ -1,4 +1,4 @@
-# aoc_2023_12_B_1.py - Day 12: Hot Springs - part 2
+# aoc_2023_12_B_2.py - Day 12: Hot Springs - part 2
 # Before processing a line, expand it. Then, for each row, count all the different arrangements
 # of operational and broken springs that meet the given criteria. What is the sum of those counts?
 # adding caching to the get_combos function in the hope it is enough to finish the program in a reasonable time

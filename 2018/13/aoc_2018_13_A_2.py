@@ -1,4 +1,4 @@
-# aoc_2018_13_A_1.py - Day 13: Mine Cart Madness - part 1
+# aoc_2018_13_A_2.py - Day 13: Mine Cart Madness - part 1
 # What is the location of the first crash?
 # https://adventofcode.com/2018/day/13
 # second version: track sections are now stored in a 2-dimensional grid, so looking up a cart's next

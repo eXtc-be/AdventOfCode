@@ -1,4 +1,4 @@
-# aoc_2018_09_B_1.py - Day 9: Marble Mania - part 2
+# aoc_2018_09_B_2.py - Day 9: Marble Mania - part 2
 # What would the new winning Elf's score be if the number of the last marble were 100 times larger?
 # https://adventofcode.com/2018/day/9
 # this is a complete rewrite of the original solution using a doubly linked list instead of an array

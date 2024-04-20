@@ -1,4 +1,4 @@
-# aoc_2015_20_A_1.py - Day 20: Infinite Elves and Infinite Houses - part 1
+# aoc_2015_20_A_2.py - Day 20: Infinite Elves and Infinite Houses - part 1
 # What is the lowest house number of the house to get at least as many presents as the number in your puzzle input?
 # https://adventofcode.com/2015/day/20
 

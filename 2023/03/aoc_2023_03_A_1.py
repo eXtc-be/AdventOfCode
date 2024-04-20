@@ -1,4 +1,4 @@
-# aoc_2023_03_A.py - Day 3: Gear Ratios - part 1
+# aoc_2023_03_A_1.py - Day 3: Gear Ratios - part 1
 # find numbers that are adjacent to symbols
 # https://adventofcode.com/2023/day/3
 

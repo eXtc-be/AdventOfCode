@@ -1,4 +1,4 @@
-# aoc_2016_19_B_2.py - Day 19: An Elephant Named Joseph - part 2
+# aoc_2016_19_B_2b.py - Day 19: An Elephant Named Joseph - part 2
 # With the number of Elves given in your puzzle input, which Elf gets all the presents with the new rules?
 # https://adventofcode.com/2016/day/19
 # strategy 2: using aoc_2016_19_B_1a.py to create a table of (number of elves, winner) pairs,

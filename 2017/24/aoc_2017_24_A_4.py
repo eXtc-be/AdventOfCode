@@ -1,4 +1,4 @@
-# aoc_2017_24_A_1.py - Day 24: Electromagnetic Moat - part 1
+# aoc_2017_24_A_4.py - Day 24: Electromagnetic Moat - part 1
 # What is the strength of the strongest bridge you can make with the components you have available?
 # https://adventofcode.com/2017/day/24
 # after trying my hand at recursively generating valid bridges and failing miserably, I found

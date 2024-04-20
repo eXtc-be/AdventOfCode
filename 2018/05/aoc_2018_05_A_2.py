@@ -1,4 +1,4 @@
-# aoc_2018_05_A_1.py - Day 5: Alchemical Reduction - part 1
+# aoc_2018_05_A_2.py - Day 5: Alchemical Reduction - part 1
 # How many units remain after fully reacting the polymer you scanned?
 # https://adventofcode.com/2018/day/5
 # found on https://old.reddit.com/r/adventofcode/comments/d1matd/2018_day_5_part_1_helpcode_review_needed/fc6c48m/

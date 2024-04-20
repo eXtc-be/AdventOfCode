@@ -1,4 +1,4 @@
-# aoc_2018_15_B_1.py - Day 15: Beverage Bandits - part 2
+# aoc_2018_15_B_3.py - Day 15: Beverage Bandits - part 2
 # After increasing the Elves' attack power until it is just barely enough for them to win without any Elves dying,
 # what is the outcome of the combat described in your puzzle input?
 # https://adventofcode.com/2018/day/15

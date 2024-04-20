@@ -1,4 +1,4 @@
-# aoc_2019_03_B_1.py - Day 3: Crossed Wires - part 2
+# aoc_2019_03_B_2.py - Day 3: Crossed Wires - part 2
 # What is the fewest combined steps the wires must take to reach an intersection?
 # https://adventofcode.com/2019/day/3
 # using aoc_2019_03_A_2's optimized functions, this version is much faster and memory efficient

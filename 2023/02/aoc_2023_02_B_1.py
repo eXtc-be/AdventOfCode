@@ -1,4 +1,4 @@
-# aoc_2023_02_B.py - Day 2: Cube Conundrum - part 2
+# aoc_2023_02_B_1.py - Day 2: Cube Conundrum - part 2
 # calculate the 'power' of combinations
 # https://adventofcode.com/2023/day/2
 

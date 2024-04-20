@@ -1,4 +1,4 @@
-# aoc_2018_21_A_2.py - Day 21: Chronal Conversion - part 1
+# aoc_2018_21_A_3.py - Day 21: Chronal Conversion - part 1
 # What is the lowest non-negative integer value for register 0 that causes
 # the program to halt after executing the most instructions?
 # https://adventofcode.com/2018/day/21

@@ -1,4 +1,4 @@
-# aoc_2017_21_A_1.py - Day 21: Fractal Art - part 1
+# aoc_2017_21_A_2.py - Day 21: Fractal Art - part 1
 # How many pixels stay on after 5 iterations?
 # https://adventofcode.com/2017/day/21
 # optimization: instead of generating all transformations for a given sub-grid each time,

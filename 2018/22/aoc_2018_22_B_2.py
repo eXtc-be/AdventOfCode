@@ -1,4 +1,4 @@
-# aoc_2018_22_B_1.py - Day 22: Mode Maze - part 2
+# aoc_2018_22_B_2.py - Day 22: Mode Maze - part 2
 # What is the fewest number of minutes you can take to reach the target?
 # https://adventofcode.com/2018/day/22
 # trying these optimizations:

@@ -1,4 +1,4 @@
-# aoc_2023_12_A_2.py - Day 12: Hot Springs - part 1
+# aoc_2023_12_A_1.py - Day 12: Hot Springs - part 1
 # For each row, count all the different arrangements of operational and broken springs
 # that meet the given criteria. What is the sum of those counts?
 # first version: generating all possible combinations and check if they match the numbers

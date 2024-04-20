@@ -1,4 +1,4 @@
-# aoc_2023_08_B_1.py - Day 8: Haunted Wasteland - part 2
+# aoc_2023_08_B_2.py - Day 8: Haunted Wasteland - part 2
 # follow instructions to choose the next node in a bunch of nodes and try to get to the end,
 # but this time the start and end nodes are arrays of nodes
 # so aoc_2023_08_B_1 ran for over 12 hours and did not produce a result

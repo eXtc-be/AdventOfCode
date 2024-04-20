@@ -1,10 +1,8 @@
-# aoc_2016_19_B_1a.py - Day 19: An Elephant Named Joseph - part 2
+# aoc_2016_19_B_2a.py - Day 19: An Elephant Named Joseph - part 2
 # With the number of Elves given in your puzzle input, which Elf gets all the presents with the new rules?
 # https://adventofcode.com/2016/day/19
-# strategy 1: looping through all elves stealing presents until 1 elf has them all
-#   using this strategy, the overhead of having all elves in memory is too large to be feasible,
-#   so this script serves to create a table with the winner for each number of elves up until a maximum
-#   which we can then use to (try to) devise a formula to calculate the winner instead of brute forcing it
+# helper script that serves to create a table with the winner for a range of elves
+# which can then be used to (try to) devise a formula to calculate the winner instead of brute forcing it
 
 
 from aoc_2016_19_A_1 import (

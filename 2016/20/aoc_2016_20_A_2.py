@@ -1,4 +1,4 @@
-# aoc_2016_20_A_1.py - Day 20: Firewall Rules - part 1
+# aoc_2016_20_A_2.py - Day 20: Firewall Rules - part 1
 # What is the lowest-valued IP that is not blocked?
 # https://adventofcode.com/2016/day/20
 # strategy 2: determine how the set would look by calculating overlaps instead of brute forcing it

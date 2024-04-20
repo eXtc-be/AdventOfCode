@@ -1,4 +1,4 @@
-# aoc_2017_22_B_1.py - Day 22: Sporifica Virus - part 2
+# aoc_2017_22_B_2.py - Day 22: Sporifica Virus - part 2
 # After 10_000_000 bursts of activity, how many bursts cause a node to become infected?
 # https://adventofcode.com/2017/day/22
 # using the new and improved data structure from aoc_2017_22_A_2 should speed things up

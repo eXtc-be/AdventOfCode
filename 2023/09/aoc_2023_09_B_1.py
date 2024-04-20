@@ -1,4 +1,4 @@
-# aoc_2023_09_B.py - Day 9: Mirage Maintenance - part 2
+# aoc_2023_09_B_1.py - Day 9: Mirage Maintenance - part 2
 # predict the previous number in a sequence using the differences between them
 # https://adventofcode.com/2023/day/9
 

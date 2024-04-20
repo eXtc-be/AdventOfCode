@@ -1,4 +1,4 @@
-# aoc_2017_11_AB_1.py - Day 11: Hex Ed - part 1
+# aoc_2017_11_AB_1.py - Day 11: Hex Ed - part 1 + part 2
 # You have the path the child process took.
 # Starting where he started, you need to determine the fewest number of steps required to reach him.
 # How many steps away is the furthest he ever got from his starting position?

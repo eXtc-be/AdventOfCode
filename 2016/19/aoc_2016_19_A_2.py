@@ -1,4 +1,4 @@
-# aoc_2016_19_A_1.py - Day 19: An Elephant Named Joseph - part 1
+# aoc_2016_19_A_2.py - Day 19: An Elephant Named Joseph - part 1
 # With the number of Elves given in your puzzle input, which Elf gets all the presents?
 # https://adventofcode.com/2016/day/19
 # strategy 2: using the formula from https://www.youtube.com/watch?v=uCsD3ZGzMgE

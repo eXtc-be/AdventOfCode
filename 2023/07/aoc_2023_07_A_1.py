@@ -1,4 +1,4 @@
-# aoc_2023_07_A.py - Day 7: Camel Cards - part 1
+# aoc_2023_07_A_1.py - Day 7: Camel Cards - part 1
 # sort poker hands with a twist and Jokers
 # https://adventofcode.com/2023/day/7
 
