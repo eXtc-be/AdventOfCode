@@ -5,7 +5,9 @@
 
 from aoc_2019_05_A_1 import (
     DATA_PATH,
-    load_data,get_program,run_program,
+    load_data,
+    get_program,
+    run_program,
     # test_data,
 )
 

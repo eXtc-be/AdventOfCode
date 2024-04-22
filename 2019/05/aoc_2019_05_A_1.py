@@ -107,6 +107,7 @@ def main(data: str) -> None:
 
 if __name__ == "__main__":
     main(load_data(DATA_PATH)[0])
+    # main(test_data[0])
     # main(test_data[1])
 
     # using input data:

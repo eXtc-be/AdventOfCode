@@ -51,10 +51,10 @@ def main(data: str) -> None:
     program = get_program(data)
     # print(program)
 
-    program[1] = 59
-    program[2] = 36
-    # program[1] = 12
-    # program[2] = 2
+    # program[1] = 59
+    # program[2] = 36
+    program[1] = 12
+    program[2] = 2
 
     run_program(program)
     # print(program)
@@ -64,6 +64,9 @@ def main(data: str) -> None:
 
 if __name__ == "__main__":
     main(load_data(DATA_PATH)[0])
+    # main(test_data[0])
+    # main(test_data[1])
+    # main(test_data[2])
     # main(test_data[3])
 
     # using input data:
