@@ -20,6 +20,7 @@ class Argument:
 class Computer:
     memory: list[int]
     inputs: list[int] = field(default_factory=list)
+    verbose: bool = True
 
     def __post_init__(self):
         self.ip = 0
@@ -55,7 +56,8 @@ class Computer:
 
     def out(self, args: list[Argument]) -> int:
         self.outputs.append(self._get_arg(args[0]))
-        print(f'OUTPUT: {self.outputs[-1]}')
+        if self.verbose:
+            print(f'OUTPUT: {self.outputs[-1]}')
         return self.ip + len(args) + 1
 
     def jit(self, args: list[Argument]) -> int:
