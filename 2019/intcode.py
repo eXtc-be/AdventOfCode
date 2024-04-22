@@ -10,6 +10,12 @@ class Mode(Enum):
     immediate = 1
 
 
+class State(Enum):
+    running = auto()
+    paused = auto()
+    halted = auto()
+
+
 @dataclass
 class Argument:
     mode: Mode
@@ -26,10 +32,7 @@ class Computer:
         self.ip = 0
         self._ip_len = len(f'{len(self.memory)}')
         self.outputs = []
-
-    @property
-    def input(self):
-        return next(iter(self.inputs))
+        self.state = State.paused
 
     def _get_arg(self, arg: Argument) -> int:
         if arg.mode == Mode.immediate:
@@ -51,8 +54,12 @@ class Computer:
 
     def inp(self, args: list[Argument]) -> int:
         assert args[-1].mode == Mode.positional
-        self.memory[args[-1].value] = self.input  # get the (next) input value
-        return self.ip + len(args) + 1
+        if self.inputs:
+            self.memory[args[-1].value] = self.inputs.pop(0)
+            return self.ip + len(args) + 1
+        else:
+            self.state = State.paused
+            return self.ip
 
     def out(self, args: list[Argument]) -> int:
         self.outputs.append(self._get_arg(args[0]))
@@ -83,6 +90,7 @@ class Computer:
         return self.ip + len(args) + 1
 
     def hlt(self, args: list[Argument]) -> int:
+        self.state = State.halted
         return -1
 
     INSTRUCTION_SET = {
@@ -97,8 +105,13 @@ class Computer:
         99: {'function': hlt, 'args': 0},
     }
 
-    def run(self) -> int | None:
-        while self.ip >= 0:
+    def run(self, inputs: list[int] = None) -> int | None:
+        if inputs:
+            self.inputs.extend(inputs)
+
+        self.state = State.running
+
+        while self.state == State.running:
             # read next instruction from memory and convert it to zero padded string
             instruction = f'{self.memory[self.ip]:05}'
             opcode = int(instruction[-2:])  # extract opcode
