@@ -2,6 +2,7 @@
 
 import functools
 import time
+import os
 
 
 # evaluates an integer and returns the integer and a string
@@ -90,6 +91,10 @@ def convertSeconds(duration, mode=3):
                             r = 'less than a millisecond'
 
     return r
+
+
+def clear() -> None:
+    os.system('cls' if os.name == 'nt' else 'clear') if not os.environ.get('CHARM') else print('-' * 100)
 
 
 def time_it(func):
