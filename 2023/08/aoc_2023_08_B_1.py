@@ -1,24 +1,31 @@
 # aoc_2023_08_B_1.py - Day 8: Haunted Wasteland - part 2
-# follow instructions to choose the next node in a bunch of nodes and try to get to the end,
-# but this time the start and end nodes are arrays of nodes
+# Simultaneously start on every node that ends with A.
+# How many steps does it take before you're only on nodes that end with Z?
 # https://adventofcode.com/2023/day/8
+# despite running the program with test data took less than a millisecond, running it with the real data
+# takes way too long (even when using an int instead of a list to keep track of the steps)
 
 
-from aoc_2023_08_A import (
+from aoc_2023_08_A_1 import (
     DATA_PATH,
     load_data,
-    test_data_1,
-    test_data_2,
+    # test_data,
     get_instructions,
-    get_nodes
+    get_nodes,
+    cycle,
 )
 
-import time
+from tools import time_it
 
-from tools import convertSeconds
+# other imports
+
+from pprint import pprint
 
 
-def walk_path(instructions, nodes):
+# other constants
+
+
+def walk_path(instructions: cycle[str], nodes: dict[str, dict[str, str]]) -> int:
     # steps = [[node for node in nodes if node.endswith('A')]]  # keep track of all steps
     steps = 0  # keep track of number of steps
     current_nodes = {node: nodes[node] for node in nodes if node.endswith('A')}
@@ -34,7 +41,8 @@ def walk_path(instructions, nodes):
     return steps
 
 
-test_data_3 = """LR
+test_data = '''
+LR
 
 11A = (11B, XXX)
 11B = (XXX, 11Z)
@@ -44,16 +52,11 @@ test_data_3 = """LR
 22C = (22Z, 22Z)
 22Z = (22B, 22B)
 XXX = (XXX, XXX)
-""".splitlines()
+'''.strip().splitlines()
 
 
-if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data_1
-    # data_lines = test_data_2
-    # data_lines = test_data_3
-    # print(data_lines)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     instructions = get_instructions(data_lines[0])
     # for i in range(10):
     #     print(next(instructions))
@@ -61,12 +64,23 @@ if __name__ == "__main__":
     nodes = get_nodes(data_lines[2:])  # skip first 2 lines
     # print(nodes)
 
-    start_time = time.time()  # make note of start time (to calculate running time at end)
-
     steps = walk_path(instructions, nodes)
     # print(steps)
 
     # print(f'End result: {len(steps) - 1}')
     print(f'End result: {steps}')
 
-    print(f'finished in {convertSeconds(time.time() - start_time)}')
+
+if __name__ == "__main__":
+    # main(load_data(DATA_PATH))
+    main(test_data)
+
+    # using test_data using a list to keep track of the steps:
+    #   End result: 6
+    #   Finished 'main' in less than a millisecond
+    # using test_data using an int to keep track of the steps:
+    #   End result: 6
+    #   Finished 'main' in less than a millisecond
+    # using input data:
+    #   End result: xxx
+    #   Finished 'main' in xxx

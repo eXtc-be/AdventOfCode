@@ -27,7 +27,7 @@ REJECTED = 'R'
 class Category:
     name: str
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.name = self.name.upper()
         if self.name not in CATEGORIES:
             raise ValueError(f'Not a valid category: {self.name}')
@@ -39,7 +39,7 @@ class Condition:
     operator: Callable
     value: int
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.operator not in (lt, gt):
             raise ValueError(f'Not a valid operator: {self.operator}')
 
@@ -85,7 +85,7 @@ class Workflows:
 
         part.status = next
 
-    def __getitem__(self, index):
+    def __getitem__(self, index) -> Workflow:
         """returns the workflow with name == index"""
         if not isinstance(index, str):
             raise ValueError(f'Not a valid index: {index}')
@@ -108,17 +108,17 @@ class Part:
     parameters: list[Parameter] = field(default_factory=list)
     status: str = None
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: Category) -> Parameter:
         if not isinstance(index, Category):
             raise ValueError(f'Not a valid index: {index}')
 
         return self.parameters[CATEGORIES.index(index.name)]
 
     @property
-    def value(self):
+    def value(self) -> int:
         return sum(param.value for param in self.parameters)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return (f'{{'
                 f'{",".join(f"{param.category.name}={param.value}" for param in self.parameters)}'
                 f'}} = {self.value}')
@@ -235,11 +235,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 19114
     #   Finished 'main' in less than a millisecond

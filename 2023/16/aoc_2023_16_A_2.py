@@ -2,10 +2,10 @@
 # The light isn't energizing enough tiles to produce lava; to debug the contraption,
 # you need to start by analyzing the current situation. With the beam starting in the top-left heading right,
 # how many tiles end up being energized?
+# https://adventofcode.com/2023/day/16
 # this version will try a different loop detecting strategy: for each cell on the grid, keep track of the
 #   directions from which it has been entered and stop a particular path if all 4 directions are used
 # I also discovered by chance that the upper left corner of the grid (the starting position) was not processed properly
-# https://adventofcode.com/2023/day/16
 
 
 from aoc_2023_16_A_1 import (
@@ -165,12 +165,10 @@ test_data_2 = r'''
 
 
 if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # data_lines = test_data_2
-    # print(data_lines)
+    # main(load_data(DATA_PATH))
+    main(test_data)
+    main(test_data_2)
 
-    main(data_lines)
     # using test_data:
     #   End result: 46
     #   Finished 'main' in less than a millisecond

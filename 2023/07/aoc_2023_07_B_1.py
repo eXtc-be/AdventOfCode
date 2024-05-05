@@ -1,17 +1,17 @@
 # aoc_2023_07_B_1.py - Day 7: Camel Cards - part 2
-# sort poker hands with a twist
+# Find the rank of every hand in your set. What are the total winnings?
 # https://adventofcode.com/2023/day/7
 
 
-from aoc_2023_07_A import (
+from aoc_2023_07_A_1 import (
     DATA_PATH,
     load_data,
     test_data,
-    # Type,
     Hand,
-    # _create_cards,
-    # create_hands,
+    Type,
 )
+
+from tools import time_it
 
 from enum import IntEnum, auto
 from collections import Counter
@@ -54,7 +54,7 @@ card_to_Card = {
 
 class Hand_J(Hand):
     @staticmethod
-    def _get_type(cards):
+    def _get_type(cards: list[Card]) -> Type:
         # override method: replace JOKER cards with whatever card(s) make(s) this hand better,
         # then call parent method (with new cards) to determine type
 
@@ -86,11 +86,11 @@ class Hand_J(Hand):
         return Hand._get_type([replacement if card == Card.JOKER else card for card in cards])
 
 
-def _create_cards(hand_string):  # cannot import from other file, because the wrong card_to_Card would be used
+def _create_cards(hand_string: str) -> list[Card]:  # cannot import from other file, because the wrong card_to_Card would be used
     return [card_to_Card[card] for card in hand_string]
 
 
-def create_hands(data_lines):  # cannot import from other file, because the wrong card_to_Card would be used
+def create_hands(data_lines: list[str]) -> list[Hand_J]:  # cannot import from other file, because the wrong card_to_Card would be used
     return [
         Hand_J(
             _create_cards(line.strip().split()[0]),
@@ -99,21 +99,17 @@ def create_hands(data_lines):  # cannot import from other file, because the wron
     ]
 
 
-test_data_2="""AAAAJ 0
+test_data_2 = """
+AAAAJ 0
 AAAKJ 0
 AAKKJ 0
 AAKQJ 0
 AKQTJ 0
-""".splitlines()
+""".strip().splitlines()
 
 
-if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data_2
-    # data_lines = test_data
-    # print(data_lines)
-    # print('-' * 100)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     hands = create_hands(data_lines)
     # pprint(hands)
     # print('-' * 100)
@@ -122,7 +118,22 @@ if __name__ == "__main__":
     # pprint(hands)
     # print('-' * 100)
 
-    for rank, hand in enumerate(hands, 1):
-        print(f'{rank:4d} * {hand.bid:3d} = {rank * hand.bid:8,d}')
-    print('-' * 21)
-    print(f'Total:   {sum(rank * hand.bid for rank, hand in enumerate(hands, 1)):12,}')
+    # for rank, hand in enumerate(hands, 1):
+    #     print(f'{rank:4d} * {hand.bid:3d} = {rank * hand.bid:8,d}')
+    # print('-' * 21)
+    # print(f'Total:   {sum(rank * hand.bid for rank, hand in enumerate(hands, 1)):12,}')
+
+    print(f'End result: {sum(rank * hand.bid for rank, hand in enumerate(hands, 1))}')
+
+
+if __name__ == "__main__":
+    main(load_data(DATA_PATH))
+    # main(test_data_2)
+    # main(test_data)
+
+    # using test_data:
+    #   End result: 5905
+    #   Finished 'main' in less than a millisecond
+    # using input data:
+    #   End result: 245576185
+    #   Finished 'main' in 9 milliseconds

@@ -57,10 +57,10 @@ class Coord:
     row: int
     col: int
 
-    def __add__(self, other):
+    def __add__(self, other: 'Coord') -> 'Coord':
         return Coord(self.row + other.row, self.col + other.col)
 
-    def __mul__(self, factor):
+    def __mul__(self, factor: int) -> 'Coord':
         return Coord(self.row * factor, self.col * factor)
 
 
@@ -69,7 +69,7 @@ class Direction:
     name: str
     delta: Coord = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.name not in DIRECTIONS:
             raise ValueError('invalid direction: {}'.format(self.name))
 
@@ -108,14 +108,14 @@ class Color(NamedTuple):
         return cls(r, g, b)
 
     @property
-    def hex(self):
+    def hex(self) -> str:
         return (f'#'
                 f'{HEX_CHARS[self.r//16]}{HEX_CHARS[self.r%16]}'
                 f'{HEX_CHARS[self.g//16]}{HEX_CHARS[self.g%16]}'
                 f'{HEX_CHARS[self.b//16]}{HEX_CHARS[self.b%16]}')
 
     @property
-    def dec(self):
+    def dec(self) -> int:
         return (self.r * 256 + self.g) * 256 + self.b
 
 
@@ -140,11 +140,11 @@ class Row:
     num_cols: int = 1
     cells: list[Cell] = field(default_factory=list)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if not self.cells:
             self.cells = [Cell() for _ in range(self.num_cols)]
 
-    def grow(self, num_cols):
+    def grow(self, num_cols: int) -> None:  # changes the grid in place
         # DONE: allow negative number to grow left
         new_cells = [Cell() for _ in range(abs(num_cols))]
         if num_cols > 0:
@@ -158,12 +158,12 @@ class Row:
         cells = [Cell(Color(int(char != '.')*255, 0, 0 ), int(char != '.'), char) for char in string]
         return cls(len(cells), cells)
 
-    def _find_edges(self):
+    def _find_edges(self) -> list[str]:
         """marks all cells in the row that are considered an edge"""
         edges = []
 
         prev = ''
-        for cell in self:
+        for cell in self.cells:
             if cell.depth == 0:
                 edges.append(' ')
                 continue  # skip if this cell isn't part of the loop
@@ -223,13 +223,13 @@ class Row:
     def active(self) -> int:
         return len([cell for cell in self.cells if cell.depth > 0])
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.num_cols
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int) -> Cell:
         return self.cells[index]
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index: int, value: Cell):
         self.cells[index] = value
 
     def __str__(self) -> str:
@@ -339,7 +339,7 @@ class Grid:
             self.rows[index.row][index.col] = value
         else:
             for cell in self.rows[index]:
-                cell[index] = value
+                cell = value
 
     def __str__(self) -> str:
         return '\n'.join(str(row) for row in self.rows)

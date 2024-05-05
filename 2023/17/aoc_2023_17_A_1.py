@@ -163,7 +163,7 @@ def find_path(grid: list[list[int]], start: tuple[int, int], stop: tuple[int, in
             ):
                 n = v
 
-        draw_grid(grid, parents=parents, current=n)
+        # draw_grid(grid, parents=parents, current=n)
 
         # n is guaranteed to not be None:
         #   - while to_visit assures there is at least one node to do: for v in to_visit
@@ -268,19 +268,17 @@ def main(data_lines: list[str]) -> None:
         print('Found a path:', path)
         # draw_grid(grid, path)
         weights = [grid[n[0]][n[1]] for n in path]
-        print('Weights:', weights)
+        # print('Weights:', weights)
         print(f'End result: {sum(weights[1:])}')
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
+    # main(load_data(DATA_PATH))
+    main(test_data)
 
-    main(data_lines)
     # using test_data:
-    #   End result: xxx
-    #   Finished 'main' in xxx
+    #   End result: 113 (should be 102)
+    #   Finished 'main' in 5 milliseconds
     # using input data:
     #   End result: xxx
     #   Finished 'main' in xxx

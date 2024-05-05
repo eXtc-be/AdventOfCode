@@ -1,27 +1,30 @@
-# aoc_2023_05_A_3.py - Day 5: If You Give A Seed A Fertilizer - part 1
-# create mappings from a text file and use them to map seed numbers to locations
+# aoc_2023_05_A_1.py - Day 5: If You Give A Seed A Fertilizer - part 1
+# What is the lowest location number that corresponds to any of the initial seed numbers?
+# https://adventofcode.com/2023/day/5
 # not much of a difference with aoc_2023_052.py, except for maps being renamed to mappings
 # and being a list instead of a dict
 # I actually had to rewrite this from scratch because I forgot to copy it to my thumb drive :)
-# https://adventofcode.com/2023/day/5
 
+
+from aoc_2023_05_A_1 import (
+    DATA_PATH,
+    load_data,
+    test_data,
+)
+
+from tools import time_it
+
+# other imports
 
 from pprint import pprint
 
 
-DATA_PATH = './input_2023_05'
+# other constants
 
 
-mappings = []
-
-
-def load_data(path):
-    with open(path) as f:
-        return f.read().splitlines()
-
-
-def create_mappings(data_lines):
+def create_mappings(data_lines: list[str]) -> None:  # changes global variable directly
     global mappings
+
     current_mapping = {}
     for line in data_lines[2:]:  # skip first 2 lines (seed numbers + empty line)
         if line.strip() and line.strip().lower().endswith('map:'):  # found the first line of a new map
@@ -41,27 +44,28 @@ def create_mappings(data_lines):
         mappings.append(current_mapping)
 
 
-def _calc_destination(maps, val):
+def _calc_destination(maps: dict, value: int) -> int:
     for map in maps:
-        if val in range(map['src'], map['src'] + map['num']):
-            return val + (map['dst'] - map['src'])
+        if value in range(map['src'], map['src'] + map['num']):
+            return value + (map['dst'] - map['src'])
     # Any source numbers that aren't mapped correspond to the same destination number
-    return val
+    return value
 
 
-def _map_src_to_dst(src, dst, val):
+def _map_src_to_dst(src: str, dst: str, val: int) -> int:
     current_mapping = None
     for mapping in mappings:
         if mapping['src'] == src.strip():  # found the mapping with the correct src
             current_mapping = mapping
             break
+
     if current_mapping['dst'] == dst.strip():  # the mapping also has the correct dst
         return _calc_destination(current_mapping['maps'], val)
     else:  # get the next level mapping
         return _map_src_to_dst(current_mapping['dst'], dst, _calc_destination(current_mapping['maps'], val))
 
 
-def find_locations(seed_line):
+def find_locations(seed_line: str) -> list[int]:
     locations = []
 
     for seed in seed_line.split()[1:]:  # skip first element ('seeds:')
@@ -70,61 +74,39 @@ def find_locations(seed_line):
     return locations
 
 
-test_data = """seeds: 79 14 55 13
-
-seed-to-soil map:
-50 98 2
-52 50 48
-
-soil-to-fertilizer map:
-0 15 37
-37 52 2
-39 0 15
-
-fertilizer-to-water map:
-49 53 8
-0 11 42
-42 0 7
-57 7 4
-
-water-to-light map:
-88 18 7
-18 25 70
-
-light-to-temperature map:
-45 77 23
-81 45 19
-68 64 13
-
-temperature-to-humidity map:
-0 69 1
-1 0 69
-
-humidity-to-location map:
-60 56 37
-56 93 4
-""".splitlines()
+mappings = []
 
 
-if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     create_mappings(data_lines)
     # pprint(mappings)
 
-    # seed = 79
-    # print('seed =', seed)
-    # print('soil =', _map_src_to_dst('seed', 'soil', 79))  # should be 81
-    # print('fertilizer =', _map_src_to_dst('seed', 'fertilizer', 79))  # should be 81
-    # print('water =', _map_src_to_dst('seed', 'water', 79))  # should be 81
-    # print('light =', _map_src_to_dst('seed', 'light', 79))  # should be 74
-    # print('temperature =', _map_src_to_dst('seed', 'temperature', 79))  # should be 78
-    # print('humidity =', _map_src_to_dst('seed', 'humidity', 79))  # should be 78
-    # print('location =', _map_src_to_dst('seed', 'location', 79))  # should be 82
-
-    locations = find_locations(data_lines[0])  # first line contains seed numbers
-    print(locations)
+    locations = find_locations(data_lines[0])
+    # print(locations)
 
     print(f'End result: {min(locations)}')
+
+
+if __name__ == "__main__":
+    main(load_data(DATA_PATH))
+    # main(test_data)
+
+    # using test_data:
+    #   End result: 35
+    #   Finished 'main' in less than a millisecond
+    # using input data:
+    #   End result: 175622908
+    #   Finished 'main' in 1 millisecond
+
+    # create_mappings(test_data)
+    # seed = 79
+    # print('seed =', seed)
+    # print('soil =', _map_src_to_dst('seed', 'soil', seed))  # should be 81
+    # print('fertilizer =', _map_src_to_dst('seed', 'fertilizer', seed))  # should be 81
+    # print('water =', _map_src_to_dst('seed', 'water', seed))  # should be 81
+    # print('light =', _map_src_to_dst('seed', 'light', seed))  # should be 74
+    # print('temperature =', _map_src_to_dst('seed', 'temperature', seed))  # should be 78
+    # print('humidity =', _map_src_to_dst('seed', 'humidity', seed))  # should be 78
+    # print('location =', _map_src_to_dst('seed', 'location', seed))  # should be 82
+

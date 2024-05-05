@@ -1,8 +1,8 @@
 # aoc_2023_12_B_2.py - Day 12: Hot Springs - part 2
 # Before processing a line, expand it. Then, for each row, count all the different arrangements
 # of operational and broken springs that meet the given criteria. What is the sum of those counts?
-# adding caching to the get_combos function in the hope it is enough to finish the program in a reasonable time
 # https://adventofcode.com/2023/day/12
+# adding caching to the get_combos function in the hope it is enough to finish the program in a reasonable time
 
 
 from aoc_2023_12_A_1 import (
@@ -88,11 +88,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 525152
     #   Finished 'main' in 1 millisecond

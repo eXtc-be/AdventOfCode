@@ -111,14 +111,12 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 405
-    #   Finished 'main' in 0 milliseconds
+    #   Finished 'main' in less than a millisecond
     # using input data:
     #   End result: 34100
     #   Finished 'main' in 2 milliseconds

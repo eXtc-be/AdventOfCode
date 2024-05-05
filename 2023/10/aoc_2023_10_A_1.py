@@ -1,9 +1,14 @@
 # aoc_2023_10_A_1.py - Day 10: Pipe Maze - part 1
-# follow pipes in a grid to find a loop
+# How many steps along the loop does it take to get from the starting position
+# to the point farthest from the starting position?
 # https://adventofcode.com/2023/day/10
 
 
-# imports
+from tools import time_it
+
+# other imports
+
+from pprint import pprint
 
 
 DATA_PATH = './input_2023_10'
@@ -86,28 +91,26 @@ def find_loop(
             return loop
 
 
-test_data_1 = """-L|F7
+test_data = [
+'''
+-L|F7
 7S-7|
 L|7||
 -L-J|
 L|-JF
-""".splitlines()
-
-
-test_data_2 = """7-F7-
+'''.strip().splitlines(),
+'''
+7-F7-
 .FJ|7
 SJLL7
 |F--J
 LJ.LJ
-""".splitlines()
+'''.strip().splitlines(),
+]
 
 
-if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data_1
-    # data_lines = test_data_2
-    # print(data_lines)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     grid = create_grid(data_lines)
     # print(grid)
 
@@ -115,6 +118,22 @@ if __name__ == "__main__":
     print(f'start character "{START}" was found on row {start_row}, column {start_col}')
 
     loop = find_loop(grid, start_row, start_col)
-    print(loop)
+    # print(loop)
 
     print(f'End result: {(len(loop) - 1) // 2}')
+
+
+if __name__ == "__main__":
+    main(load_data(DATA_PATH))
+    # main(test_data[0])
+    # main(test_data[1])
+
+    # using test_data 0:
+    #   End result: 4
+    #   Finished 'main' in less than a millisecond
+    # using test_data 1:
+    #   End result: 8
+    #   Finished 'main' in less than a millisecond
+    # using input data:
+    #   End result: 6649
+    #   Finished 'main' in 15 milliseconds

@@ -1,7 +1,9 @@
 # aoc_2023_07_A_1.py - Day 7: Camel Cards - part 1
-# sort poker hands with a twist and Jokers
+# Find the rank of every hand in your set. What are the total winnings?
 # https://adventofcode.com/2023/day/7
 
+
+from tools import time_it
 
 from enum import IntEnum, auto
 from dataclasses import dataclass, field
@@ -10,7 +12,6 @@ from pprint import pprint
 
 
 DATA_PATH = './input_2023_07'
-
 
 class Card(IntEnum):
     TWO = 2
@@ -61,11 +62,11 @@ class Hand:
     bid: int = 0
     type: Type = field(init=False)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         self.type = self._get_type(self.cards)
 
     @staticmethod
-    def _get_type(cards):
+    def _get_type(cards: list[Card]) -> Type:
         s = set(cards)
         if len(s) == 1:  # all characters are identical, so five of a kind
             return Type.FIVE
@@ -85,16 +86,16 @@ class Hand:
                 return Type.PAIR2
         elif len(s) == 4:  # the only possibility left at this point is 1 pair
             return Type.PAIR1
-        else:  # the only possibility left at this point is a high cara
+        else:  # the only possibility left at this point is a high card
             return Type.HIGH
 
-    def __eq__(self, other):
+    def __eq__(self, other: 'Hand') -> bool:
         if self.type == other.type:
             if all(self_card == other_card for self_card, other_card in zip(self.cards, other.cards)):
                 return True
         return False
 
-    def __lt__(self, other):
+    def __lt__(self, other: 'Hand') -> bool:
         if self.type < other.type:
             return True
         elif self.type > other.type:
@@ -111,16 +112,16 @@ class Hand:
             return False
 
 
-def load_data(path):
+def load_data(path: str) -> list[str]:
     with open(path) as f:
         return f.read().splitlines()
 
 
-def _create_cards(hand_string):
+def _create_cards(hand_string: str) -> list[Card]:
     return [card_to_Card[card] for card in hand_string]
 
 
-def create_hands(data_lines):
+def create_hands(data_lines: list[str]) -> list[Hand]:
     return [
         Hand(
             _create_cards(line.strip().split()[0]),
@@ -129,23 +130,43 @@ def create_hands(data_lines):
     ]
 
 
-test_data = """32T3K 765
+test_data = '''
+32T3K 765
 T55J5 684
 KK677 28
 KTJJT 220
 QQQJA 483
-""".splitlines()
+'''.strip().splitlines()
 
 
-if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
-    # print('-' * 100)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     hands = create_hands(data_lines)
     # pprint(hands)
     # print('-' * 100)
+
+    hands.sort()
+    # pprint(hands)
+    # print('-' * 100)
+
+    # for rank, hand in enumerate(hands, 1):
+    #     print(f'{rank:4d} * {hand.bid:3d} = {rank * hand.bid:8,d}')
+    # print('-' * 21)
+    # print(f'Total:   {sum(rank * hand.bid for rank, hand in enumerate(hands, 1)):12,}')
+
+    print(f'End result: {sum(rank * hand.bid for rank, hand in enumerate(hands, 1))}')
+
+
+if __name__ == "__main__":
+    main(load_data(DATA_PATH))
+    # main(test_data)
+
+    # using test_data:
+    #   End result: 6440
+    #   Finished 'main' in less than a millisecond
+    # using input data:
+    #   End result: 248217452
+    #   Finished 'main' in 5 milliseconds
 
     # for hand_string in 'AAAAA AAAAK AAAKK AAAKQ AAKKQ AAKQJ AKQJT'.split():
     #     print(Hand(_create_cards(hand_string)))
@@ -156,11 +177,3 @@ if __name__ == "__main__":
     # print(Hand(_create_cards('AAAAK')) < Hand(_create_cards('KKKKK')))  # True
     # print('-' * 100)
 
-    hands.sort()
-    # pprint(hands)
-    # print('-' * 100)
-
-    for rank, hand in enumerate(hands, 1):
-        print(f'{rank:4d} * {hand.bid:3d} = {rank * hand.bid:8,d}')
-    print('-' * 21)
-    print(f'Total:   {sum(rank * hand.bid for rank, hand in enumerate(hands, 1)):12,}')

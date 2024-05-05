@@ -1,9 +1,10 @@
 # aoc_2023_10_B_1.py - Day 10: Pipe Maze - part 2
-# find the number of tiles that are enclosed by the loop
-# hoping to solve this by scanning top to bottom, left to right
-# remembering whether we're inside or out the loop, after much tweaking,
-# I finally gave up on this strategy, because what worked for case A didn't for case B and vice versa
+# How many tiles are enclosed by the loop?
 # https://adventofcode.com/2023/day/10
+# hoping to solve this by scanning top to bottom, left to right
+# remembering whether we're inside or out the loop
+# after much tweaking I finally gave up on this strategy,
+# because what worked for case A didn't for case B and vice versa
 
 
 from aoc_2023_10_A_1 import (
@@ -17,6 +18,12 @@ from aoc_2023_10_A_1 import (
     # START,
     PIPES,
 )
+
+from tools import time_it
+
+# other imports
+
+from pprint import pprint
 
 
 INSIDE = '●'
@@ -300,16 +307,8 @@ L7JLJL-JLJLJL--JLJ.L
 """.splitlines()
 
 
-if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    # data_lines = test_data_1
-    # data_lines = test_data_2
-    data_lines = test_data_3
-    # data_lines = test_data_4
-    # data_lines = test_data_5
-    # data_lines = test_data_6
-    # print(data_lines)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     grid = create_grid(data_lines)
     for r in grid:
         print(r)
@@ -317,32 +316,6 @@ if __name__ == "__main__":
 
     start_row, start_col = find_start(grid)
     # print(f'start character "{START}" was found on row {start_row}, column {start_col}')
-
-    # for row, col in (
-    #         (3, 0),  # |
-    #         (4, 0),  # L
-    #         (4, 1),  # J
-    #         (3, 1),  # F
-    #         (3, 2),  # -
-    #         (2, 3),  # L
-    # ):
-    #     grid = create_grid(test_data_2)
-    #
-    #     grid[2][0] = 'F'
-    #     grid[row][col] = 'S'
-    #     start_row, start_col = row, col
-    #
-    #     for r in grid:
-    #         print(r)
-    #     print()
-    #
-    #     loop = find_loop(grid, start_row, start_col)
-    #     # print(loop)
-    #
-    #     replace_start(grid, loop)
-    #     for r in grid:
-    #         print(r)
-    #     print('-' * 100)
 
     loop = find_loop(grid, start_row, start_col)
     # print(loop)
@@ -362,3 +335,20 @@ if __name__ == "__main__":
     print()
 
     print(f'End result: {len(enclosed)}')
+
+
+if __name__ == "__main__":
+    # main(load_data(DATA_PATH))
+    # main(test_data_1)
+    main(test_data_2a)
+    # main(test_data_3)
+    # main(test_data_4)
+    # main(test_data_5)
+    # main(test_data_6)
+
+    # using test_data:
+    #   End result: xxx
+    #   Finished 'main' in xxx
+    # using input data:
+    #   End result: xxx
+    #   Finished 'main' in xxx

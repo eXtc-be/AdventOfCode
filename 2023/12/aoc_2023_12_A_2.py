@@ -1,6 +1,7 @@
 # aoc_2023_12_A_2.py - Day 12: Hot Springs - part 1
 # For each row, count all the different arrangements of operational and broken springs
 # that meet the given criteria. What is the sum of those counts?
+# https://adventofcode.com/2023/day/12
 # second version:
 #   process_record now returns number of valid combos instead of the list of valid combos
 #   _get_combos now looks at every group separately and multiplies each group's number of valid combinations
@@ -11,7 +12,6 @@
 #   for example, using this strategy for ??.???.#?? 1,1,2 we get 2*3*2 = 12,
 #       while using the old strategy we got
 #           ['...#.#.##.', '.#...#.##.', '.#..#..##.', '.#.#...##.', '#....#.##.', '#...#..##.', '#..#...##.'] = 7
-# https://adventofcode.com/2023/day/12
 
 
 from aoc_2023_12_A_1 import(
@@ -96,11 +96,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 21
     #   Finished 'main' in 0.002 seconds

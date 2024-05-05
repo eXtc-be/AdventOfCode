@@ -2,10 +2,10 @@
 # The light isn't energizing enough tiles to produce lava; to debug the contraption,
 # you need to start by analyzing the current situation. With the beam starting in the top-left heading right,
 # how many tiles end up being energized?
+# https://adventofcode.com/2023/day/16
 # after a good night's sleep, I came to the conclusion my technique of keeping track of the directions a cell
 #   has been entered into is a good one, but the condition to break early isn't, so I changed that. this also
 #   allowed me to remove my other 'loop detection' code (with counting visits and comparing them to MAX_VISIT)
-# https://adventofcode.com/2023/day/16
 
 
 from aoc_2023_16_A_1 import (
@@ -130,11 +130,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
+    # main(load_data(DATA_PATH))
+    main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 46
     #   Finished 'main' in less than a millisecond

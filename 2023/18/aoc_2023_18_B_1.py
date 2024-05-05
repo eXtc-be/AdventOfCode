@@ -96,7 +96,7 @@ class HugeGrid:
 
         self._normalize_grid()
 
-    def _normalize_grid(self):
+    def _normalize_grid(self) -> None:  # changes the grid in place
         """if any of the vertices' coordinates are negative,
         add an offset to every vertex so all the coordinates are positive again"""
         row_min = min(vertex.position.row for vertex in self.vertices)
@@ -269,20 +269,18 @@ def main(data_lines: list[str]) -> None:
     print(f'Grid size: {grid.size[0]} x {grid.size[1]}')
 
     trench = grid.trench()
-    print(trench)
+    # print(trench)
 
     dugout = grid.dugout()
-    print(dugout)
+    # print(dugout)
 
     print(f'End result: {trench + dugout}')
 
 
 if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
+    # main(load_data(DATA_PATH))
+    main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   Final grid size: 1,186,329 x 1,186,329
     #   End result: 952408144115

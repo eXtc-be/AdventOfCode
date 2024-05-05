@@ -1,13 +1,13 @@
 # aoc_2023_12_A_3.py - Day 12: Hot Springs - part 1
 # For each row, count all the different arrangements of operational and broken springs
 # that meet the given criteria. What is the sum of those counts?
+# https://adventofcode.com/2023/day/12
 # third version:
 #   get_combos now only checks 'viable' combinations, i.e. where the number of # (after injecting the combo)
 #       is equal to the sum of numbers
 #   get_combos also does all the checking and injecting locally instead of calling another function (in another file!)
 #   also in the old version _inject_combo was called several times, now the injection of the combo happens only once
 #       per loop and locally
-# https://adventofcode.com/2023/day/12
 
 
 from aoc_2023_12_A_1 import (
@@ -85,11 +85,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 21
     #   Finished 'main' in 2 milliseconds

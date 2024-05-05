@@ -1,9 +1,9 @@
-# aoc_2023_01_B_1.py - Day 1: Trebuchet?! - part 2
-# Consider your entire calibration document. What is the sum of all of the calibration values?
-# https://adventofcode.com/2023/day/1
+# aoc_2023_17_B_1.py - Day 17: Clumsy Crucible - part 2
+# Directing the crucible from the lava pool to the machine parts factory, but not moving more than three consecutive blocks in the same direction, what is the least heat loss it can incur?
+# https://adventofcode.com/2023/day/17
 
 
-from aoc_2023_01_A_1 import (
+from aoc_2023_17_A_1 import (
     DATA_PATH,
     load_data,
     test_data,

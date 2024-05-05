@@ -1,24 +1,29 @@
 # aoc_2023_05_A_1.py - Day 5: If You Give A Seed A Fertilizer - part 1
-# build translation maps from text file and use them to find locations
-# this version creates the maps explicitly: {a: x, b: y, etc.}
+# What is the lowest location number that corresponds to any of the initial seed numbers?
 # https://adventofcode.com/2023/day/5
+# this version creates the maps explicitly: {a: x, b: y, etc.}
 
+
+from tools import time_it
+
+# other imports
 
 from pprint import pprint
 
 
 DATA_PATH = './input_2023_05'
 
-maps = {}
+# other constants
 
 
-def load_data(path):
+def load_data(path: str) -> list[str]:
     with open(path) as f:
         return f.read().splitlines()
 
 
-def generate_maps(data_lines):
+def generate_maps(data_lines: list[str]) -> None:  # changes global variable directly
     global maps
+
     current_map = ''
     for line in data_lines:
         if line and line.lower().startswith('seeds'):  # don't need this to create maps
@@ -39,13 +44,14 @@ def generate_maps(data_lines):
             continue
 
 
-def _map_x_to_y(src, dst, value):
+def _map_x_to_y(src: str, dst: str, value: int) -> int:
     if src not in [map['src'] for map in maps.values()]:
         raise KeyError(f'source "{src}" not in maps')
     if dst not in [map['dst'] for map in maps.values()]:
         raise KeyError(f'destination "{dst}" not in maps')
 
     # find the map with the source we need
+    map = None
     for _, map in maps.items():
         if map['src'] == src:
             break  # no need to look any further
@@ -64,15 +70,17 @@ def _map_x_to_y(src, dst, value):
         return _map_x_to_y(map['dst'], dst, retval)
 
 
-def find_locations(seed_line):
+def find_locations(seed_line: str) -> list[int]:
     seeds = seed_line.split()[1:]
+
     locations = []
     for seed in seeds:
         locations.append(_map_x_to_y('seed', 'location', int(seed)))
     return locations
 
 
-test_data = """seeds: 79 14 55 13
+test_data = '''
+seeds: 79 14 55 13
 
 seed-to-soil map:
 50 98 2
@@ -105,17 +113,35 @@ temperature-to-humidity map:
 humidity-to-location map:
 60 56 37
 56 93 4
-""".splitlines()
+'''.strip().splitlines()
 
 
-if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
+maps = {}
 
+
+@time_it
+def main(data_lines: list[str]) -> None:
     generate_maps(data_lines)
     # pprint(maps)
 
+    locations = find_locations(data_lines[0])
+    # print(locations)
+
+    print(f'End result: {min(locations)}')
+
+
+if __name__ == "__main__":
+    # main(load_data(DATA_PATH))
+    main(test_data)
+
+    # using test_data:
+    #   End result: 35
+    #   Finished 'main' in less than a millisecond
+    # using input data:
+    #   End result: ???
+    #   Didn't finish 'main' (takes too long)
+
+    # generate_maps(test_data)
     # test = _map_x_to_y('seed', 'soil', 79)
     # print(f'79 -> {test}')
     # test = _map_x_to_y('seed', 'fertilizer', 14)
@@ -125,7 +151,3 @@ if __name__ == "__main__":
     # test = _map_x_to_y('seed', 'location', 13)
     # print(f'13 -> {test}')
 
-    locations = find_locations(data_lines[0])
-    print(locations)
-
-    # print(f'End result: {sum(<last_array>)}')

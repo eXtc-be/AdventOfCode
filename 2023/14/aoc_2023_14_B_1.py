@@ -1,9 +1,9 @@
 # aoc_2023_14_B_1.py - Day 14: Parabolic Reflector Dish - part 2
 # Tilt the platform a large number of times.
 # Afterward, what is the total load on the north support beams?
+# https://adventofcode.com/2023/day/14
 # this unoptimized version runs for over 2 minutes with test_data (10x10) and only 1_000_000 cycles,
 #   so no way we're going to even try with the input data (100x100) and 1_000_000_000 cycles before optimizing
-# https://adventofcode.com/2023/day/14
 
 
 from aoc_2023_14_A_1 import (
@@ -82,11 +82,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
+    # main(load_data(DATA_PATH))
+    main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 64 after 1,000 cycles
     #   Finished 'main' in 155 milliseconds

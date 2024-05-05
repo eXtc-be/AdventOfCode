@@ -2,8 +2,8 @@
 # The light isn't energizing enough tiles to produce lava; to debug the contraption,
 # you need to start by analyzing the current situation. With the beam starting in the top-left heading right,
 # how many tiles end up being energized?
-# this version ends in a very reasonable time (less than a second), but fails to give the correct answer
 # https://adventofcode.com/2023/day/16
+# this version ends in a very reasonable time (less than a second), but fails to give the correct answer
 
 
 from tools import time_it
@@ -134,11 +134,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data
-    # print(data_lines)
+    # main(load_data(DATA_PATH))
+    main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 46
     #   Finished 'main' in less than a millisecond

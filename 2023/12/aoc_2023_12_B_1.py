@@ -1,11 +1,11 @@
 # aoc_2023_12_B_1.py - Day 12: Hot Springs - part 2
 # Before processing a line, expand it. Then, for each row, count all the different arrangements
 # of operational and broken springs that meet the given criteria. What is the sum of those counts?
+# https://adventofcode.com/2023/day/12
 # using the recursive get_combos function from aoc_2023_12_A_4, the unfolded example records
 #   finished in little over one second.
 # processing the input file takes way longer: the first 4 lines out of 1000 took about 15 minutes,
 #   so time for another optimization
-# https://adventofcode.com/2023/day/12
 
 
 from aoc_2023_12_A_1 import (
@@ -55,11 +55,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 525152
     #   Finished 'main' in 1 second

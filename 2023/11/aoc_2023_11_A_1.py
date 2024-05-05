@@ -1,10 +1,15 @@
 # aoc_2023_11_A_1.py - Day 11: Cosmic Expansion - part 1
-# sum the shortest paths between galaxies in an expanded universe
-# version 1: keep the entire universe in a 2D array
+# Expand the universe, then find the length of the shortest path between every pair of galaxies.
+# What is the sum of these lengths?
 # https://adventofcode.com/2023/day/11
+# version 1: keep the entire universe in a 2D array
 
+
+from tools import time_it
 
 from itertools import combinations
+
+from pprint import pprint
 
 
 DATA_PATH = './input_2023_11'
@@ -14,7 +19,7 @@ GALAXY = '#'
 PATH = 'o'
 
 
-def load_data(path):
+def load_data(path: str) -> list[str]:
     with open(path) as f:
         return f.read().splitlines()
 
@@ -93,7 +98,8 @@ def draw_universe(universe: list[list[str]]) -> None:
     print('-' * 100)
 
 
-test_data = """...#......
+test_data = '''
+...#......
 .......#..
 #.........
 ..........
@@ -103,14 +109,11 @@ test_data = """...#......
 ..........
 .......#..
 #...#.....
-""".splitlines()
+'''.strip().splitlines()
 
 
-if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     universe = create_universe(data_lines)
     # draw_universe(universe)
 
@@ -120,9 +123,35 @@ if __name__ == "__main__":
     coords = get_galaxy_coords(expanded_universe)
     # print(coords)
 
+    path_lengths = []
+    for pair in combinations(coords, 2):
+        # test_universe = [[cell for cell in row] for row in expanded_universe]
+        # draw_universe(test_universe)
+        path = shortest_path(*pair)
+        # print(pair, len(path) - 1)
+        # print(pair, path, len(path) - 1)
+        path_lengths.append(len(path) - 1)
+        # for coord in path:
+        #     test_universe[coord[0]][coord[1]] = PATH
+        # draw_universe(test_universe)
+
+    print(f'End result: {sum(path_lengths)}')
+
+
+if __name__ == "__main__":
+    main(load_data(DATA_PATH))
+    # main(test_data)
+
+    # using test_data:
+    #   End result: 374
+    #   Finished 'main' in less than a millisecond
+    # using input data:
+    #   End result: 9947476
+    #   Finished 'main' in 3.4 seconds
+
+    # # test shortest_path
     # test_universe = [['.' for _ in range(10)] for _ in range(10)]
     # draw_universe(test_universe)
-
     # for test in (
     #         ((1, 1), (8, 8)),  # m=1
     #         ((1, 8), (8, 1)),  # m=-1
@@ -138,17 +167,3 @@ if __name__ == "__main__":
     #     for coord in path:
     #         test_universe[coord[0]][coord[1]] = PATH
     #     draw_universe(test_universe)
-
-    path_lengths = []
-    for pair in combinations(coords, 2):
-        # test_universe = [[cell for cell in row] for row in expanded_universe]
-        # draw_universe(test_universe)
-        path = shortest_path(*pair)
-        print(pair, len(path) - 1)
-        # print(pair, path, len(path) - 1)
-        path_lengths.append(len(path) - 1)
-        # for coord in path:
-        #     test_universe[coord[0]][coord[1]] = PATH
-        # draw_universe(test_universe)
-
-    print(f'End result: {sum(path_lengths)}')

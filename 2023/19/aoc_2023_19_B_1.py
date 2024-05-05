@@ -1,14 +1,14 @@
 # aoc_2023_19_B_1.py - Day 19: Aplenty - part 2
-# Sort through all the parts you've been given;
-# what do you get if you add together all the rating numbers
-# for all the parts that ultimately get accepted?
+# How many distinct combinations of ratings will be accepted by the Elves' workflows?
 # https://adventofcode.com/2023/day/19
 
 
 from aoc_2023_19_A_1 import (
     DATA_PATH,
     load_data,
-    ACCEPTED,REJECTED,Category
+    ACCEPTED,
+    REJECTED,
+    Category
 )
 
 from tools import time_it
@@ -30,7 +30,7 @@ class Condition:
     operator: Callable
     value: int
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.operator not in (lt, gt):
             raise ValueError(f'Not a valid operator: {self.operator}')
 
@@ -60,7 +60,6 @@ class Rule:
             return true_value, 0, ACCEPTED
         else:
             return 0, 0, self.destination
-
 
 
 @dataclass
@@ -147,11 +146,9 @@ in{s>5:A,A}
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: xxx
     #   Finished 'main' in xxx

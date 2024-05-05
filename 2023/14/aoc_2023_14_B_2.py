@@ -1,11 +1,11 @@
 # aoc_2023_14_B_2.py - Day 14: Parabolic Reflector Dish - part 2
 # Tilt the platform a large number of times.
 # Afterward, what is the total load on the north support beams?
+# https://adventofcode.com/2023/day/14
 # first optimization: compare the current total load with the previous one and if the value stays stable
 #   long enough, i.e. after CUTOFF cycles with the same value, quit early instead of doing all cycles
 # turns out this isn't a good optimizing strategy: the value of load is changing so much the number of
 #   cycles with an equal value never gets past 2
-# https://adventofcode.com/2023/day/14
 
 
 from aoc_2023_14_A_1 import (
@@ -63,11 +63,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
+    # main(load_data(DATA_PATH))
+    main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 64 after 1,000 cycles
     #   Finished 'main' in 154 milliseconds

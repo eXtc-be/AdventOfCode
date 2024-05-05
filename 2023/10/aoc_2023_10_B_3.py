@@ -1,9 +1,9 @@
-# aoc_2023_10_B_3.py - Day 10: Pipe Maze - part 2
-# find the number of tiles that are enclosed by the loop
+# aoc_2023_10_B_1.py - Day 10: Pipe Maze - part 2
+# How many tiles are enclosed by the loop?
+# https://adventofcode.com/2023/day/10
 # found a hint saying I should count the number of pipe edges to the left and to the right of a cell
 #   and if both numbers are odd the cell should be considered enclosed
 # one problem with that strategy: what exactly is a pipe edge?
-# https://adventofcode.com/2023/day/10
 
 
 from aoc_2023_10_A_1 import (
@@ -48,8 +48,14 @@ from aoc_2023_10_B_2 import (
     INSIDE,
 )
 
+from tools import time_it
 
-def _mark_edges(grid, loop, r):
+from enum import Enum, auto
+
+from pprint import pprint
+
+
+def _mark_edges(grid: list[list[str]], loop: list[tuple[int]], r: int) -> list[str]:
     """takes one line from the grid and marks all cells that are considered a loop edge"""
     line = []
     # line = ['L' if (r, c) in loop else ' ' for c, char in enumerate(grid[r])]  # mark loop pieces for this row
@@ -109,44 +115,52 @@ def find_enclosed(grid: list[list[str]], loop: list[tuple[int]]) -> int:
     return enclosed
 
 
-if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    # data_lines = test_data_1
-    # data_lines = test_data_1a
-    # data_lines = test_data_1b
-    # data_lines = test_data_1c
-    # data_lines = test_data_1d
-    # data_lines = test_data_1e
-    # data_lines = test_data_1f
-    # data_lines = test_data_1g
-    # data_lines = test_data_1h
-    # data_lines = test_data_2a
-    # data_lines = test_data_2b
-    # data_lines = test_data_3
-    # data_lines = test_data_4
-    # data_lines = test_data_4b
-    # data_lines = test_data_5
-    # data_lines = test_data_5a
-    # data_lines = test_data_5b
-    # data_lines = test_data_5c
-    data_lines = test_data_6
-    # data_lines = test_data_7
-    # print(data_lines)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     grid = create_grid(data_lines)
-    # draw_grid(grid ,[])
+    # draw_grid(grid, [])
 
     start_row, start_col = find_start(grid)
     # print(f'start character "{START}" was found on row {start_row}, column {start_col}')
-
 
     loop = find_loop(grid, start_row, start_col)
     # print(loop)
 
     replace_start(grid, loop)
-    draw_grid(grid, loop)
+    # draw_grid(grid, loop)
 
     enclosed = find_enclosed(grid, loop)
-    draw_grid(grid, loop)
+    # draw_grid(grid, loop)
 
     print(f'End result: {enclosed}')
+
+
+if __name__ == "__main__":
+    main(load_data(DATA_PATH))
+    # main(test_data_1)
+    # main(test_data_1a)
+    # main(test_data_1b)
+    # main(test_data_1c)
+    # main(test_data_1d)
+    # main(test_data_1e)
+    # main(test_data_1f)
+    # main(test_data_1g)
+    # main(test_data_1h)
+    # main(test_data_2a)
+    # main(test_data_2b)
+    # main(test_data_3)
+    # main(test_data_4)
+    # main(test_data_4b)
+    # main(test_data_5)
+    # main(test_data_5a)
+    # main(test_data_5b)
+    # main(test_data_5c)
+    # main(test_data_6)
+    # main(test_data_7)
+
+    # using test_data:
+    #   End result: xxx
+    #   Finished 'main' in xxx
+    # using input data:
+    #   End result: xxx
+    #   Finished 'main' in xxx

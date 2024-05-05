@@ -1,10 +1,11 @@
-# aoc_2023_11_A_2.py - Day 11: Cosmic Expansion - part 1
-# sum the shortest paths between galaxies in an expanded universe
+# aoc_2023_11_A_1.py - Day 11: Cosmic Expansion - part 1
+# Expand the universe, then find the length of the shortest path between every pair of galaxies.
+# What is the sum of these lengths?
+# https://adventofcode.com/2023/day/11
 # version 2: use coordinates for galaxies instead of storing the whole universe in a 2D array,
-# shortest_path just returns the number steps instead of all the steps
+# shortest_path just returns the number of steps instead of all the steps
 # (for the special cases horizontal and vertical, the code is already optimized
 # by returning the difference between coordinates)
-# https://adventofcode.com/2023/day/11
 
 
 from aoc_2023_11_A_1 import (
@@ -15,15 +16,19 @@ from aoc_2023_11_A_1 import (
     GALAXY,
 )
 
+from tools import time_it
+
 from itertools import combinations
+
+from pprint import pprint
+
+
+EXPANSION = 1  # x 2
 
 
 def get_galaxy_coords(data_lines: list[str]) -> list[tuple[int, int]]:
     """finds the coordinates of all galaxies in the universe"""
     return [(r, c) for r, row in enumerate(data_lines) for c, cell in enumerate(row) if cell == GALAXY]
-
-
-EXPANSION = 1  # x 2
 
 
 def expand_galaxies(galaxies: list[tuple[int, int]], expansion: int = EXPANSION) -> list[tuple[int, int]]:
@@ -90,11 +95,8 @@ def draw_universe(galaxies: list[tuple[int, int]]) -> None:
     print('-' * 100)
 
 
-if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     galaxies = get_galaxy_coords(data_lines)
     # print(galaxies)
     # draw_universe(galaxies)
@@ -102,6 +104,26 @@ if __name__ == "__main__":
     expanded_galaxies = expand_galaxies(galaxies)
     # print(expanded_galaxies)
     # draw_universe(expanded_galaxies)
+
+    path_lengths = []
+    for pair in combinations(expanded_galaxies, 2):
+        path_length = shortest_path(*pair)
+        # print(pair, path_length)
+        path_lengths.append(path_length)
+
+    print(f'End result: {sum(path_lengths)}')
+
+
+if __name__ == "__main__":
+    main(load_data(DATA_PATH))
+    # main(test_data)
+
+    # using test_data:
+    #   End result: 374
+    #   Finished 'main' in less than a millisecond
+    # using input data:
+    #   End result: 9947476
+    #   Finished 'main' in 3.2 seconds
 
     # test_universe = [(9, 9)]
     # draw_universe(test_universe)
@@ -124,11 +146,3 @@ if __name__ == "__main__":
     #         ((1000000, 2000000), (4000000, 8000000)),  # m=2
     # ):
     #     print(test, shortest_path(*test))
-
-    path_lengths = []
-    for pair in combinations(expanded_galaxies, 2):
-        path_length = shortest_path(*pair)
-        print(pair, path_length)
-        path_lengths.append(path_length)
-
-    print(f'End result: {sum(path_lengths)}')

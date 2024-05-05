@@ -1,8 +1,8 @@
 # aoc_2023_12_A_1.py - Day 12: Hot Springs - part 1
 # For each row, count all the different arrangements of operational and broken springs
 # that meet the given criteria. What is the sum of those counts?
-# first version: generating all possible combinations and check if they match the numbers
 # https://adventofcode.com/2023/day/12
+# first version: generating all possible combinations and check if they match the numbers
 
 from itertools import product
 
@@ -86,11 +86,9 @@ def main(data_lines: list[str]) -> None:
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    # print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 21
     #   Finished 'main' in 3 milliseconds

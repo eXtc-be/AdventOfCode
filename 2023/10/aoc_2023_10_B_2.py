@@ -1,8 +1,9 @@
-# aoc_2023_10_B_2.py - Day 10: Pipe Maze - part 2
-# find the number of tiles that are enclosed by the loop
-# new tactic: for each and every cell check if we can reach one of the sides without touching the loop
-# I got this working, except for grids where you have to 'squeeze' between pipes - I can't figure out how to implement that
+# aoc_2023_10_B_1.py - Day 10: Pipe Maze - part 2
+# How many tiles are enclosed by the loop?
 # https://adventofcode.com/2023/day/10
+# new tactic: for each and every cell check if we can reach one of the sides without touching the loop
+# I got this working, except for grids where you have to 'squeeze' between pipes
+# I can't figure out how to implement that
 
 
 from aoc_2023_10_A_1 import (
@@ -43,7 +44,11 @@ from aoc_2023_10_B_1 import (
     test_data_7,
 )
 
+from tools import time_it
+
 from enum import Enum, auto
+
+from pprint import pprint
 
 
 class Found(Enum):
@@ -194,30 +199,8 @@ def draw_grid(grid: list[list[str|Found]], loop: list[tuple[int, int]]) -> None:
     print()
 
 
-if __name__ == "__main__":
-    data_lines = load_data(DATA_PATH)
-    # data_lines = test_data_1
-    # data_lines = test_data_1a
-    # data_lines = test_data_1b
-    # data_lines = test_data_1c
-    # data_lines = test_data_1d
-    # data_lines = test_data_1e
-    # data_lines = test_data_1f
-    # data_lines = test_data_1g
-    # data_lines = test_data_1h
-    # data_lines = test_data_2a
-    # data_lines = test_data_2b
-    # data_lines = test_data_3
-    # data_lines = test_data_4
-    # data_lines = test_data_4b
-    # data_lines = test_data_5
-    # data_lines = test_data_5a
-    # data_lines = test_data_5b
-    # data_lines = test_data_5c
-    # data_lines = test_data_6
-    # data_lines = test_data_7
-    # print(data_lines)
-
+@time_it
+def main(data_lines: list[str]) -> None:
     grid = create_grid(data_lines)
     # draw_grid(grid, [])
 
@@ -235,3 +218,34 @@ if __name__ == "__main__":
     # draw_grid(grid , loop)
 
     # print(f'End result: {sum(line.count(Found.LOOP) for line in grid)}')
+
+
+if __name__ == "__main__":
+    # main(load_data(DATA_PATH))
+    main(test_data_1)
+    # main(test_data_1a)
+    # main(test_data_1b)
+    # main(test_data_1c)
+    # main(test_data_1d)
+    # main(test_data_1e)
+    # main(test_data_1f)
+    # main(test_data_1g)
+    # main(test_data_1h)
+    # main(test_data_2a)
+    # main(test_data_2b)
+    # main(test_data_3)
+    # main(test_data_4)
+    # main(test_data_4b)
+    # main(test_data_5)
+    # main(test_data_5a)
+    # main(test_data_5b)
+    # main(test_data_5c)
+    # main(test_data_6)
+    # main(test_data_7)
+
+    # using test_data:
+    #   End result: xxx
+    #   Finished 'main' in xxx
+    # using input data:
+    #   End result: xxx
+    #   Finished 'main' in xxx

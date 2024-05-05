@@ -40,24 +40,22 @@ def main(data_lines: list[str]) -> None:
 
     for string in data_lines[0].split(','):
         result = calculate_hash(string)
-        print('the hash of {:10} is {:3}'.format(f'"{string}"', result))
+        # print('the hash of {:10} is {:3}'.format(f'"{string}"', result))
         results.append((string, result))
 
     print(f'End result: {sum(result[1] for result in results)}')
 
 
 if __name__ == "__main__":
-    # data_lines = load_data(DATA_PATH)
-    data_lines = test_data
-    print(data_lines)
+    main(load_data(DATA_PATH))
+    # main(test_data)
 
-    main(data_lines)
     # using test_data:
     #   End result: 1320
-    #   Finished 'main' in 0 milliseconds
+    #   Finished 'main' in less than a millisecond
     # using input data:
     #   End result: 512283
-    #   Finished 'main' in 25 milliseconds
+    #   Finished 'main' in 4 milliseconds
 
     # test calculate_hash
     # hash = calculate_hash('HASH')
