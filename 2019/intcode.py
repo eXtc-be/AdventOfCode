@@ -184,18 +184,29 @@ class Computer:
 
             # print instruction
             if verbose:
-                print(f'{self.ip:0{ADDRESS_WIDTH}d}: '
-                      f'{function.__name__.upper()} '
-                      f'{" ".join([f"{str(arg)}={self._get_arg(arg):{NUMBER_WIDTH}}" for arg in args])}',
-                      end=' ')
+                if args and args[-1].mode == Mode.immediate:
+                    print(f'{self.ip:0{ADDRESS_WIDTH}d}: '
+                          f'{function.__name__.upper()} '
+                          f'{" ".join([f"{str(arg)}={self._get_arg(arg):{NUMBER_WIDTH}}" for arg in args])}',
+                          end=' ')
+                else:  # if last argument (dest) is relative or positional, don't print it yet
+                    print(f'{self.ip:0{ADDRESS_WIDTH}d}: '
+                          f'{function.__name__.upper()} '
+                          f'{" ".join([f"{str(arg)}={self._get_arg(arg):{NUMBER_WIDTH}}" for arg in args[:-1]])}',
+                          end='')
+
+            # execute instruction
+            self.ip = function(self, args)
+
+            # print last argument (dest) if it is relative or positional
+            if verbose:
+                if args and args[-1].mode != Mode.immediate:
+                    print(f'{str(args[-1])}={self._get_arg(args[-1]):{NUMBER_WIDTH}}', end=' ')
 
                 if confirm:
                     input()
                 else:
                     print()
-
-            # execute instruction
-            self.ip = function(self, args)
 
         return self.outputs[-1] if self.outputs else None
 
