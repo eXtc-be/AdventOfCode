@@ -5,7 +5,7 @@ import sys
 from pathlib import Path
 import re
 
-FILENAME = re.compile(r'(?:aoc_\d{4}_\d{2}_[A-Z]{1,2}(?:_extern)?_\d[a-z]?|extern_\d)\.py')
+FILENAME = re.compile(r'(?:aoc_\d{4}_\d{2}_[A-Z]{1,2}(?:_extern)?_\d[a-z]?|extern_\d[a-z]?)\.py')
 
 path_parts = ['.']
 
@@ -16,7 +16,8 @@ if len(sys.argv) > 2:
     path_parts.append(f'{int(sys.argv[2]):02d}')
 
 for file in Path('/'.join(path_parts)).glob('**/*.py'):
-    if len(file.parts[0]) == 4 and file.parts[0].isdigit():  # only look at paths that start with 4 number (i.e. years)
+    # only look at paths that have 3 parts and start with 4 numbers (i.e. years)
+    if len(file.parts) == 3 and len(file.parts[0]) == 4 and file.parts[0].isdigit():
         first_line = ''
 
         print(file)
