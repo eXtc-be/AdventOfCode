@@ -1,4 +1,4 @@
-# aoc_2019_10_A_2.py - Day 10: Monitoring Station - part 1
+# aoc_2019_10_A_3.py - Day 10: Monitoring Station - part 1
 # Find the best location for a new monitoring station.  How many other asteroids can be detected from that location?
 # https://adventofcode.com/2019/day/10
 # this version uses math.atan2 to calculate the angle between points

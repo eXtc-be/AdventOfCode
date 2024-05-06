@@ -1,4 +1,4 @@
-# aoc_2019_14_A_1a.py - Day 14: Space Stoichiometry - part 1
+# aoc_2019_14_A_extern_1a.py - Day 14: Space Stoichiometry - part 1
 # Given the list of reactions in your puzzle input,
 # what is the minimum amount of ORE required to produce exactly 1 FUEL?
 # https://adventofcode.com/2019/day/14

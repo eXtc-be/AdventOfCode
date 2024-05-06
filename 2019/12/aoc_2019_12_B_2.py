@@ -1,4 +1,4 @@
-# aoc_2019_12_B_1.py - Day 12: The N-Body Problem - part 2
+# aoc_2019_12_B_2.py - Day 12: The N-Body Problem - part 2
 # How many steps does it take to reach the first state that exactly matches a previous state?
 # https://adventofcode.com/2019/day/12
 # knowing that the repeating state is the initial state, we no longer need to keep a list
