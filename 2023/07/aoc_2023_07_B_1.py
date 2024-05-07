@@ -1,5 +1,5 @@
 # aoc_2023_07_B_1.py - Day 7: Camel Cards - part 2
-# Find the rank of every hand in your set. What are the total winnings?
+# Using the new joker rule, find the rank of every hand in your set. What are the new total winnings?
 # https://adventofcode.com/2023/day/7
 
 

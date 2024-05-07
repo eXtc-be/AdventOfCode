@@ -1,5 +1,6 @@
 # aoc_2019_06_B_1.py - Day 6: Universal Orbit Map - part 2
-# What is the total number of direct and indirect orbits in your map data?
+# What is the minimum number of orbital transfers required to move
+# from the object YOU are orbiting to the object SAN is orbiting?
 # https://adventofcode.com/2019/day/6
 
 

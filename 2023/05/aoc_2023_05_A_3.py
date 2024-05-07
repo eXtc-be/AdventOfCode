@@ -1,7 +1,7 @@
 # aoc_2023_05_A_1.py - Day 5: If You Give A Seed A Fertilizer - part 1
 # What is the lowest location number that corresponds to any of the initial seed numbers?
 # https://adventofcode.com/2023/day/5
-# not much of a difference with aoc_2023_052.py, except for maps being renamed to mappings
+# not much of a difference with aoc_2023_05_A_2.py, except for maps being renamed to mappings
 # and being a list instead of a dict
 # I actually had to rewrite this from scratch because I forgot to copy it to my thumb drive :)
 
