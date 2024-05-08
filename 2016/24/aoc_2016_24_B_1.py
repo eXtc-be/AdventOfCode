@@ -1,5 +1,6 @@
 # aoc_2016_24_B_1.py - Day 24: Air Duct Spelunking - part 2
-# What is the fewest number of steps required to visit every non-0 number marked on the map at least once?
+# What is the fewest number of steps required to start at 0, visit every non-0 number
+# marked on the map at least once, and then return to 0?
 # https://adventofcode.com/2016/day/24
 
 
