@@ -109,8 +109,8 @@ class Computer:
 
     def out(self, args: list[Argument]) -> int:
         self.outputs.append(self._get_arg(args[0]))
-        if self.verbose:
-            print(f'OUTPUT: {self.outputs[-1]}')
+        # if self.verbose:
+        #     print(f'OUTPUT: {self.outputs[-1]}')
         return self.ip + len(args) + 1
 
     def jit(self, args: list[Argument]) -> int:
@@ -260,6 +260,6 @@ if __name__ == "__main__":
     # mem[0] = input[0]; mem[20] = mem[20] * mem[8]; output[20]; halt :: len(mem) < 20
     test = Computer([3, 0, 2, 0, 8, 20, 4, 20, 99], [5])
 
-    test.dump()
+    # test.dump()
 
-    # test.run()
+    test.run([], True)
