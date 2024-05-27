@@ -54,7 +54,7 @@ def main(data_lines: list[str]) -> None:
     #     print(f'{line} -> {decompressed} {len(decompressed)}')
 
     decompressed = decompress(data_lines[0])
-    print(decompressed)
+    # print(decompressed)
 
     print(f'End result: {len(decompressed)}')
 

@@ -1,5 +1,5 @@
 # aoc_2016_09_B_1.py - Day 9: Explosives in Cyberspace - part 2
-# What is the decompressed length of the file? Don't count whitespace.
+# What is the decompressed length of the file using the improved format?
 # https://adventofcode.com/2016/day/9
 
 
@@ -53,7 +53,7 @@ def main(data_lines: list[str]) -> None:
     #     print(f'{line} -> {decompressed} {len(decompressed)}')
 
     decompressed = decompress(data_lines[0])
-    print(decompressed)
+    # print(decompressed)
 
     print(f'End result: {len(decompressed)}')
 
