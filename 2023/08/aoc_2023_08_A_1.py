@@ -21,7 +21,7 @@ def load_data(path: str) -> list[str]:
         return f.read().splitlines()
 
 
-def get_instructions(instruction_line: str) -> cycle[str]:
+def get_instructions(instruction_line: str) -> cycle:
     return cycle(instruction_line)
 
 
@@ -34,7 +34,7 @@ def get_nodes(data_lines: list[str]) -> dict[str, dict[str, str]]:
     }
 
 
-def walk_path(instructions: cycle[str], nodes: dict[str, dict[str, str]]) -> list[str]:
+def walk_path(instructions: cycle, nodes: dict[str, dict[str, str]]) -> list[str]:
     steps = ['AAA']
     current_node = nodes['AAA']
     while True:
