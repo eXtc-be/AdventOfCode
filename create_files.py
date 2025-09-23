@@ -104,7 +104,7 @@ if write:
             with open(path / html_file, 'w', encoding='utf-8') as out_file:
                 out_file.write(html)
         else:
-            print(f'something went wrong, remote server returned status {response.status_code}')
+            print(f'SOMETHING WENT WRONG, REMOTE SERVER RETURNED STATUS {response.status_code}')
             # exit()
 
         print(f'downloading input file from {input_url}')
@@ -115,7 +115,7 @@ if write:
             with open(path / input_file, 'w', encoding='utf-8') as out_file:
                 out_file.write(response.text)
         else:
-            print(f'something went wrong, remote server returned status {response.status_code}')
+            print(f'SOMETHING WENT WRONG, REMOTE SERVER RETURNED STATUS {response.status_code}')
             # exit()
 
     # create both files from template and replace placeholders
