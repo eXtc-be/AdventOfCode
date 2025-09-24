@@ -33,9 +33,7 @@ def sort_update(update: list[int], rules: list[tuple[int, int]]) -> list[int]:
         for f, l in rules:
             if f in sorted_update and l in sorted_update:
                 if sorted_update.index(f) > sorted_update.index(l):
-                    temp = sorted_update[sorted_update.index(f)]
-                    sorted_update[sorted_update.index(f)] = sorted_update[sorted_update.index(l)]
-                    sorted_update[sorted_update.index(l)] = temp
+                    sorted_update[sorted_update.index(f)], sorted_update[sorted_update.index(l)] = sorted_update[sorted_update.index(l)], sorted_update[sorted_update.index(f)]
                     finished = False
                     break
         if finished:
