@@ -30,7 +30,6 @@ def create_range(ranges: list[str]) -> list[tuple[int, int]]:
 
     for range_ in ranges:
         start, end = [int(v) for v in range_.split('-')]
-        # print(f'adding range {start}-{end}')
         result.append((start, end+1))
 
     return result
