@@ -1,5 +1,5 @@
 # aoc_2016_01_B_1.py - Day 1: No Time for a Taxicab - part 2
-# How many blocks away is Easter Bunny HQ?
+# How many blocks away is the first location you visit twice?
 # https://adventofcode.com/2016/day/1
 
 

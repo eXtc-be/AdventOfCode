@@ -15,6 +15,9 @@ DATA_PATH = './input_<year>_<0_day>'
 # other constants
 
 
+# classes
+
+
 def load_data(path: str) -> list[str]:
     with open(path) as f:
         return f.read().splitlines()
