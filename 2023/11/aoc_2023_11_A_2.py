@@ -1,4 +1,4 @@
-# aoc_2023_11_A_1.py - Day 11: Cosmic Expansion - part 1
+# aoc_2023_11_A_2.py - Day 11: Cosmic Expansion - part 1
 # Expand the universe, then find the length of the shortest path between every pair of galaxies.
 # What is the sum of these lengths?
 # https://adventofcode.com/2023/day/11

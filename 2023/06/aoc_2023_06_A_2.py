@@ -1,4 +1,4 @@
-# aoc_2023_06_A_1.py - Day 6: Wait For It - part 1
+# aoc_2023_06_A_2.py - Day 6: Wait For It - part 1
 # Determine the number of ways you could beat the record in each race.
 # What do you get if you multiply these numbers together?
 # https://adventofcode.com/2023/day/6

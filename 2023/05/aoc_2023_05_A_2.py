@@ -1,4 +1,4 @@
-# aoc_2023_05_A_1.py - Day 5: If You Give A Seed A Fertilizer - part 1
+# aoc_2023_05_A_2.py - Day 5: If You Give A Seed A Fertilizer - part 1
 # What is the lowest location number that corresponds to any of the initial seed numbers?
 # https://adventofcode.com/2023/day/5
 # numbers in the input file are too big to create maps explicitly, so we just record source, destination and amount

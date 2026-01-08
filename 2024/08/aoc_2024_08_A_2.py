@@ -1,4 +1,4 @@
-# aoc_2024_08_A_1.py - Day 8: Resonant Collinearity - part 1
+# aoc_2024_08_A_2.py - Day 8: Resonant Collinearity - part 1
 # Calculate the impact of the signal. How many unique locations within the
 # bounds of the map contain an antinode?
 # https://adventofcode.com/2024/day/8

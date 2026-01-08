@@ -1,4 +1,4 @@
-# aoc_2023_06_B_1.py - Day 6: Wait For It - part 2
+# aoc_2023_06_B_2.py - Day 6: Wait For It - part 2
 # How many ways can you beat the record in this one much longer race?
 # https://adventofcode.com/2023/day/6
 # same formula as aoc_2023_06_A_2, only difference is the time and distance values are now concatenated

@@ -1,4 +1,4 @@
-# aoc_2023_08_B_1.py - Day 8: Haunted Wasteland - part 2
+# aoc_2023_08_B_2.py - Day 8: Haunted Wasteland - part 2
 # Simultaneously start on every node that ends with A.
 # How many steps does it take before you're only on nodes that end with Z?
 # https://adventofcode.com/2023/day/8

@@ -1,4 +1,4 @@
-# aoc_2023_10_B_1.py - Day 10: Pipe Maze - part 2
+# aoc_2023_10_B_2.py - Day 10: Pipe Maze - part 2
 # How many tiles are enclosed by the loop?
 # https://adventofcode.com/2023/day/10
 # new tactic: for each and every cell check if we can reach one of the sides without touching the loop

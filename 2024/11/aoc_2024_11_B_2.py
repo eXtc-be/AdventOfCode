@@ -1,4 +1,4 @@
-# aoc_2024_11_B_1.py - Day 11: Plutonian Pebbles - part 2
+# aoc_2024_11_B_2.py - Day 11: Plutonian Pebbles - part 2
 # How many stones would you have after blinking a total of 75 times?
 # https://adventofcode.com/2024/day/11
 
