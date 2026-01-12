@@ -38,7 +38,7 @@ def process_rotations(lines: list[str]) -> int:
                 total_zeroes += 1
             current_position = (current_position + distance) % DIAL
         elif direction == 'L':
-            if distance >= current_position and current_position != 0:
+            if distance >= current_position != 0:
                 total_zeroes += 1
             current_position = (current_position - distance) % DIAL
         else:
